@@ -5,7 +5,7 @@ from pypdf import PdfReader
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_groq import ChatGroq
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -13,20 +13,19 @@ from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
 
-# استخراج ایمن کلید API از استریم‌لیت سیکرتز یا محیط
-google_key = ""
+# استخراج ایمن کلید Groq از Secrets استریم‌لیت یا محیط
+groq_key = ""
 try:
-    if "GOOGLE_API_KEY" in st.secrets:
-        google_key = st.secrets["GOOGLE_API_KEY"]
+    if "GROQ_API_KEY" in st.secrets:
+        groq_key = st.secrets["GROQ_API_KEY"]
 except Exception:
     pass
 
-if not google_key:
-    google_key = os.getenv("GOOGLE_API_KEY", "")
+if not groq_key:
+    groq_key = os.getenv("GROQ_API_KEY", "")
 
-# تنظیم مستقیم متغیر محیطی برای پکیج گوگل
-if google_key:
-    os.environ["GOOGLE_API_KEY"] = google_key
+if groq_key:
+    os.environ["GROQ_API_KEY"] = groq_key
 
 st.set_page_config(
     page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
@@ -124,7 +123,8 @@ st.markdown(f"""
 
 texts = {
     "English": {
-        "title": "✨ Smart PDF Chat Assistant 🌲","subtitle": "Upload your PDF file and get precise AI-powered answers instantly using Google Gemini.",
+        "title": "✨ Smart PDF Chat Assistant 🌲",
+        "subtitle": "Upload your PDF file and get precise AI-powered answers instantly using Groq Llama.",
         "sidebar_header": "📄 Document Management",
         "upload_label": "Choose a PDF file",
         "process_btn": "🚀 Process & Analyze",
@@ -136,7 +136,7 @@ texts = {
     },
     "فارسی": {
         "title": "✨ دستیار هوشمند گفتگو با فایل‌های PDF 🌲",
-        "subtitle": "فایل PDF خود را آپلود کنید و با استفاده از هوش مصنوعی قدرتمند گوگل جمنای پاسخ بگیرید.",
+        "subtitle": "فایل PDF خود را آپلود کنید و با استفاده از هوش مصنوعی گروق پاسخ بگیرید.",
         "sidebar_header": "📄 مدیریت سند",
         "upload_label": "یک فایل PDF انتخاب کنید",
         "process_btn": "🚀 پردازش و تحلیل فایل",
@@ -206,10 +206,10 @@ if user_query:
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
                 
-                # اتصال ایمن به مدل جمنای با ارسال مستقیم کلید
-                llm = ChatGoogleGenerativeAI(
-                    model="gemini-1.5-flash",
-                    google_api_key=google_key,
+                # استفاده از مدل فوق‌العاده گروق
+                llm = ChatGroq(
+                    model="llama-3.3-70b-versatile",
+                    groq_api_key=groq_key,
                     temperature=0.3
                 )
 
@@ -222,8 +222,7 @@ if user_query:
                 Context:
                 {context}
                 
-                Question: {input}
-                """)
+                Question: {input}""")
 
                 def format_docs(docs):
                     return "\n\n".join(doc.page_content for doc in docs)
