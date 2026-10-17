@@ -10,28 +10,15 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
+# تنظیم مستقیم کلید 
+GROQ_API_KEY = "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"
+
 # تنظیمات صفحه
 st.set_page_config(
     page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
     page_icon="🌲", 
     layout="wide"
 )
-
-# بررسی و دریافت امن کلید گروق از Secrets استریم‌لیت
-groq_api_key = ""
-try:
-    if "GROQ_API_KEY" in st.secrets:
-        groq_api_key = st.secrets["GROQ_API_KEY"]
-except Exception:
-    pass
-
-if not groq_api_key:
-    groq_api_key = os.getenv("GROQ_API_KEY", "")
-
-# اگر کلید تنظیم نشده باشد، برنامه متوقف شده و به کاربر پیام می‌دهد
-if not groq_api_key:
-    st.error("⚠️ لطفاً کلید GROQ_API_KEY را در بخش Secrets استریم‌لیت تنظیم کنید.")
-    st.stop()
 
 with st.sidebar:
     st.markdown("### 🌐 Language / انتخاب زبان")
@@ -128,8 +115,7 @@ texts = {
         "sidebar_header": "📄 Document Management",
         "upload_label": "Choose a PDF file",
         "process_btn": "🚀 Process & Analyze",
-        "processing_spinner": "Extracting text and preparing AI...",
-        "success_msg": "✅ File processed successfully! Ask your question now.",
+        "processing_spinner": "Extracting text and preparing AI...","success_msg": "✅ File processed successfully! Ask your question now.",
         "chat_input": "Type your question here...",
         "warning_no_file": "⚠️ Please upload and process a PDF file first.",
         "searching_spinner": "Searching and generating smart response...",
@@ -206,10 +192,10 @@ if user_query:
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
                 
-                # استفاده از مدل کاملاً پایدار گروق
+                # به‌روزرسانی مدل به نسخه کاملاً پایدار و جدیدتر گروق
                 llm = ChatGroq(
-                    model="llama-3.1-8b-instant",
-                    groq_api_key=groq_api_key,
+                    model="llama-3.3-70b-versatile",
+                    groq_api_key=GROQ_API_KEY,
                     temperature=0.3
                 )
 
@@ -217,7 +203,9 @@ if user_query:
                 You are a helpful AI assistant. Answer the user's question accurately based ONLY on the provided context. 
                 - If the user asks in Persian, reply in fluent Persian. 
                 - If the user asks in English, reply in fluent English.
-                - If the answer is not in the text, say "در فایل یافت نشد / Not found in the file".Context:
+                - If the answer is not in the text, say "در فایل یافت نشد / Not found in the file".
+                
+                Context:
                 {context}
                 
                 Question: {input}
