@@ -11,20 +11,25 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
-# ۱. بارگذاری متغیرها
 load_dotenv()
 
-if "GOOGLE_API_KEY" in st.secrets:
-    os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
+# استخراج ایمن کلید از Secrets استریم‌لیت یا محیط
+api_key = ""
+try:
+    if "GOOGLE_API_KEY" in st.secrets:
+        api_key = st.secrets["GOOGLE_API_KEY"]
+except Exception:
+    pass
 
-# ۲. تنظیمات صفحه
+if not api_key:
+    api_key = os.getenv("GOOGLE_API_KEY", "")
+
 st.set_page_config(
     page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
     page_icon="🌲", 
     layout="wide"
 )
 
-# ۳. مدیریت سایدبار برای زبان و حالت تاریک/روشن
 with st.sidebar:
     st.markdown("### 🌐 Language / انتخاب زبان")
     language = st.selectbox("", ["English", "فارسی"], label_visibility="collapsed")
@@ -33,7 +38,6 @@ with st.sidebar:
     st.markdown("### 🌗 Theme Mode / حالت نمایش")
     theme_mode = st.radio("", ["Dark Mode (کیهانی خفن)", "Light Mode (جنگل طبیعی و واضح)"], label_visibility="collapsed")
 
-# تنظیمات استایل داینامیک
 if "Dark" in theme_mode:
     bg_style = """
     .stApp {
@@ -114,7 +118,6 @@ st.markdown(f"""
     </style>
 """, unsafe_allow_html=True)
 
-# ۴. متن‌های دوزبانه
 texts = {
     "English": {
         "title": "✨ Smart PDF Chat Assistant 🌲",
@@ -151,13 +154,11 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# ۵. مدیریت نشست
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 if "vector_store" not in st.session_state:
     st.session_state.vector_store = None
 
-# ۶. بخش سایدبار
 with st.sidebar:
     st.markdown("---")
     st.markdown(f"### {t['sidebar_header']}")
@@ -184,12 +185,10 @@ with st.sidebar:
             st.session_state.vector_store = vector_store
             st.success(t["success_msg"])
 
-# ۷. تاریخچه چت
 for message in st.session_state.chat_history:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# ۸. ورودی و پردازش با گوگل جمنای
 user_query = st.chat_input(t["chat_input"])
 
 if user_query:
@@ -203,7 +202,13 @@ if user_query:
         with st.chat_message("assistant"):
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
-                llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.3)
+                
+                # اتصال ایمن به مدل جمنای با ارسال صریح کلید API
+                llm = ChatGoogleGenerativeAI(
+                    model="gemini-1.5-flash",
+                    google_api_key=api_key,
+                    temperature=0.3
+                )
 
                 prompt = ChatPromptTemplate.from_template("""
                 You are a helpful AI assistant. Answer the user's question accurately based ONLY on the provided context. 
