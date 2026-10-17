@@ -13,16 +13,20 @@ from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
 
-# استخراج ایمن کلید از Secrets استریم‌لیت یا محیط
-api_key = ""
+# استخراج ایمن کلید API از استریم‌لیت سیکرتز یا محیط
+google_key = ""
 try:
     if "GOOGLE_API_KEY" in st.secrets:
-        api_key = st.secrets["GOOGLE_API_KEY"]
+        google_key = st.secrets["GOOGLE_API_KEY"]
 except Exception:
     pass
 
-if not api_key:
-    api_key = os.getenv("GOOGLE_API_KEY", "")
+if not google_key:
+    google_key = os.getenv("GOOGLE_API_KEY", "")
+
+# تنظیم مستقیم متغیر محیطی برای پکیج گوگل
+if google_key:
+    os.environ["GOOGLE_API_KEY"] = google_key
 
 st.set_page_config(
     page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
@@ -120,8 +124,7 @@ st.markdown(f"""
 
 texts = {
     "English": {
-        "title": "✨ Smart PDF Chat Assistant 🌲",
-        "subtitle": "Upload your PDF file and get precise AI-powered answers instantly using Google Gemini.",
+        "title": "✨ Smart PDF Chat Assistant 🌲","subtitle": "Upload your PDF file and get precise AI-powered answers instantly using Google Gemini.",
         "sidebar_header": "📄 Document Management",
         "upload_label": "Choose a PDF file",
         "process_btn": "🚀 Process & Analyze",
@@ -203,10 +206,10 @@ if user_query:
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
                 
-                # اتصال ایمن به مدل جمنای با ارسال صریح کلید API
+                # اتصال ایمن به مدل جمنای با ارسال مستقیم کلید
                 llm = ChatGoogleGenerativeAI(
                     model="gemini-1.5-flash",
-                    google_api_key=api_key,
+                    google_api_key=google_key,
                     temperature=0.3
                 )
 
