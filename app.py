@@ -17,7 +17,7 @@ load_dotenv()
 # ۲. تنظیمات صفحه
 st.set_page_config(
     page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
-    page_icon="🌿", 
+    page_icon="🌲", 
     layout="wide"
 )
 
@@ -28,22 +28,22 @@ with st.sidebar:
     
     st.markdown("---")
     st.markdown("### 🌗 Theme Mode / حالت نمایش")
-    theme_mode = st.radio("", ["Dark Mode (کیهانی)", "Light Mode (جنگلی و طبیعی)"], label_visibility="collapsed")
+    theme_mode = st.radio("", ["Dark Mode (کیهانی خفن)", "Light Mode (جنگل طبیعی و واضح)"], label_visibility="collapsed")
 
-# تنظیمات استایل داینامیک بر اساس حالت تاریک (کیهانی) یا روشن (جنگلی با متن کاملاً مشکی)
+# تنظیمات استایل داینامیک بر اساس حالت تاریک (کیهانی باکیفیت) یا روشن (جنگل سرسبز و رنگ‌های اصلی)
 if "Dark" in theme_mode:
     bg_style = """
     .stApp {
-        background-image: linear-gradient(rgba(10, 15, 30, 0.88), rgba(15, 23, 42, 0.94)), 
-                          url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1920&auto=format&fit=crop');
+        background-image: linear-gradient(rgba(5, 8, 20, 0.75), rgba(10, 15, 30, 0.82)), 
+                          url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=2560&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
     }
     .main-header, .stChatMessage {
-        background: rgba(30, 41, 59, 0.85) !important;
-        backdrop-filter: blur(14px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background: rgba(15, 23, 42, 0.82) !important;
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
         color: #f8fafc !important;
     }
     .main-header h1, .main-header p, .stChatMessage p, .stChatMessage span, .stChatMessage div {
@@ -57,26 +57,26 @@ if "Dark" in theme_mode:
 else:
     bg_style = """
     .stApp {
-        background-image: linear-gradient(rgba(240, 247, 240, 0.82), rgba(220, 240, 220, 0.88)), 
-                          url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1920&auto=format&fit=crop');
+        background-image: linear-gradient(rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.35)), 
+                          url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2560&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
     }
     .main-header, .stChatMessage {
-        background: rgba(255, 255, 255, 0.92) !important;
-        backdrop-filter: blur(14px);
-        border: 1px solid rgba(0, 0, 0, 0.12);
-        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        background: rgba(255, 255, 255, 0.94) !important;
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
         color: #0f172a !important;
     }
     .main-header h1, .main-header p, .stChatMessage p, .stChatMessage span, .stChatMessage div, label, span {
         color: #0f172a !important;
-        font-weight: 600;
+        font-weight: 700 !important;
     }
     [data-testid="stSidebar"] {
-        background-color: #f1f8f1;
-        border-right: 1px solid #d1e7d1;
+        background-color: #f4fbf4;
+        border-right: 1px solid #c2e0c2;
     }
     """
 
@@ -85,11 +85,11 @@ st.markdown(f"""
     <style>
     {bg_style}
     .main-header {{
-        padding: 2.2rem;
+        padding: 2.4rem;
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
         margin-bottom: 2rem;
-        border-right: 6px solid #10b981;
+        border-right: 6px solid #059669;
     }}
     .stChatMessage {{
         border-radius: 16px;
@@ -115,7 +115,7 @@ st.markdown(f"""
 # ۴. متن‌های دوزبانه
 texts = {
     "English": {
-        "title": "✨ Smart PDF Chat Assistant 🌿",
+        "title": "✨ Smart PDF Chat Assistant 🌲",
         "subtitle": "Upload your PDF file and get precise AI-powered answers instantly in both English and Persian.",
         "sidebar_header": "📄 Document Management",
         "upload_label": "Choose a PDF file",
@@ -127,7 +127,7 @@ texts = {
         "searching_spinner": "Searching and generating smart response...",
     },
     "فارسی": {
-        "title": "✨ دستیار هوشمند گفتگو با فایل‌های PDF 🌿",
+        "title": "✨ دستیار هوشمند گفتگو با فایل‌های PDF 🌲",
         "subtitle": "فایل PDF خود را آپلود کنید و با استفاده از هوش مصنوعی پیشرفته، پاسخ دقیق سوالات خود را به هر دو زبان دریافت کنید.",
         "sidebar_header": "📄 مدیریت سند",
         "upload_label": "یک فایل PDF انتخاب کنید",
@@ -216,7 +216,8 @@ if user_query:
                 Question: {input}
                 """)
 
-                def format_docs(docs):return "\n\n".join(doc.page_content for doc in docs)
+                def format_docs(docs):
+                    return "\n\n".join(doc.page_content for doc in docs)
 
                 rag_chain = (
                     {"context": retriever | format_docs, "input": RunnablePassthrough()}
