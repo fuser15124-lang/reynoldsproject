@@ -13,7 +13,7 @@ from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
 
-# خواندن مستقیم و ایمن کلید گروق از Secrets استریم‌لیت
+# خواندن ایمن کلید گروق از Secrets
 groq_api_key = ""
 try:
     if "GROQ_API_KEY" in st.secrets:
@@ -203,7 +203,6 @@ if user_query:
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
                 
-                # استفاده از مدل فعال و استاندارد گروق
                 llm = ChatGroq(
                     model="llama-3.1-8b-instant",
                     groq_api_key=groq_api_key,
@@ -220,7 +219,9 @@ if user_query:
                 {context}
                 
                 Question: {input}
-                """)def format_docs(docs):
+                """)
+
+                def format_docs(docs):
                     return "\n\n".join(doc.page_content for doc in docs)
 
                 rag_chain = (
