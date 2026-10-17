@@ -13,7 +13,7 @@ from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
 
-# استخراج ایمن کلید Groq از Secrets استریم‌لیت یا محیط
+# استخراج دقیق کلید با هماهنگی کامل نام Secrets
 groq_key = ""
 try:
     if "GROQ_API_KEY" in st.secrets:
@@ -23,9 +23,6 @@ except Exception:
 
 if not groq_key:
     groq_key = os.getenv("GROQ_API_KEY", "")
-
-if groq_key:
-    os.environ["GROQ_API_KEY"] = groq_key
 
 st.set_page_config(
     page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
@@ -125,7 +122,7 @@ texts = {
     "English": {
         "title": "✨ Smart PDF Chat Assistant 🌲",
         "subtitle": "Upload your PDF file and get precise AI-powered answers instantly using Groq Llama.",
-        "sidebar_header": "📄 Document Management",
+        "sidebar_header": "📄 DocumentManagement",
         "upload_label": "Choose a PDF file",
         "process_btn": "🚀 Process & Analyze",
         "processing_spinner": "Extracting text and preparing AI...",
@@ -206,7 +203,7 @@ if user_query:
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
                 
-                # استفاده از مدل فوق‌العاده گروق
+                # انتقال ایمن کلید گروق به مدل
                 llm = ChatGroq(
                     model="llama-3.3-70b-versatile",
                     groq_api_key=groq_key,
@@ -222,10 +219,10 @@ if user_query:
                 Context:
                 {context}
                 
-                Question: {input}""")
+                Question: {input}
+                """)
 
-                def format_docs(docs):
-                    return "\n\n".join(doc.page_content for doc in docs)
+                def format_docs(docs):return "\n\n".join(doc.page_content for doc in docs)
 
                 rag_chain = (
                     {"context": retriever | format_docs, "input": RunnablePassthrough()}
