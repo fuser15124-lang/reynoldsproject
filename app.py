@@ -1,6 +1,5 @@
 import os
 import streamlit as st
-from dotenv import load_dotenv
 from pypdf import PdfReader
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -11,9 +10,14 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 
-load_dotenv()
+# تنظیمات صفحه
+st.set_page_config(
+    page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
+    page_icon="🌲", 
+    layout="wide"
+)
 
-# خواندن ایمن کلید گروق از Secrets
+# بررسی و دریافت امن کلید گروق از Secrets استریم‌لیت
 groq_api_key = ""
 try:
     if "GROQ_API_KEY" in st.secrets:
@@ -24,11 +28,10 @@ except Exception:
 if not groq_api_key:
     groq_api_key = os.getenv("GROQ_API_KEY", "")
 
-st.set_page_config(
-    page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
-    page_icon="🌲", 
-    layout="wide"
-)
+# اگر کلید تنظیم نشده باشد، برنامه متوقف شده و به کاربر پیام می‌دهد
+if not groq_api_key:
+    st.error("⚠️ لطفاً کلید GROQ_API_KEY را در بخش Secrets استریم‌لیت تنظیم کنید.")
+    st.stop()
 
 with st.sidebar:
     st.markdown("### 🌐 Language / انتخاب زبان")
@@ -203,6 +206,7 @@ if user_query:
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
                 
+                # استفاده از مدل کاملاً پایدار گروق
                 llm = ChatGroq(
                     model="llama-3.1-8b-instant",
                     groq_api_key=groq_api_key,
@@ -213,9 +217,7 @@ if user_query:
                 You are a helpful AI assistant. Answer the user's question accurately based ONLY on the provided context. 
                 - If the user asks in Persian, reply in fluent Persian. 
                 - If the user asks in English, reply in fluent English.
-                - If the answer is not in the text, say "در فایل یافت نشد / Not found in the file".
-                
-                Context:
+                - If the answer is not in the text, say "در فایل یافت نشد / Not found in the file".Context:
                 {context}
                 
                 Question: {input}
