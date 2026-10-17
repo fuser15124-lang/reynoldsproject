@@ -17,78 +17,79 @@ load_dotenv()
 # ۲. تنظیمات صفحه
 st.set_page_config(
     page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
-    page_icon="🌌", 
+    page_icon="🌿", 
     layout="wide"
 )
 
-# ۳. مدیریت سایدبار برای زبان و حالت تاریک/روشن (Dark/Light Mode)
+# ۳. مدیریت سایدبار برای زبان و حالت تاریک/روشن
 with st.sidebar:
     st.markdown("### 🌐 Language / انتخاب زبان")
     language = st.selectbox("", ["English", "فارسی"], label_visibility="collapsed")
     
     st.markdown("---")
     st.markdown("### 🌗 Theme Mode / حالت نمایش")
-    theme_mode = st.radio("", ["Dark Mode (تاریک)", "Light Mode (روشن)"], label_visibility="collapsed")
+    theme_mode = st.radio("", ["Dark Mode (کیهانی)", "Light Mode (جنگلی و طبیعی)"], label_visibility="collapsed")
 
-# تنظیمات استایل داینامیک بر اساس انتخاب کاربر (Dark/Light)
+# تنظیمات استایل داینامیک بر اساس حالت تاریک (کیهانی) یا روشن (جنگلی با متن کاملاً مشکی)
 if "Dark" in theme_mode:
-    bg_style = f"""
-    .stApp {{
+    bg_style = """
+    .stApp {
         background-image: linear-gradient(rgba(10, 15, 30, 0.88), rgba(15, 23, 42, 0.94)), 
                           url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1920&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-    }}
-    .main-header, .stChatMessage {{
-        background: rgba(30, 41, 59, 0.8) !important;
+    }
+    .main-header, .stChatMessage {
+        background: rgba(30, 41, 59, 0.85) !important;
         backdrop-filter: blur(14px);
         border: 1px solid rgba(255, 255, 255, 0.1);
         color: #f8fafc !important;
-    }}
-    .main-header h1, .main-header p, .stChatMessage p, .stChatMessage span, .stChatMessage div {{
+    }
+    .main-header h1, .main-header p, .stChatMessage p, .stChatMessage span, .stChatMessage div {
         color: #f8fafc !important;
-    }}
-    [data-testid="stSidebar"] {{
+    }
+    [data-testid="stSidebar"] {
         background-color: rgba(15, 23, 42, 0.95);
         border-right: 1px solid rgba(255, 255, 255, 0.08);
-    }}
+    }
     """
 else:
-    bg_style = f"""
-    .stApp {{
-        background-image: linear-gradient(rgba(240, 244, 248, 0.9), rgba(255, 255, 255, 0.95)), 
-                          url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1920&auto=format&fit=crop');
+    bg_style = """
+    .stApp {
+        background-image: linear-gradient(rgba(240, 247, 240, 0.82), rgba(220, 240, 220, 0.88)), 
+                          url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=1920&auto=format&fit=crop');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
-    }}
-    .main-header, .stChatMessage {{
-        background: rgba(255, 255, 255, 0.85) !important;
+    }
+    .main-header, .stChatMessage {
+        background: rgba(255, 255, 255, 0.92) !important;
         backdrop-filter: blur(14px);
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        color: #1e293b !important;
-    }}
-    .main-header h1, .main-header p, .stChatMessage p, .stChatMessage span, .stChatMessage div {{
-        color: #1e293b !important;
-    }}
-    [data-testid="stSidebar"] {{
-        background-color: #f8fafc;
-        border-right: 1px solid #e2e8f0;
-    }}
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        color: #0f172a !important;
+    }
+    .main-header h1, .main-header p, .stChatMessage p, .stChatMessage span, .stChatMessage div, label, span {
+        color: #0f172a !important;
+        font-weight: 600;
+    }
+    [data-testid="stSidebar"] {
+        background-color: #f1f8f1;
+        border-right: 1px solid #d1e7d1;
+    }
     """
 
-# اعمال استایل‌های CSS عمومی و داینامیک
+# اعمال استایل‌های CSS نهایی
 st.markdown(f"""
     <style>
     {bg_style}
     .main-header {{
         padding: 2.2rem;
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         margin-bottom: 2rem;
-        border-right: 6px solid #6366f1;
+        border-right: 6px solid #10b981;
     }}
     .stChatMessage {{
         border-radius: 16px;
@@ -98,7 +99,7 @@ st.markdown(f"""
     .stButton>button {{
         border-radius: 12px;
         font-weight: 600;
-        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        background: linear-gradient(135deg, #059669 0%, #10b981 100%);
         color: white;
         border: none;
         padding: 0.6rem 1.2rem;
@@ -106,7 +107,7 @@ st.markdown(f"""
     }}
     .stButton>button:hover {{
         transform: translateY(-2px);
-        box-shadow: 0 6px 22px rgba(124, 58, 237, 0.4);
+        box-shadow: 0 6px 22px rgba(16, 185, 129, 0.4);
     }}
     </style>
 """, unsafe_allow_html=True)
@@ -114,7 +115,7 @@ st.markdown(f"""
 # ۴. متن‌های دوزبانه
 texts = {
     "English": {
-        "title": "✨ Smart PDF Chat Assistant 📚",
+        "title": "✨ Smart PDF Chat Assistant 🌿",
         "subtitle": "Upload your PDF file and get precise AI-powered answers instantly in both English and Persian.",
         "sidebar_header": "📄 Document Management",
         "upload_label": "Choose a PDF file",
@@ -126,7 +127,7 @@ texts = {
         "searching_spinner": "Searching and generating smart response...",
     },
     "فارسی": {
-        "title": "✨ دستیار هوشمند گفتگو با فایل‌های PDF 📚",
+        "title": "✨ دستیار هوشمند گفتگو با فایل‌های PDF 🌿",
         "subtitle": "فایل PDF خود را آپلود کنید و با استفاده از هوش مصنوعی پیشرفته، پاسخ دقیق سوالات خود را به هر دو زبان دریافت کنید.",
         "sidebar_header": "📄 مدیریت سند",
         "upload_label": "یک فایل PDF انتخاب کنید",
@@ -144,7 +145,7 @@ t = texts[language]
 # نمایش هدر شیک
 st.markdown(f"""
     <div class="main-header">
-        <h1 style="margin-bottom: 8px; font-size: 26px; font-weight: 700;">{t['title']}</h1>
+        <h1 style="margin-bottom: 8px; font-size: 26px;">{t['title']}</h1>
         <p style="font-size: 15px; margin: 0; line-height: 1.5;">{t['subtitle']}</p>
     </div>
 """, unsafe_allow_html=True)
@@ -215,8 +216,7 @@ if user_query:
                 Question: {input}
                 """)
 
-                def format_docs(docs):
-                    return "\n\n".join(doc.page_content for doc in docs)
+                def format_docs(docs):return "\n\n".join(doc.page_content for doc in docs)
 
                 rag_chain = (
                     {"context": retriever | format_docs, "input": RunnablePassthrough()}
