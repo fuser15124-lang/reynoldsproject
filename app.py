@@ -13,16 +13,16 @@ from langchain_core.runnables import RunnablePassthrough
 
 load_dotenv()
 
-# استخراج دقیق کلید با هماهنگی کامل نام Secrets
-groq_key = ""
+# خواندن مستقیم و ایمن کلید گروق از Secrets استریم‌لیت
+groq_api_key = ""
 try:
     if "GROQ_API_KEY" in st.secrets:
-        groq_key = st.secrets["GROQ_API_KEY"]
+        groq_api_key = st.secrets["GROQ_API_KEY"]
 except Exception:
     pass
 
-if not groq_key:
-    groq_key = os.getenv("GROQ_API_KEY", "")
+if not groq_api_key:
+    groq_api_key = os.getenv("GROQ_API_KEY", "")
 
 st.set_page_config(
     page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
@@ -122,7 +122,7 @@ texts = {
     "English": {
         "title": "✨ Smart PDF Chat Assistant 🌲",
         "subtitle": "Upload your PDF file and get precise AI-powered answers instantly using Groq Llama.",
-        "sidebar_header": "📄 DocumentManagement",
+        "sidebar_header": "📄 Document Management",
         "upload_label": "Choose a PDF file",
         "process_btn": "🚀 Process & Analyze",
         "processing_spinner": "Extracting text and preparing AI...",
@@ -203,10 +203,10 @@ if user_query:
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
                 
-                # انتقال ایمن کلید گروق به مدل
+                # استفاده از مدل فعال و استاندارد گروق
                 llm = ChatGroq(
-                    model="llama-3.3-70b-versatile",
-                    groq_api_key=groq_key,
+                    model="llama-3.1-8b-instant",
+                    groq_api_key=groq_api_key,
                     temperature=0.3
                 )
 
@@ -220,9 +220,8 @@ if user_query:
                 {context}
                 
                 Question: {input}
-                """)
-
-                def format_docs(docs):return "\n\n".join(doc.page_content for doc in docs)
+                """)def format_docs(docs):
+                    return "\n\n".join(doc.page_content for doc in docs)
 
                 rag_chain = (
                     {"context": retriever | format_docs, "input": RunnablePassthrough()}
