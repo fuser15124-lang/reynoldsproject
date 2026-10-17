@@ -5,7 +5,7 @@ from pypdf import PdfReader
 
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_groq import ChatGroq
+from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
@@ -13,6 +13,9 @@ from langchain_core.runnables import RunnablePassthrough
 
 # ۱. بارگذاری متغیرها
 load_dotenv()
+
+if "GOOGLE_API_KEY" in st.secrets:
+    os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
 
 # ۲. تنظیمات صفحه
 st.set_page_config(
@@ -30,7 +33,7 @@ with st.sidebar:
     st.markdown("### 🌗 Theme Mode / حالت نمایش")
     theme_mode = st.radio("", ["Dark Mode (کیهانی خفن)", "Light Mode (جنگل طبیعی و واضح)"], label_visibility="collapsed")
 
-# تنظیمات استایل داینامیک بر اساس حالت تاریک یا روشن
+# تنظیمات استایل داینامیک
 if "Dark" in theme_mode:
     bg_style = """
     .stApp {
@@ -80,7 +83,6 @@ else:
     }
     """
 
-# اعمال استایل‌های CSS نهایی
 st.markdown(f"""
     <style>
     {bg_style}
@@ -116,7 +118,7 @@ st.markdown(f"""
 texts = {
     "English": {
         "title": "✨ Smart PDF Chat Assistant 🌲",
-        "subtitle": "Upload your PDF file and get precise AI-powered answers instantly in both English and Persian.",
+        "subtitle": "Upload your PDF file and get precise AI-powered answers instantly using Google Gemini.",
         "sidebar_header": "📄 Document Management",
         "upload_label": "Choose a PDF file",
         "process_btn": "🚀 Process & Analyze",
@@ -128,7 +130,7 @@ texts = {
     },
     "فارسی": {
         "title": "✨ دستیار هوشمند گفتگو با فایل‌های PDF 🌲",
-        "subtitle": "فایل PDF خود را آپلود کنید و با استفاده از هوش مصنوعی پیشرفته، پاسخ دقیق سوالات خود را به هر دو زبان دریافت کنید.",
+        "subtitle": "فایل PDF خود را آپلود کنید و با استفاده از هوش مصنوعی قدرتمند گوگل جمنای پاسخ بگیرید.",
         "sidebar_header": "📄 مدیریت سند",
         "upload_label": "یک فایل PDF انتخاب کنید",
         "process_btn": "🚀 پردازش و تحلیل فایل",
@@ -142,7 +144,6 @@ texts = {
 
 t = texts[language]
 
-# نمایش هدر شیک
 st.markdown(f"""
     <div class="main-header">
         <h1 style="margin-bottom: 8px; font-size: 26px;">{t['title']}</h1>
@@ -150,13 +151,13 @@ st.markdown(f"""
     </div>
 """, unsafe_allow_html=True)
 
-# ۵. مدیریت نشست (Session State)
+# ۵. مدیریت نشست
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 if "vector_store" not in st.session_state:
     st.session_state.vector_store = None
 
-# ۶. بخش سایدبار برای آپلود فایل
+# ۶. بخش سایدبار
 with st.sidebar:
     st.markdown("---")
     st.markdown(f"### {t['sidebar_header']}")
@@ -183,12 +184,12 @@ with st.sidebar:
             st.session_state.vector_store = vector_store
             st.success(t["success_msg"])
 
-# ۷. نمایش تاریخچه چت
+# ۷. تاریخچه چت
 for message in st.session_state.chat_history:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# ۸. ورودی پیام کاربر و پردازش هوش مصنوعی با مدل کاملاً پایدار
+# ۸. ورودی و پردازش با گوگل جمنای
 user_query = st.chat_input(t["chat_input"])
 
 if user_query:
@@ -202,8 +203,7 @@ if user_query:
         with st.chat_message("assistant"):
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
-                # استفاده از مدل کاملاً فعال و معتبر گروق
-                llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.3)
+                llm = ChatGoogleGenerativeAI(model="gemini-1.5-flash", temperature=0.3)
 
                 prompt = ChatPromptTemplate.from_template("""
                 You are a helpful AI assistant. Answer the user's question accurately based ONLY on the provided context. 
@@ -214,7 +214,8 @@ if user_query:
                 Context:
                 {context}
                 
-                Question: {input}""")
+                Question: {input}
+                """)
 
                 def format_docs(docs):
                     return "\n\n".join(doc.page_content for doc in docs)
