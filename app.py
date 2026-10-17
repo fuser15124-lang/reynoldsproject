@@ -14,97 +14,114 @@ from langchain_core.runnables import RunnablePassthrough
 # ۱. بارگذاری متغیرها
 load_dotenv()
 
-# ۲. تنظیمات صفحه با طراحی مدرن و UI جذاب
+# ۲. تنظیمات صفحه با طراحی کیهانی و مدرن
 st.set_page_config(
-    page_title="Smart PDF Assistant | دستیار هوشمند PDF", 
-    page_icon="✨", 
+    page_title="Quantum & Cosmos PDF Assistant | دستیار کوانتومی PDF", 
+    page_icon="🌌", 
     layout="wide"
 )
 
-# تزریق کدهای CSS برای زیباتر کردن ظاهر سایت، حاشیه‌ها و فونت‌ها
+# تزریق استایل‌های CSS سفارشی و تصویر پس‌زمینه کیهانی
 st.markdown("""
     <style>
-    /* استایل کلی بدنه */
+    /* تنظیم تصویر پس‌زمینه سه‌بعدی کیهان و فیزیک کوانتوم */
     .stApp {
-        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        background-image: linear-gradient(rgba(10, 15, 30, 0.85), rgba(15, 23, 42, 0.9), rgba(10, 15, 30, 0.95)), 
+                          url('https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?q=80&w=1920&auto=format&fit=crop');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
     }
     
-    /* بلوک‌های عنوان و هدر */
+    /* بلوک هدر شیشه‌ای و مدرن */
     .main-header {
-        background: white;
+        background: rgba(30, 41, 59, 0.75);
+        backdrop-filter: blur(12px);
         padding: 2rem;
         border-radius: 16px;
-        box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         margin-bottom: 2rem;
-        border-right: 6px solid #4f46e5;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-right: 6px solid #8b5cf6;
     }
     
-    /* استایل حباب‌های چت */
+    /* استایل حباب‌های چت شیشه‌ای */
     .stChatMessage {
         border-radius: 14px;
         padding: 1rem;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.03);
-        background-color: white;
+        background: rgba(30, 41, 59, 0.8) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
     }
     
-    /* دکمه‌ها و سایدبار */
-    .css-1d391kg {
-        background-color: #ffffff;
+    /* استایل متن‌های داخل چت برای خوانایی بهتر در پس‌زمینه تاریک */
+    .stChatMessage p, .stChatMessage span, .stChatMessage div {
+        color: #f1f5f9 !important;
     }
     
-    /* سفارشی‌سازی دکمه پردازش */
+    /* منوی سایدبار شیشه‌ای */
+    [data-testid="stSidebar"] {
+        background-color: rgba(15, 23, 42, 0.95);
+        border-right: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    /* دکمه‌های جذاب */
     .stButton>button {
         border-radius: 10px;
         font-weight: bold;
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        color: white;
+        border: none;
         transition: all 0.3s ease;
     }
     .stButton>button:hover {
         transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+        box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
     }
     </style>
 """, unsafe_allow_html=True)
 
 # ۳. مدیریت دوزبانه بودن (فارسی و انگلیسی)
 with st.sidebar:
-    st.markdown("### 🌐 Language / انتخاب زبان")
+    st.markdown("### 🌌 Language / انتخاب زبان")
     language = st.selectbox("", ["فارسی", "English"], label_visibility="collapsed")
 
 # متن‌های ترجمه شده برای هر دو زبان
 texts = {
     "فارسی": {
-        "title": "✨ دستیار هوشمند گفتگو با اسناد PDF",
-        "subtitle": "فایل PDF خود را آپلود کنید و با استفاده از هوش مصنوعی پیشرفته، پاسخ دقیق سوالات خود را به هر دو زبان دریافت کنید.",
-        "sidebar_header": "📄 مدیریت سند",
-        "upload_label": "یک فایل PDF انتخاب کنید",
-        "process_btn": "🚀 پردازش و تحلیل فایل",
-        "processing_spinner": "در حال استخراج متن و آماده‌سازی هوش مصنوعی...",
+        "title": "🌌 دستیار هوشمند کوانتوم و کیهان‌شناسی",
+        "subtitle": "فایل PDF خود را بارگذاری کنید و از طریق هوش مصنوعی پیشرفته، پاسخ پرسش‌های خود را دریافت کنید.",
+        "sidebar_header": "📄 مدیریت اسناد",
+        "upload_label": "انتخاب فایل PDF",
+        "process_btn": "🚀 پردازش و تحلیل سند",
+        "processing_spinner": "در حال کاوش در ساختار متن...",
         "success_msg": "✅ فایل با موفقیت پردازش شد! اکنون سوالتان را بپرسید.",
-        "chat_input": "سوال خود را اینجا بنویسید...",
+        "chat_input": "پرسش خود را درباره کیهان، کوانتوم یا متن فایل بنویسید...",
         "warning_no_file": "⚠️ لطفاً ابتدا یک فایل PDF آپلود و پردازش کنید.",
-        "searching_spinner": "در حال جستجو و تولید پاسخ مدرن...",
+        "searching_spinner": "در حال کاوش در کهکشان داده‌ها...",
     },
     "English": {
-        "title": "✨ Smart PDF Chat Assistant",
-        "subtitle": "Upload your PDF file and get precise AI-powered answers instantly in both English and Persian.",
+        "title": "🌌 Quantum & Cosmos PDF Assistant",
+        "subtitle": "Upload your PDF file and explore precise AI-powered answers instantly.",
         "sidebar_header": "📄 Document Management",
         "upload_label": "Choose a PDF file",
         "process_btn": "🚀 Process & Analyze",
-        "processing_spinner": "Extracting text and preparing AI...",
+        "processing_spinner": "Extracting and analyzing text structure...",
         "success_msg": "✅ File processed successfully! Ask your question now.",
-        "chat_input": "Type your question here...",
+        "chat_input": "Ask about quantum physics, cosmos, or file content...",
         "warning_no_file": "⚠️ Please upload and process a PDF file first.",
-        "searching_spinner": "Searching and generating smart response...",
+        "searching_spinner": "Exploring the galaxy of data...",
     }
 }
 
 t = texts[language]
 
-# نمایش هدر شیک و مدرن در بالای صفحه
+# نمایش هدر شیک و کیهانی
 st.markdown(f"""
     <div class="main-header">
-        <h1 style="color: #1e293b; margin-bottom: 5px; font-size: 28px;">{t['title']}</h1>
-        <p style="color: #64748b; font-size: 16px; margin: 0;">{t['subtitle']}</p>
+        <h1 style="color: #f8fafc; margin-bottom: 5px; font-size: 26px;">{t['title']}</h1>
+        <p style="color: #cbd5e1; font-size: 15px; margin: 0;">{t['subtitle']}</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -163,7 +180,7 @@ if user_query:
                 llm = ChatGroq(model_name="llama3-70b-8192", temperature=0.3)
 
                 prompt = ChatPromptTemplate.from_template("""
-                You are an advanced helpful AI assistant. Answer the user's question accurately based ONLY on the provided context. 
+                You are an advanced AI assistant specialized in physics, cosmos, and document analysis. Answer the user's question accurately based ONLY on the provided context. 
                 - If the user asks in Persian, reply in fluent Persian. 
                 - If the user asks in English, reply in fluent English.
                 - If the answer is not in the text, say "در فایل یافت نشد / Not found in the file".
