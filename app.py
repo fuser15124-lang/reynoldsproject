@@ -188,7 +188,7 @@ for message in st.session_state.chat_history:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# ۸. ورودی پیام کاربر و پردازش هوش مصنوعی
+# ۸. ورودی پیام کاربر و پردازش هوش مصنوعی با مدل به‌روز
 user_query = st.chat_input(t["chat_input"])
 
 if user_query:
@@ -202,7 +202,8 @@ if user_query:
         with st.chat_message("assistant"):
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
-                llm = ChatGroq(model_name="llama3-70b-8192", temperature=0.3)
+                # استفاده از مدل جدید و پایدار گروق
+                llm = ChatGroq(model_name="llama-3.3-70b-versatile", temperature=0.3)
 
                 prompt = ChatPromptTemplate.from_template("""
                 You are a helpful AI assistant. Answer the user's question accurately based ONLY on the provided context. 
@@ -211,9 +212,7 @@ if user_query:
                 - If the answer is not in the text, say "در فایل یافت نشد / Not found in the file".
                 
                 Context:
-                {context}
-                
-                Question: {input}
+                {context}Question: {input}
                 """)
 
                 def format_docs(docs):
