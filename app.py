@@ -30,7 +30,7 @@ with st.sidebar:
     st.markdown("### 🌗 Theme Mode / حالت نمایش")
     theme_mode = st.radio("", ["Dark Mode (کیهانی خفن)", "Light Mode (جنگل طبیعی و واضح)"], label_visibility="collapsed")
 
-# تنظیمات استایل داینامیک بر اساس حالت تاریک (کیهانی باکیفیت) یا روشن (جنگل سرسبز و رنگ‌های اصلی)
+# تنظیمات استایل داینامیک بر اساس حالت تاریک یا روشن
 if "Dark" in theme_mode:
     bg_style = """
     .stApp {
@@ -188,7 +188,7 @@ for message in st.session_state.chat_history:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# ۸. ورودی پیام کاربر و پردازش هوش مصنوعی با مدل به‌روز
+# ۸. ورودی پیام کاربر و پردازش هوش مصنوعی با مدل کاملاً پایدار
 user_query = st.chat_input(t["chat_input"])
 
 if user_query:
@@ -202,8 +202,8 @@ if user_query:
         with st.chat_message("assistant"):
             with st.spinner(t["searching_spinner"]):
                 retriever = st.session_state.vector_store.as_retriever(search_kwargs={"k": 3})
-                # استفاده از مدل جدید و پایدار گروق
-                llm = ChatGroq(model_name="llama-3.3-70b-versatile", temperature=0.3)
+                # استفاده از مدل کاملاً فعال و معتبر گروق
+                llm = ChatGroq(model_name="llama-3.1-8b-instant", temperature=0.3)
 
                 prompt = ChatPromptTemplate.from_template("""
                 You are a helpful AI assistant. Answer the user's question accurately based ONLY on the provided context. 
@@ -212,8 +212,9 @@ if user_query:
                 - If the answer is not in the text, say "در فایل یافت نشد / Not found in the file".
                 
                 Context:
-                {context}Question: {input}
-                """)
+                {context}
+                
+                Question: {input}""")
 
                 def format_docs(docs):
                     return "\n\n".join(doc.page_content for doc in docs)
