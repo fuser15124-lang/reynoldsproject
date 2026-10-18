@@ -228,10 +228,10 @@ TEXTS = {
         "messages_count": "Mesajlar",
         "clear_chat": "Sohbet Geçmişini Temizle",
         "chat_page": "Sohbet",
-        "study_page": "Çalışma و Pratik",
+        "study_page": "Çalışma ve Pratik",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışا Aktar و Yedekle",
+        "export_page": "Dışa Aktar و Yedekle",
         "settings_page": "Ayarlar",
         "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
         "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
@@ -377,7 +377,7 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (RTL Fix: Sidebar moved to Right for Persian & Hebrew)
+# STYLING (Safe Layout without Sidebar Bugs)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
@@ -389,19 +389,12 @@ st.markdown(
     .stApp {{
         background: #080b14;
         color: #e7edf7;
-        direction: {"rtl" if is_rtl else "ltr"};
     }}
 
-    /* جابجایی سایدبار به سمت راست در زبان‌های فارسی و عبری */
     [data-testid="stSidebar"] {{
         background: #0c1120;
-        {"border-left: 1px solid #252e49;" if is_rtl else "border-right: 1px solid #252e49;"}
-        direction: {"rtl" if is_rtl else "ltr"};
-        {"right: 0;" if is_rtl else "left: 0;"}
+        border-right: 1px solid #252e49;
     }}
-
-    /* انتقال دکمه باز کردن سایدبار به سمت راست صفحه در حالت RTL */
-    {"[data-testid='collapsedControl'] { left: auto !important; right: 1rem !important; }" if is_rtl else ""}
 
     h1, h2, h3 {{
         color: #e8faff !important;
@@ -426,6 +419,7 @@ st.markdown(
         background: rgba(15, 22, 39, .9);
         padding: 10px;
         text-align: {"right" if is_rtl else "left"};
+        direction: {"rtl" if is_rtl else "ltr"};
     }}
 
     .stButton button {{
