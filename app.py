@@ -7,6 +7,8 @@ import base64
 import logging
 from typing import List, Dict, Optional
 
+from core import normalize_digits, requested_page_number, make_signature, export_conversation
+
 import streamlit as st
 from pypdf import PdfReader
 from langchain_community.embeddings import HuggingFaceEmbeddings
@@ -81,8 +83,8 @@ div[data-testid="stMetric"] { background:#10172a; padding:12px; border:1px solid
 with st.sidebar:
     st.markdown("## <span class='neon'>✦ NOVA</span>", unsafe_allow_html=True)
     language = st.selectbox("زبان / Language", ["فارسی", "English"], label_visibility="collapsed")
-    mode = st.radio("حالت دستیار", ["گفت‌وگو و تحلیل", "معلم خصوصی", "ساخت آزمون"] if language == "فارسی"
-                    else ["Chat & Analyze", "Private Tutor", "Create Quiz"])
+    mode = st.radio("حالت دستیار", ["گفت‌وگو و تحلیل", "معلم خصوصی", "ساخت آزمون", "فلش‌کارت"] if language == "فارسی"
+                    else ["Chat & Analyze", "Private Tutor", "Create Quiz", "Flashcards"])
     st.markdown("---")
     st.markdown("### 📚 مدیریت اسناد" if language == "فارسی" else "### 📚 Documents")
     uploaded_pdfs = st.file_uploader(
@@ -115,20 +117,6 @@ defaults = {
 for k, v in defaults.items():
     if k not in st.session_state:
         st.session_state[k] = v
-
-def normalize_digits(value: str) -> str:
-    return value.translate(str.maketrans("۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩", "01234567890123456789"))
-
-def requested_page_number(query: str) -> Optional[int]:
-    q = normalize_digits(query.casefold())
-    for pattern in (r"(?:صفحه(?:ٔ|ی)?|page|p\.)\s*(\d+)", r"(\d+)\s*(?:صفحه|page)"):
-        match = re.search(pattern, q)
-        if match:
-            return int(match.group(1))
-    return None
-
-def make_signature(files) -> tuple:
-    return tuple(sorted((f.name, f.size) for f in (files or [])))
 
 def google_search(query: str, limit: int = 6) -> str:
     """Use official Google Custom Search or SerpAPI if configured; DDGS is the fallback."""
@@ -279,10 +267,12 @@ def ask_model(query: str, image_bytes: Optional[bytes] = None, image_type: str =
         tutor_rules = "Act as a patient private tutor. Explain concepts step by step, check understanding, use examples, and ask one short follow-up question."
     elif mode in ("ساخت آزمون", "Create Quiz"):
         tutor_rules = "Create a useful quiz based on the supplied PDF context first. Include 5 questions, mixed multiple-choice and short-answer, then put the answer key in a separate clearly labeled section at the end. Do not fabricate PDF facts."
+    elif mode in ("فلش‌کارت", "Flashcards"):
+        tutor_rules = "Create 8 concise study flashcards from the supplied PDF context. Format each as Front / Back, prioritize key terms and concepts, and state when the context does not contain enough evidence. End with a short spaced-repetition suggestion."
     system = f"""You are NOVA, a precise PDF research assistant and private tutor. Reply in the user's language ({language}).
 {tutor_rules}
 Prioritize retrieved PDF evidence and cite every PDF claim as [نام فایل، صفحه N]. Never invent page numbers.
-For web claims, attach numbered citations like [Web 1] and include the exact URL from the search results in a Sources section. Never invent URLs or claim a source supports more than its snippet supports.
+For web claims, attach numbered citations like [Web 1] and include the exact URL from the search results in a Sources section. Never invent URLs or claim a source supports more than its snippet supports. For consequential or uncertain claims, flag uncertainty and recommend checking primary sources. Separate verified evidence from inference; never pretend to have searched the web if no results were returned.
 Clearly distinguish document evidence from web information. If evidence is missing, say so. For calculations show steps.
 PDF CONTEXT:
 {pdf_context}
@@ -337,15 +327,20 @@ if user_query:
                 st.error(f"درخواست ناموفق بود: {exc}" if language == "فارسی" else f"Request failed: {exc}")
 
 if st.session_state.chat_history:
-    conversation = []
-    for item in st.session_state.chat_history:
-        role = "شما" if language == "فارسی" and item["role"] == "user" else ("دستیار" if language == "فارسی" else item["role"].title())
-        conversation.append(f"## {role}\n\n{item['content']}")
-    export_md = "\n\n---\n\n".join(conversation)
-    st.download_button("⬇️ دانلود گفتگو به Markdown" if language == "فارسی" else "⬇️ Download conversation as Markdown",
-                       data=export_md, file_name="nova_conversation.md", mime="text/markdown")
-    st.download_button("⬇️ دانلود گفتگو به TXT" if language == "فارسی" else "⬇️ Download conversation as TXT",
-                       data=export_md, file_name="nova_conversation.txt", mime="text/plain")
+    export_md = export_conversation(st.session_state.chat_history, "markdown", language)
+    export_txt = export_conversation(st.session_state.chat_history, "txt", language)
+    export_json = export_conversation(st.session_state.chat_history, "json", language)
+    c_md, c_txt, c_json = st.columns(3)
+    c_md.download_button("⬇️ Markdown" if language == "فارسی" else "⬇️ Markdown", data=export_md,
+                         file_name="nova_conversation.md", mime="text/markdown", use_container_width=True)
+    c_txt.download_button("⬇️ متن ساده (TXT)" if language == "فارسی" else "⬇️ Plain text (TXT)", data=export_txt,
+                          file_name="nova_conversation.txt", mime="text/plain; charset=utf-8", use_container_width=True)
+    c_json.download_button("⬇️ پشتیبان JSON" if language == "فارسی" else "⬇️ JSON backup", data=export_json,
+                           file_name="nova_conversation.json", mime="application/json", use_container_width=True)
+    if st.button("🗑️ پاک‌کردن گفت‌وگو" if language == "فارسی" else "🗑️ Clear conversation"):
+        st.session_state.chat_history = []
+        st.session_state.last_answer = ""
+        st.rerun()
 
 with st.expander("⚙️ تنظیمات راه‌اندازی و کلیدها" if language == "فارسی" else "⚙️ Setup and API keys"):
     st.markdown("""
