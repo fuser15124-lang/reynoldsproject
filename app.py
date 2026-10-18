@@ -231,7 +231,7 @@ TEXTS = {
         "study_page": "Çalışma و Pratik",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışا Aktar و Yedekle",
+        "export_page": "Dışa Aktar و Yedekle",
         "settings_page": "Ayarlar",
         "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
         "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
@@ -283,7 +283,7 @@ TEXTS = {
         "sidebar_workspace": "ワークスペース",
         "sidebar_lang": "🌐 言語選択",
         "new_chat": "➕ 新しいチャット",
-        "system_status": "システムステータス",
+        "system_status": "システムステータс",
         "online_model": "オンラインモデル",
         "connected": "API接続済み",
         "not_configured": "未設定",
@@ -312,7 +312,7 @@ TEXTS = {
     },
     "🇮🇱 עברית": {
         "title": "NOVA 2.0 · עוזר חכם",
-        "subtitle": "בינה מלאכותית אישית · לימודים · אינטרנט · מסמכים · ייצוא",
+        "subtitle": "בינה מלאכותية אישית · לימודים · אינטרנט · מסמכים · ייצוא",
         "sidebar_workspace": "מרחב עבודה",
         "sidebar_lang": "🌐 בחר שפה",
         "new_chat": "➕ שיחה חדשה",
@@ -320,7 +320,7 @@ TEXTS = {
         "online_model": "מודל מקوون",
         "connected": "מחובר ل-API",
         "not_configured": "לא מוגדר",
-        "web_search": "חיפוש באינטرנט",
+        "web_search": "חיפוש באינטרנט",
         "ready": "מוכן",
         "need_install": "דורש התקנה",
         "uploaded_docs": "מסמכים שהועלו",
@@ -341,7 +341,7 @@ TEXTS = {
         "study_text": "נושא, טקסט לימודי أو תיאור תרגיל",
         "generate_study": "צור תוכן לימודי",
         "flashcard_text": "טקסט ליצירת כרטיסיות לימוד",
-        "make_flashcard": "צור כרטיסיות",
+        "make_flashcard": "צור כרטיسیות",
     }
 }
 
@@ -377,7 +377,7 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Forcing LTR for formulas & math blocks to prevent reversal)
+# STYLING
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
@@ -421,20 +421,6 @@ st.markdown(
         text-align: {"right" if is_rtl else "left"};
         direction: {"rtl" if is_rtl else "ltr"};
         word-break: break-word;
-    }}
-
-    /* جلوگیری از برعکس شدن فرمول‌ها و اعداد در چت */
-    .math-formula {{
-        direction: ltr !important;
-        unicode-bidi: embed;
-        display: inline-block;
-        font-family: monospace;
-        font-weight: bold;
-        color: #5cecff;
-        background: rgba(85, 236, 255, 0.1);
-        padding: 2px 6px;
-        border-radius: 4px;
-        margin: 2px 0;
     }}
 
     .stButton button {{
@@ -573,26 +559,15 @@ Respond warmly, politely, and naturally in {selected_language}.
 Offer your assistance with their PDF documents, exercises, questions, or general queries.
 """
     else:
-        # پرامپت دقیق برای جلوگیری از به هم ریختگی فرمول‌ها و رعایت چیدمان صحیح ریاضی
+        # پرامپت دقیق و قاطع برای اجبار به پاسخ‌دهی کامل، به زبان انتخابی کاربر و جلوگیری از پاسخ انگلیسی یا امتناع از حل سوال
         system_prompt = f"""
-You are NOVA, a friendly academic tutor who explains science to a 14-year-old student in simple terms.
+You are NOVA, an expert academic tutor and study assistant.
 
-STRICT RULES FOR FORMULAS AND TEXT:
-- Explain everything in clear, friendly, and simple language suitable for a teenager.
-- **NEVER** use raw code blocks.
-- **CRITICAL FORMATTING FOR MATH/FORMULAS:** Whenever you write mathematical formulas or variables with subscripts/superscripts (like cation radius r with superscript c, anion radius r with superscript w, or division like a ÷ 2), write them clearly using HTML tags or markdown blocks so they never appear reversed or broken. For example, write formulas inside dedicated lines using clear notation like:
-  شعاع کاتیونی = r^c = a ÷ 2
-  شعاع آنیونی = r^w = a ÷ 2
-  اختلاف شعاع دو یون: a = r^c - r^w
-- Keep multiplication (×) and division (÷) signs crystal clear and correctly positioned.
+MANDATORY RULES:
+1. **LANGUAGE:** You MUST respond 100% in the language selected by the user: {selected_language}. Never reply in English if the user selected Persian, Spanish, or any other language.
+2. **DIRECT ANSWERS:** When the user asks to solve questions or provide answers based on uploaded documents, exercises, or prompts, **NEVER refuse, never lecture, and never tell the user to solve it themselves**. Always provide the full, accurate, and step-by-step solutions immediately.
+3. **CLARITY & FORMAT:** Explain everything simply and clearly for a 14-year-old student using normal text paragraphs and bullet points. Never output raw code blocks. Use correct math symbols like multiplication (×) and division (÷).
 """
-
-        if mode == "Study Tutor":
-            system_prompt += "\nAct as a patient study tutor explaining step by step."
-        elif mode == "Research":
-            system_prompt += "\nAct as a clear research assistant."
-        elif mode == "Writing":
-            system_prompt += "\nAct as a writing assistant."
 
     context = get_document_context()
     if context and not is_greeting:
