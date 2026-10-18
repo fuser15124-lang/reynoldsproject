@@ -271,6 +271,25 @@ def build_history(history):
     return result
 
 
+def requested_page_number(query: str):
+    """Detect explicit page requests in Persian or English."""
+    normalized = query.casefold()
+    # Normalize Persian and Arabic-Indic digits to ASCII digits.
+    normalized = normalized.translate(
+        str.maketrans("۰۱۲۳۴۵۶۷۸۹٠١٢٣٤٥٦٧٨٩", "01234567890123456789")
+    )
+    patterns = (
+        r"(?:صفحه|صفحهٔ|صفحه‌ی)\s*(\d+)",
+        r"(?:page|p\.)\s*(\d+)",
+        r"(\d+)\s*(?:صفحه|page)",
+    )
+    for pattern in patterns:
+        match = re.search(pattern, normalized)
+        if match:
+            return int(match.group(1))
+    return None
+
+
 def format_retrieved_docs(docs):
     parts = []
     for doc in docs:
