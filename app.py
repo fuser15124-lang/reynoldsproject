@@ -47,8 +47,8 @@ st.set_page_config(
 
 TEXTS = {
     "🇮🇷 فارسی": {
-        "title": "NOVA 2.0 · دستیار هوشمند",
-        "subtitle": "هوش مصنوعی شخصی · مطالعه · وب · اسناد · خروجی",
+        "title": "NOVA 2.0",
+        "subtitle": "دستیار هوشمند و حل کامل تمرین‌ها",
         "sidebar_workspace": "فضای کاری",
         "sidebar_lang": "🌐 انتخاب زبان",
         "new_chat": "چت جدید",
@@ -69,19 +69,19 @@ TEXTS = {
         "export_page": "خروجی و پشتیبان",
         "settings_page": "تنظیمات",
         "chat_input": "پیام، سوال یا تمرین خود را برای NOVA بنویس...",
-        "thinking": "NOVA در حال جستجوی آنلاین معتبر و تحلیل دقیق است...",
+        "thinking": "NOVA در حال تحلیل دقیق و پاسخ‌دهی به تمام سوالات است...",
         "error_msg": "در تولید پاسخ خطایی رخ داد. تنظیمات API و اتصال شبکه را بررسی کنید.",
         "upload_label": "افزودن فایل/عکس",
         "ask_doc_input": "سؤال درباره محتوای PDF یا تمرین‌ها",
-        "ask_doc_btn": "پاسخ از روی اسناد و وب",
+        "ask_doc_btn": "پاسخ کامل به اسناد",
         "study_text": "موضوع یا متن آموزشی یا صورت تمرین",
         "generate_study": "تولید محتوای آموزشی",
         "flashcard_text": "متن برای ساخت فلش‌کارت",
         "make_flashcard": "ساخت فلش‌کارت",
     },
     "🇺🇸 English": {
-        "title": "NOVA 2.0 · Smart Assistant",
-        "subtitle": "Personal AI · Study · Web · Documents · Export",
+        "title": "NOVA 2.0",
+        "subtitle": "Smart Assistant & Complete Exercise Solver",
         "sidebar_workspace": "Workspace",
         "sidebar_lang": "🌐 Select Language",
         "new_chat": "New Chat",
@@ -102,11 +102,11 @@ TEXTS = {
         "export_page": "Export & Backup",
         "settings_page": "Settings",
         "chat_input": "Type your message, question, or exercise for NOVA...",
-        "thinking": "NOVA is searching trusted online sources and analyzing...",
+        "thinking": "NOVA is analyzing and solving all questions...",
         "error_msg": "An error occurred. Check API settings and network connection.",
         "upload_label": "Add File/Image",
         "ask_doc_input": "Question about PDF content or exercises",
-        "ask_doc_btn": "Answer from Docs & Web",
+        "ask_doc_btn": "Answer All Questions",
         "study_text": "Subject, educational text, or exercise prompt",
         "generate_study": "Generate Study Content",
         "flashcard_text": "Text for creating flashcards",
@@ -132,7 +132,7 @@ SESSION_DEFAULTS = {
     "settings": {
         "model": "openai/gpt-oss-120b",
         "temperature": 0.1,
-        "max_tokens": 2048,
+        "max_tokens": 4096,
     },
 }
 
@@ -146,7 +146,7 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING
+# STYLING (Perfect Responsive Design)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
@@ -171,7 +171,7 @@ st.markdown(
     }}
 
     .nova-header-title {{
-        font-size: 1.5rem;
+        font-size: 1.6rem;
         font-weight: 800;
         color: #5cecff;
         margin-bottom: 0.1rem;
@@ -179,7 +179,7 @@ st.markdown(
 
     .nova-header-sub {{
         color: #9baac5;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
         margin-bottom: 0.8rem;
     }}
 
@@ -287,7 +287,7 @@ def extract_pdf_text(data: bytes) -> list[dict]:
 
 def get_document_context() -> str:
     parts = []
-    remaining = 28000
+    remaining = 32000
     for filename, pages in st.session_state.documents.items():
         if remaining <= 0:
             break
@@ -339,24 +339,24 @@ def generate_answer(question: str, mode: str, web_results: list[dict] | None = N
 تو دستیار هوشمند NOVA هستی. به گرمی و با ادب به زبان {selected_language} جواب بده و اعلام آمادگی کن.
 """
     else:
-        # پرامپت با تاکید بر استفاده از وب، دقت تضمینی، زبان ساده برای نوجوان 12 ساله، و فرمول‌های دقیق با × و ÷
+        # پرامپت با تاکید بر حل کامل و ۱۰۰ درصدی تمام سوالات بدون استثنا
         system_prompt = f"""
-تو هوش مصنوعی فوق‌العاده دقیق و پیشرفته‌ای به نام NOVA هستی که به معتبرترین منابع و سایت‌های علمی آنلاین متصل است. مخاطب تو یک دانش‌آموز ۱۲ ساله است.
+تو هوش مصنوعی فوق‌العاده دقیق، قدرتمند و جامع به نام NOVA هستی.
 
-قوانین حیاتی برای پاسخ‌دهی:
-۱. **جستجوی آنلاین و دقت:** از نتایج جستجوی وب و منابع معتبر آنلاین برای استخراج دقیق‌ترین و درست‌ترین پاسخ استفاده کن. هیچ‌وقت جواب را حدس نزن. پاسخ باید کاملاً تضمینی و علمی باشد.
+قوانین حتمی و اجباری:
+۱. **پاسخ کامل و ۱۰۰% به تمام سوالات:** باید بدون هیچ‌گونه استثنا، خلاصه کاری یا جا انداختن، تمام سوالات، تمرین‌ها و بندهای موجود در فایل آپلود شده یا متن کاربر را یک به یک و کاملاً گام‌به‌گام حل کنی و پاسخ قطعی بدهی.
 ۲. **زبان پاسخ:** فقط و فقط به زبان {selected_language} پاسخ بده.
-۳. **پاسخ مستقیم:** هرگز از پاسخ‌دهی امتناع نکن، پند و اندرز نده و جواب کامل و گام‌به‌گام تمرینات را بده.
-۴. **سادگی برای سن ۱۲ سال:** تمامی مفاهیم، نکات و فرمول‌ها را با زبان بسیار ساده، روان، شیوا و کودکانه (مناسب سن ۱۲ سال) توضیح بده.
-۵. **فرمول‌ها و علائم:** فرمول‌های ریاضی و فیزیک/شیمی را به شکلی بنویس که روی موبایل کاملاً خوانا باشند. از نمادهای ضرب (×) و تقسیم (÷) به درستی استفاده کن و به هیچ وجه از کدهای کامپیوتری استفاده نکن.
+۳. **عدم امتناع:** هرگز از پاسخ دادن شانه خالی نکن، نصیحت نکن و مستقیم پاسخ کامل، علمی و دقیق همه سوالات را ارائه بده.
+۴. **سادگی و خوانایی:** تمام مفاهیم و فرمول‌ها را به زبانی کاملاً روان، ساده، واضح و قابل فهم بیان کن.
+۵. **فرمول‌ها:** از علائم دقیق ریاضی مانند ضرب (×) و تقسیم (÷) استفاده کن و هیچ‌وقت کد کامپیوتری خام تولید نکن.
 """
 
     context = get_document_context()
     if context and not is_greeting:
-        context = "\n\nمتن اسناد و فایل‌های بارگذاری‌شده:\n" + context
+        context = "\n\nمتن کامل اسناد و فایل‌های بارگذاری‌شده:\n" + context
 
     if not is_greeting and web_results:
-        context += "\n\nنتایج جستجوی وب از معتبرترین سایت‌ها:\n"
+        context += "\n\nنتایج معتبر جستجوی وب:\n"
         for index, item in enumerate(web_results, start=1):
             context += f"\n[{index}] عنوان: {item['title']}\nمنبع: {item['url']}\nمتن: {item['snippet']}\n"
 
