@@ -229,10 +229,10 @@ TEXTS = {
         "messages_count": "Mesajlar",
         "clear_chat": "Sohbet Geçmişini Temizle",
         "chat_page": "Sohbet",
-        "study_page": "Çalışma ve Pratik",
+        "study_page": "Çalışma و Pratik",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışa Aktar ve Yedekle",
+        "export_page": "Dışa Aktar و Yedekle",
         "settings_page": "Ayarlar",
         "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
         "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
@@ -318,7 +318,7 @@ TEXTS = {
         "sidebar_lang": "🌐 בחר שפה",
         "new_chat": "➕ שיחה חדשה",
         "system_status": "מצב המערכת",
-        "online_model": "מודל מקוון",
+        "online_model": "מודל מקוون",
         "connected": "מחובר ל-API",
         "not_configured": "לא מוגדר",
         "web_search": "חיפוש באינטרנט",
@@ -378,11 +378,11 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Supports RTL for Persian and Hebrew)
+# STYLING (Responsive for Mobile & RTL support)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "عברית" in current_lang
+is_rtl = "فارسی" in current_lang or "עברית" in current_lang
 
 st.markdown(
     f"""
@@ -407,16 +407,16 @@ st.markdown(
     }}
 
     .nova-brand {{
-        font-size: 2.8rem;
+        font-size: 2.2rem;
         font-weight: 800;
-        letter-spacing: .16em;
+        letter-spacing: .12em;
         color: #5cecff;
         text-shadow: 0 0 22px rgba(92, 236, 255, .3);
     }}
 
     .nova-subtitle {{
         color: #9baac5;
-        font-size: .95rem;
+        font-size: .9rem;
         margin-bottom: 1.5rem;
     }}
 
@@ -444,6 +444,20 @@ st.markdown(
         padding: 14px;
         border: 1px solid #26334e;
         border-radius: 12px;
+    }}
+
+    /* Media Queries for Mobile Screens */
+    @media (max-width: 768px) {{
+        .nova-brand {{
+            font-size: 1.6rem;
+            letter-spacing: .08em;
+        }}
+        .nova-subtitle {{
+            font-size: 0.8rem;
+        }}
+        .stChatMessage {{
+            padding: 8px;
+        }}
     }}
     </style>
     """,
@@ -645,7 +659,6 @@ with st.sidebar:
     st.caption("YOUR PERSONAL AI WORKSPACE")
     st.divider()
 
-    # دکمه ساخت چت جدید
     if st.button(t("new_chat"), use_container_width=True, type="primary"):
         st.session_state.chat_history = []
         st.session_state.last_answer = ""
