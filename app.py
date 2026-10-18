@@ -231,7 +231,7 @@ TEXTS = {
         "study_page": "Çalışma و Pratik",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışa Aktar و Yedekle",
+        "export_page": "Dışا Aktar و Yedekle",
         "settings_page": "Ayarlar",
         "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
         "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
@@ -313,14 +313,14 @@ TEXTS = {
     "🇮🇱 עברית": {
         "title": "NOVA 2.0 · עוזר חכם",
         "subtitle": "בינה מלאכותית אישית · לימודים · אינטרנט · מסמכים · ייצוא",
-        "sidebar_workspace": "מרחب עבודה",
+        "sidebar_workspace": "מרחב עבודה",
         "sidebar_lang": "🌐 בחר שפה",
         "new_chat": "➕ שיחה חדשה",
         "system_status": "מצב המערכת",
         "online_model": "מודל מקوون",
         "connected": "מחובר ل-API",
         "not_configured": "לא מוגדר",
-        "web_search": "חיפוש באינטרנט",
+        "web_search": "חיפוש באינטرנט",
         "ready": "מוכן",
         "need_install": "דורש התקנה",
         "uploaded_docs": "מסמכים שהועלו",
@@ -377,7 +377,7 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING
+# STYLING (Forcing LTR for formulas & math blocks to prevent reversal)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
@@ -421,6 +421,20 @@ st.markdown(
         text-align: {"right" if is_rtl else "left"};
         direction: {"rtl" if is_rtl else "ltr"};
         word-break: break-word;
+    }}
+
+    /* جلوگیری از برعکس شدن فرمول‌ها و اعداد در چت */
+    .math-formula {{
+        direction: ltr !important;
+        unicode-bidi: embed;
+        display: inline-block;
+        font-family: monospace;
+        font-weight: bold;
+        color: #5cecff;
+        background: rgba(85, 236, 255, 0.1);
+        padding: 2px 6px;
+        border-radius: 4px;
+        margin: 2px 0;
     }}
 
     .stButton button {{
@@ -559,19 +573,22 @@ Respond warmly, politely, and naturally in {selected_language}.
 Offer your assistance with their PDF documents, exercises, questions, or general queries.
 """
     else:
-        # تنظیم پرامپت برای پاسخ به شدت ساده، روان، مناسب نوجوانان، با علامت‌های صحیح ضرب (×) و تقسیم (÷)
+        # پرامپت دقیق برای جلوگیری از به هم ریختگی فرمول‌ها و رعایت چیدمان صحیح ریاضی
         system_prompt = f"""
-You are NOVA, a friendly and expert academic tutor who explains things to a 14-year-old student.
+You are NOVA, a friendly academic tutor who explains science to a 14-year-old student in simple terms.
 
-STRICT RULES FOR RESPONSES:
-- Explain everything in extremely simple, clear, and friendly language, exactly like an experienced teacher talking to a 14-year-old teenager.
-- **NEVER** use raw programming code blocks. Write everything in normal, readable text and paragraphs.
-- For mathematical or scientific formulas, write them out clearly using correct symbols like multiplication (×) and division (÷) instead of messy code symbols.
-- Break down steps into numbered lists so they are very easy to follow and understand.
+STRICT RULES FOR FORMULAS AND TEXT:
+- Explain everything in clear, friendly, and simple language suitable for a teenager.
+- **NEVER** use raw code blocks.
+- **CRITICAL FORMATTING FOR MATH/FORMULAS:** Whenever you write mathematical formulas or variables with subscripts/superscripts (like cation radius r with superscript c, anion radius r with superscript w, or division like a ÷ 2), write them clearly using HTML tags or markdown blocks so they never appear reversed or broken. For example, write formulas inside dedicated lines using clear notation like:
+  شعاع کاتیونی = r^c = a ÷ 2
+  شعاع آنیونی = r^w = a ÷ 2
+  اختلاف شعاع دو یون: a = r^c - r^w
+- Keep multiplication (×) and division (÷) signs crystal clear and correctly positioned.
 """
 
         if mode == "Study Tutor":
-            system_prompt += "\nAct as a patient study tutor explaining things simply."
+            system_prompt += "\nAct as a patient study tutor explaining step by step."
         elif mode == "Research":
             system_prompt += "\nAct as a clear research assistant."
         elif mode == "Writing":
