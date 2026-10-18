@@ -30,14 +30,14 @@ except ImportError:
 
 
 # =========================================================
-# PAGE CONFIGURATION (Collapsed Sidebar for Mobile)
+# PAGE CONFIGURATION
 # =========================================================
 
 st.set_page_config(
     page_title="NOVA AI Assistant",
     page_icon="🌌",
     layout="wide",
-    initial_sidebar_state="collapsed",  # حالت کشویی و بسته برای موبایل مثل سایر هوش مصنوعی‌ها
+    initial_sidebar_state="collapsed",
 )
 
 
@@ -228,18 +228,18 @@ TEXTS = {
         "messages_count": "Mesajlar",
         "clear_chat": "Sohbet Geçmişini Temizle",
         "chat_page": "Sohbet",
-        "study_page": "Çalışma ve Pratik",
+        "study_page": "Çalışma و Pratik",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışa Aktar ve Yedekle",
+        "export_page": "Dışا Aktar و Yedekle",
         "settings_page": "Ayarlar",
-        "chat_input": "NOVA için mesajınızı, sorunuzu veya egzersizinizi yazın...",
-        "thinking": "NOVA analiz ediyor ve yanıt hazırlıyor...",
+        "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
+        "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
         "error_msg": "Bir hata oluştu. API ayarlarını و ağ bağlantısını kontrol edin.",
         "upload_label": "PDF dosyalarını seçin",
-        "ask_doc_input": "PDF içeriği veya alıştırmalar hakkında soru",
-        "ask_doc_btn": "Belgelerden ve Web'den Yanıtla",
-        "study_text": "Konu, eğitim metni veya egzersiz metni",
+        "ask_doc_input": "PDF içeriği یا alıştırmalar hakkında soru",
+        "ask_doc_btn": "Belgelerden و Web'den Yanıtla",
+        "study_text": "Konu, eğitim metni یا egzersiz metni",
         "generate_study": "Eğitim İçeriği Oluştur",
         "flashcard_text": "Bilgi kartı oluşturmak için metin",
         "make_flashcard": "Bilgi Kartı Oluştur",
@@ -377,11 +377,11 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Clean & Fully Responsive)
+# STYLING (RTL Fix: Sidebar moved to Right for Persian & Hebrew)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "عברית" in current_lang
+is_rtl = "فارسی" in current_lang or "עברית" in current_lang
 
 st.markdown(
     f"""
@@ -392,11 +392,16 @@ st.markdown(
         direction: {"rtl" if is_rtl else "ltr"};
     }}
 
+    /* جابجایی سایدبار به سمت راست در زبان‌های فارسی و عبری */
     [data-testid="stSidebar"] {{
         background: #0c1120;
-        border-right: 1px solid #252e49;
+        {"border-left: 1px solid #252e49;" if is_rtl else "border-right: 1px solid #252e49;"}
         direction: {"rtl" if is_rtl else "ltr"};
+        {"right: 0;" if is_rtl else "left: 0;"}
     }}
+
+    /* انتقال دکمه باز کردن سایدبار به سمت راست صفحه در حالت RTL */
+    {"[data-testid='collapsedControl'] { left: auto !important; right: 1rem !important; }" if is_rtl else ""}
 
     h1, h2, h3 {{
         color: #e8faff !important;
@@ -620,7 +625,7 @@ def build_flashcards(text: str) -> list[dict]:
 
 
 # =========================================================
-# SIDEBAR (Collapsible / Drawer)
+# SIDEBAR
 # =========================================================
 
 with st.sidebar:
