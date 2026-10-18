@@ -30,14 +30,14 @@ except ImportError:
 
 
 # =========================================================
-# PAGE CONFIGURATION
+# PAGE CONFIGURATION (Collapsed Sidebar for Mobile)
 # =========================================================
 
 st.set_page_config(
     page_title="NOVA AI Assistant",
     page_icon="🌌",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",  # حالت کشویی و بسته برای موبایل مثل سایر هوش مصنوعی‌ها
 )
 
 
@@ -228,18 +228,18 @@ TEXTS = {
         "messages_count": "Mesajlar",
         "clear_chat": "Sohbet Geçmişini Temizle",
         "chat_page": "Sohbet",
-        "study_page": "Çalışma و Pratik",
+        "study_page": "Çalışma ve Pratik",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışa Aktar و Yedekle",
+        "export_page": "Dışa Aktar ve Yedekle",
         "settings_page": "Ayarlar",
-        "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
-        "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
+        "chat_input": "NOVA için mesajınızı, sorunuzu veya egzersizinizi yazın...",
+        "thinking": "NOVA analiz ediyor ve yanıt hazırlıyor...",
         "error_msg": "Bir hata oluştu. API ayarlarını و ağ bağlantısını kontrol edin.",
         "upload_label": "PDF dosyalarını seçin",
-        "ask_doc_input": "PDF içeriği یا alıştırmalar hakkında soru",
-        "ask_doc_btn": "Belgelerden و Web'den Yanıtla",
-        "study_text": "Konu, eğitim metni یا egzersiz metni",
+        "ask_doc_input": "PDF içeriği veya alıştırmalar hakkında soru",
+        "ask_doc_btn": "Belgelerden ve Web'den Yanıtla",
+        "study_text": "Konu, eğitim metni veya egzersiz metni",
         "generate_study": "Eğitim İçeriği Oluştur",
         "flashcard_text": "Bilgi kartı oluşturmak için metin",
         "make_flashcard": "Bilgi Kartı Oluştur",
@@ -329,15 +329,15 @@ TEXTS = {
         "chat_page": "צ'אט",
         "study_page": "למידה ותרגול",
         "docs_page": "ניהול מסמכים",
-        "web_page": "מחקר אינטרנט",
+        "web_page": "מחקר אינטرנט",
         "export_page": "ייצוא وגיبוי",
         "settings_page": "הגדרות",
         "chat_input": "הקלד הודעה, שאלה أو תרגיל עבור NOVA...",
         "thinking": "NOVA מנתח ומכין את התשובה...",
-        "error_msg": "אירעה שגיאה. בדוק את הגדרות ال-API وأת חיבור הרשת.",
+        "error_msg": "אירעה شגיאה. בדוק את הגדרות ال-API وأת חיבור הרשת.",
         "upload_label": "בחר קבצי PDF",
         "ask_doc_input": "שאלה לגבי תוכן ال-PDF أو תרגילים",
-        "ask_doc_btn": "ענה מתוך המסמכים והאינטרנט",
+        "ask_doc_btn": "ענה מתוך המסמכים והאינטرנט",
         "study_text": "נושא, טקסט לימודי أو תיאור תרגיל",
         "generate_study": "צור תוכן לימודי",
         "flashcard_text": "טקסט ליצירת כרטיסיות לימוד",
@@ -377,7 +377,7 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# CLEAN & RESPONSIVE STYLING (Mobile Fixed)
+# STYLING (Clean & Fully Responsive)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
@@ -402,18 +402,17 @@ st.markdown(
         color: #e8faff !important;
     }}
 
-    /* استایل استاندارد و ایمن برای موبایل جهت جلوگیری از شکستگی متن */
     .nova-header-title {{
-        font-size: 1.6rem;
+        font-size: 1.5rem;
         font-weight: 800;
         color: #5cecff;
-        margin-bottom: 0.2rem;
+        margin-bottom: 0.1rem;
     }}
 
     .nova-header-sub {{
         color: #9baac5;
-        font-size: 0.85rem;
-        margin-bottom: 1rem;
+        font-size: 0.8rem;
+        margin-bottom: 0.8rem;
     }}
 
     div[data-testid="stChatMessage"] {{
@@ -621,7 +620,7 @@ def build_flashcards(text: str) -> list[dict]:
 
 
 # =========================================================
-# SIDEBAR
+# SIDEBAR (Collapsible / Drawer)
 # =========================================================
 
 with st.sidebar:
@@ -687,7 +686,7 @@ with st.sidebar:
 
 
 # =========================================================
-# HEADER (Safe for Mobile)
+# HEADER
 # =========================================================
 
 st.markdown(f'<div class="nova-header-title">{t("title")}</div>', unsafe_allow_html=True)
