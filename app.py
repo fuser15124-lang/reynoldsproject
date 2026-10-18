@@ -69,7 +69,7 @@ TEXTS = {
         "export_page": "خروجی و پشتیبان",
         "settings_page": "تنظیمات",
         "chat_input": "پیام، سوال یا تمرین خود را برای NOVA بنویس...",
-        "thinking": "NOVA در حال تحلیل دقیق و آماده‌سازی پاسخ است...",
+        "thinking": "NOVA در حال جستجوی آنلاین معتبر و تحلیل دقیق است...",
         "error_msg": "در تولید پاسخ خطایی رخ داد. تنظیمات API و اتصال شبکه را بررسی کنید.",
         "upload_label": "افزودن فایل/عکس",
         "ask_doc_input": "سؤال درباره محتوای PDF یا تمرین‌ها",
@@ -102,7 +102,7 @@ TEXTS = {
         "export_page": "Export & Backup",
         "settings_page": "Settings",
         "chat_input": "Type your message, question, or exercise for NOVA...",
-        "thinking": "NOVA is analyzing and preparing the response...",
+        "thinking": "NOVA is searching trusted online sources and analyzing...",
         "error_msg": "An error occurred. Check API settings and network connection.",
         "upload_label": "Add File/Image",
         "ask_doc_input": "Question about PDF content or exercises",
@@ -146,11 +146,11 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Forcing text wrapping inside chat box and tables)
+# STYLING
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "עברית" in current_lang
+is_rtl = "فارسی" in current_lang or "عברית" in current_lang
 
 st.markdown(
     f"""
@@ -183,7 +183,6 @@ st.markdown(
         margin-bottom: 0.8rem;
     }}
 
-    /* جلوگیری از بیرون زدن متن و کادر چت در موبایل */
     div[data-testid="stChatMessage"] {{
         border: 1px solid #27334e;
         border-radius: 12px;
@@ -202,7 +201,6 @@ st.markdown(
         width: 100%;
     }}
 
-    /* استایل استاندارد جدول‌ها داخل کادر پیام برای جلوگیری از بیرون زدگی */
     table {{
         width: 100% !important;
         border-collapse: collapse !important;
@@ -341,15 +339,16 @@ def generate_answer(question: str, mode: str, web_results: list[dict] | None = N
 تو دستیار هوشمند NOVA هستی. به گرمی و با ادب به زبان {selected_language} جواب بده و اعلام آمادگی کن.
 """
     else:
-        # پرامپت بسیار دقیق، تضمینی، ساده برای کودکان 12 ساله، و اجبار کامل به پاسخ‌گویی مستقیم بدون امتناع
+        # پرامپت با تاکید بر استفاده از وب، دقت تضمینی، زبان ساده برای نوجوان 12 ساله، و فرمول‌های دقیق با × و ÷
         system_prompt = f"""
-تو هوش مصنوعی بسیار دقیق و حرفه‌ای به نام NOVA هستی. کاربر تو یک دانش‌آموز ۱۲ ساله است.
+تو هوش مصنوعی فوق‌العاده دقیق و پیشرفته‌ای به نام NOVA هستی که به معتبرترین منابع و سایت‌های علمی آنلاین متصل است. مخاطب تو یک دانش‌آموز ۱۲ ساله است.
 
-قوانین حیاتی و قطعی:
-۱. **زبان پاسخ:** فقط و فقط به زبان {selected_language} پاسخ بده.
-۲. **پاسخ مستقیم و تضمینی:** هرگز از پاسخ دادن به سوالات یا حل تمرین‌ها امتناع نکن، هیچ‌وقت پند و اندرز نده که "خودت حل کن"، و همیشه جواب کامل، دقیق و قطعی سوالات موجود در فایل آپلود شده یا متن را بده.
-۳. **سادگی برای سن ۱۲ سال:** تمام مفاهیم، فرمول‌ها و پاسخ‌ها را مثل یک معلم مهربان و با زبان بسیار ساده، روان و کودکانه (مناسب سن ۱۲ سال) توضیح بده.
-۴. **دقت کامل:** سوال را با نهایت دقت بررسی کن و پاسخ کاملاً صحیح، قدم به قدم و بدون اشتباه را بنویس. از نمادهای ریاضی استاندارد مثل ضرب (×) و تقسیم (÷) استفاده کن. به هیچ وجه از کدهای کامپیوتری استفاده نکن.
+قوانین حیاتی برای پاسخ‌دهی:
+۱. **جستجوی آنلاین و دقت:** از نتایج جستجوی وب و منابع معتبر آنلاین برای استخراج دقیق‌ترین و درست‌ترین پاسخ استفاده کن. هیچ‌وقت جواب را حدس نزن. پاسخ باید کاملاً تضمینی و علمی باشد.
+۲. **زبان پاسخ:** فقط و فقط به زبان {selected_language} پاسخ بده.
+۳. **پاسخ مستقیم:** هرگز از پاسخ‌دهی امتناع نکن، پند و اندرز نده و جواب کامل و گام‌به‌گام تمرینات را بده.
+۴. **سادگی برای سن ۱۲ سال:** تمامی مفاهیم، نکات و فرمول‌ها را با زبان بسیار ساده، روان، شیوا و کودکانه (مناسب سن ۱۲ سال) توضیح بده.
+۵. **فرمول‌ها و علائم:** فرمول‌های ریاضی و فیزیک/شیمی را به شکلی بنویس که روی موبایل کاملاً خوانا باشند. از نمادهای ضرب (×) و تقسیم (÷) به درستی استفاده کن و به هیچ وجه از کدهای کامپیوتری استفاده نکن.
 """
 
     context = get_document_context()
@@ -357,9 +356,9 @@ def generate_answer(question: str, mode: str, web_results: list[dict] | None = N
         context = "\n\nمتن اسناد و فایل‌های بارگذاری‌شده:\n" + context
 
     if not is_greeting and web_results:
-        context += "\n\nنتایج جستجوی وب:\n"
+        context += "\n\nنتایج جستجوی وب از معتبرترین سایت‌ها:\n"
         for index, item in enumerate(web_results, start=1):
-            context += f"\n[{index}] {item['title']}\nتوضیح: {item['snippet']}\n"
+            context += f"\n[{index}] عنوان: {item['title']}\nمنبع: {item['url']}\nمتن: {item['snippet']}\n"
 
     messages = [{"role": "system", "content": system_prompt}]
     if context and not is_greeting:
@@ -533,7 +532,7 @@ if page == t("chat_page"):
                     is_greeting = any(g in prompt.lower() for g in greetings) and len(prompt.split()) <= 4
                     
                     if not is_greeting:
-                        web_results = search_web(prompt, limit=3)
+                        web_results = search_web(prompt, limit=5)
 
                     answer = generate_answer(prompt, mode, web_results=web_results)
                 st.markdown(answer)
@@ -594,7 +593,7 @@ elif page == t("docs_page"):
         else:
             try:
                 with st.spinner(t("thinking")):
-                    web_results = search_web(document_question, limit=3)
+                    web_results = search_web(document_question, limit=5)
                     answer = generate_answer(document_question, "Research", web_results=web_results)
                 st.markdown(answer)
                 st.session_state.chat_history.extend([
@@ -631,7 +630,7 @@ elif page == t("study_page"):
     study_text = st.text_area(t("study_text"), height=180)
     if st.button(t("generate_study"), type="primary"):
         if study_text.strip():
-            answer = generate_answer("Solve this exercise step by step: " + study_text, "Study Tutor", web_results=search_web(study_text, limit=3))
+            answer = generate_answer("Solve this exercise step by step: " + study_text, "Study Tutor", web_results=search_web(study_text, limit=5))
             st.markdown(answer)
 
 
