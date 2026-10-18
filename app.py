@@ -333,8 +333,8 @@ TEXTS = {
         "export_page": "ייצוא وגיبוי",
         "settings_page": "הגדרות",
         "chat_input": "הקלד הודעה, שאלה أو תרגיל עבור NOVA...",
-        "thinking": "NOVA מנתח ומכין את את תשובה...",
-        "error_msg": "אירעה شגיאה. בדוק את הגדרות ال-API ואت חיבור הרשת.",
+        "thinking": "NOVA מנתח ומכין את תשובה...",
+        "error_msg": "אירעה شגיאה. בדוק את הגדרות ال-API وأת חיבור הרשת.",
         "upload_label": "הוסף קובץ",
         "ask_doc_input": "שאלה לגבי תוכן ال-PDF أو תרגילים",
         "ask_doc_btn": "ענה מתוך המסמכים והאינטرנט",
@@ -377,11 +377,11 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Mobile Responsive Tables & Custom Modern Plus Button)
+# STYLING
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "עברית" in current_lang
+is_rtl = "فارسی" in current_lang or "عברית" in current_lang
 
 st.markdown(
     f"""
@@ -428,7 +428,6 @@ st.markdown(
         width: 100%;
     }}
 
-    /* واکنش‌گرا کردن جدول‌ها برای موبایل جهت جلوگیری از بیرون زدن */
     table {{
         width: 100% !important;
         overflow-x: auto;
@@ -436,7 +435,6 @@ st.markdown(
         word-break: break-word;
     }}
     
-    /* طراحی دکمه پلاس مدرن مشابه هوش مصنوعی‌ها */
     .plus-btn-container button {{
         background: transparent !important;
         border: 1px solid #354b6d !important;
@@ -554,22 +552,23 @@ Respond warmly, politely, and naturally in {selected_language}.
 Offer your assistance with their PDF documents, exercises, questions, or general queries.
 """
     else:
+        # دستورالعمل سخت‌گیرانه برای تولید پاسخ متنی، واضح و انسانی به جای کدهای به هم ریخته
         system_prompt = f"""
 You are NOVA, an advanced expert AI academic tutor, researcher, and multilingual assistant.
 
-Rules:
-- Respond strictly in the following language chosen by the user: {selected_language}.
-- Distinguish verified evidence from uncertainty.
-- Never invent citations, URLs, quotations, or page numbers.
-- **First Priority (PDF Context):** If document context is supplied, prioritize it for document/study questions. Cite exact evidence and page numbers using [Document: filename, Page: N] or [صفحه N].
-- **Second Priority (Web Search Context / Exercises):** If a question is an exercise or its answer is missing from the document context, use the provided web search results to give a fully correct, well-structured, and accurate answer.
-- For study tasks and exercises, explain concepts step by step in {selected_language}.
+CRITICAL FORMATTING RULES:
+- Respond strictly in clear, fluent, natural human text in {selected_language}.
+- **DO NOT** output raw code blocks unless explicitly requested by the user. Explain everything in clear paragraphs, bullet points, or structured markdown tables.
+- If there are mathematical formulas, scientific equations, or tabular data, present them cleanly and accurately using Markdown formatting and standard text so that any normal user can easily read and understand them.
+- Distinguish verified evidence from uncertainty. Never invent citations, URLs, quotations, or page numbers.
+- **First Priority (PDF Context):** Prioritize document context for document/study questions and cite evidence correctly.
+- **Second Priority (Web Search Context / Exercises):** Use web search results to provide fully accurate answers to exercises and questions.
 """
 
         if mode == "Study Tutor":
-            system_prompt += "\nAct as a study tutor. Explain reasoning, give examples, and provide step-by-step solutions to exercises."
+            system_prompt += "\nAct as a study tutor. Explain reasoning step by step clearly and simply."
         elif mode == "Research":
-            system_prompt += "\nAct as a research assistant. Compare evidence and separate facts and interpretations."
+            system_prompt += "\nAct as a research assistant. Compare evidence clearly."
         elif mode == "Writing":
             system_prompt += "\nAct as a writing assistant. Produce clear, structured text."
 
@@ -722,7 +721,6 @@ if page == t("chat_page"):
         with st.chat_message(role if role in ("user", "assistant") else "assistant"):
             st.markdown(content)
 
-    # طراحی مدرن دکمه پلاس در کنار فیلد چت
     col_plus, col_input = st.columns([1, 11])
     with col_plus:
         st.markdown('<div class="plus-btn-container">', unsafe_allow_html=True)
