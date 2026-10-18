@@ -71,7 +71,7 @@ TEXTS = {
         "chat_input": "پیام، سوال یا تمرین خود را برای NOVA بنویس...",
         "thinking": "NOVA در حال تحلیل و آماده‌سازی پاسخ است...",
         "error_msg": "در تولید پاسخ خطایی رخ داد. تنظیمات API و اتصال شبکه را بررسی کنید.",
-        "upload_label": "فایل‌های PDF را انتخاب کن",
+        "upload_label": "افزودن فایل یا عکس ➕",
         "ask_doc_input": "سؤال درباره محتوای PDF یا تمرین‌ها",
         "ask_doc_btn": "پاسخ از روی اسناد و وب",
         "study_text": "موضوع یا متن آموزشی یا صورت تمرین",
@@ -104,7 +104,7 @@ TEXTS = {
         "chat_input": "Type your message, question, or exercise for NOVA...",
         "thinking": "NOVA is analyzing and preparing the response...",
         "error_msg": "An error occurred. Check API settings and network connection.",
-        "upload_label": "Choose PDF files",
+        "upload_label": "Add File or Image ➕",
         "ask_doc_input": "Question about PDF content or exercises",
         "ask_doc_btn": "Answer from Docs & Web",
         "study_text": "Subject, educational text, or exercise prompt",
@@ -137,7 +137,7 @@ TEXTS = {
         "chat_input": "Escribe tu mensaje, pregunta o ejercicio para NOVA...",
         "thinking": "NOVA está analizando y preparando la respuesta...",
         "error_msg": "Ocurrió un error. Comprueba la configuración de la API.",
-        "upload_label": "Elige archivos PDF",
+        "upload_label": "Añadir archivo o imagen ➕",
         "ask_doc_input": "Pregunta sobre el contenido del PDF o ejercicios",
         "ask_doc_btn": "Responder desde documentos y web",
         "study_text": "Tema, texto educativo o enunciado de ejercicio",
@@ -170,7 +170,7 @@ TEXTS = {
         "chat_input": "Scrivi il tuo messaggio, domanda o esercizio per NOVA...",
         "thinking": "NOVA sta analizzando e preparando la risposta...",
         "error_msg": "Si è verificato un errore. Controlla le impostazioni dell'API.",
-        "upload_label": "Scegli file PDF",
+        "upload_label": "Aggiungi file o immagine ➕",
         "ask_doc_input": "Domanda sul contenuto del PDF o esercizi",
         "ask_doc_btn": "Rispondi da documenti e web",
         "study_text": "Argomento, testo educativo o traccia dell'esercizio",
@@ -203,7 +203,7 @@ TEXTS = {
         "chat_input": "Введите сообщение, вопрос или упражнение для NOVA...",
         "thinking": "NOVA анализирует и готовит ответ...",
         "error_msg": "Произошла ошибка. Проверьте настройки API.",
-        "upload_label": "Выберите PDF файлы",
+        "upload_label": "Добавить файл или фото ➕",
         "ask_doc_input": "Вопрос по содержимому PDF или упражнениям",
         "ask_doc_btn": "Ответить по документам и вебу",
         "study_text": "Тема, учебный текст или условие упражнения",
@@ -231,14 +231,14 @@ TEXTS = {
         "study_page": "Çalışma ve Pratik",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışa Aktar و Yedekle",
+        "export_page": "Dışa Aktar ve Yedekle",
         "settings_page": "Ayarlar",
-        "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
+        "chat_input": "NOVA için mesajınızı, sorunuzu veya egzersizinizi yazın...",
         "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
         "error_msg": "Bir hata oluştu. API ayarlarını و ağ bağlantısını kontrol edin.",
-        "upload_label": "PDF dosyalarını seçin",
-        "ask_doc_input": "PDF içeriği یا alıştırmalar hakkında soru",
-        "ask_doc_btn": "Belgelerden و Web'den Yanıtla",
+        "upload_label": "Dosya یا Resim Ekle ➕",
+        "ask_doc_input": "PDF içeriği veya alıştırmalar hakkında soru",
+        "ask_doc_btn": "Belgelerden ve Web'den Yanıtla",
         "study_text": "Konu, eğitim metni یا egzersiz metni",
         "generate_study": "Eğitim İçeriği Oluştur",
         "flashcard_text": "Bilgi kartı oluşturmak için metin",
@@ -269,7 +269,7 @@ TEXTS = {
         "chat_input": "向 NOVA 发送消息、提问或联系练习...",
         "thinking": "NOVA 正在分析并准备回答...",
         "error_msg": "发生错误，请检查API设置和网络连接。",
-        "upload_label": "选择 PDF 文件",
+        "upload_label": "添加文件或图片 ➕",
         "ask_doc_input": "关于PDF内容或练习的问题",
         "ask_doc_btn": "从文档和网页回答",
         "study_text": "主题、教育文本或练习提示",
@@ -302,7 +302,7 @@ TEXTS = {
         "chat_input": "NOVAへのメッセージ、質問、または演習を入力してください...",
         "thinking": "NOVAが分析し、回答を準備しています...",
         "error_msg": "エラーが発生しました。API設定とネットワーク接続を確認してください。",
-        "upload_label": "PDFファイルを選択",
+        "upload_label": "ファイルまたは画像を追加 ➕",
         "ask_doc_input": "PDFの内容や演習に関する質問",
         "ask_doc_btn": "文書とウェブから回答",
         "study_text": "トピック、教育テキスト、または演習のプロンプト",
@@ -335,7 +335,7 @@ TEXTS = {
         "chat_input": "הקלד הודעה, שאלה أو תרגיל עבור NOVA...",
         "thinking": "NOVA מנתח ומכין את התשובה...",
         "error_msg": "אירעה شגיאה. בדוק את הגדרות ال-API وأת חיבור הרשת.",
-        "upload_label": "בחר קבצי PDF",
+        "upload_label": "הוסף קובץ أو תמונה ➕",
         "ask_doc_input": "שאלה לגבי תוכן ال-PDF أو תרגילים",
         "ask_doc_btn": "ענה מתוך המסמכים והאינטرנט",
         "study_text": "נושא, טקסט לימודי أو תיאור תרגיל",
@@ -377,11 +377,11 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Safe Layout without Sidebar Bugs)
+# STYLING
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "עברית" in current_lang
+is_rtl = "فارسی" in current_lang or "عברית" in current_lang
 
 st.markdown(
     f"""
@@ -606,18 +606,6 @@ def export_chat_json() -> str:
     return json.dumps(payload, ensure_ascii=False, indent=2)
 
 
-def build_flashcards(text: str) -> list[dict]:
-    lines = [line.strip(" -*\t") for line in text.splitlines() if len(line.strip()) >= 20]
-    cards = []
-    for line in lines[:20]:
-        if ":" in line:
-            question, answer = line.split(":", 1)
-            cards.append({"question": question.strip() + "?", "answer": answer.strip()})
-        else:
-            cards.append({"question": "Explain this concept:", "answer": line})
-    return cards
-
-
 # =========================================================
 # SIDEBAR
 # =========================================================
@@ -705,6 +693,26 @@ if page == t("chat_page"):
         index=["General Assistant", "Study Tutor", "Research", "Writing"].index(st.session_state.active_mode),
     )
     st.session_state.active_mode = mode
+
+    # دکمه با علامت بعلاوه (+) در کنار صفحه برای ارسال فایل یا عکس
+    uploaded_chat_file = st.file_uploader(t("upload_label"), type=["pdf", "png", "jpg", "jpeg", "txt"], accept_multiple_files=False, key="chat_file_upload")
+
+    if uploaded_chat_file:
+        try:
+            file_data = uploaded_chat_file.getvalue()
+            file_name = uploaded_chat_file.name
+            if file_name.endswith(".pdf"):
+                signature = make_signature(file_data)
+                if st.session_state.document_hashes.get(file_name) != signature:
+                    pages = extract_pdf_text(file_data)
+                    st.session_state.documents[file_name] = pages
+                    st.session_state.document_hashes[file_name] = signature
+                    st.success(f"فایل PDF با موفقیت اضافه شد: {file_name}")
+            elif file_name.lower().endswith((".png", ".jpg", ".jpeg")):
+                st.image(file_data, caption=file_name, width=250)
+                st.success(f"تصویر بارگذاری شد: {file_name}")
+        except Exception as e:
+            st.error(f"خطا در پردازش فایل: {e}")
 
     for message in st.session_state.chat_history:
         role = message.get("role", "assistant")
