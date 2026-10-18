@@ -69,7 +69,7 @@ TEXTS = {
         "export_page": "خروجی و پشتیبان",
         "settings_page": "تنظیمات",
         "chat_input": "پیام، سوال یا تمرین خود را برای NOVA بنویس...",
-        "thinking": "NOVA در حال تحلیل و آماده‌سازی پاسخ است...",
+        "thinking": "NOVA در حال تحلیل دقیق و آماده‌سازی پاسخ است...",
         "error_msg": "در تولید پاسخ خطایی رخ داد. تنظیمات API و اتصال شبکه را بررسی کنید.",
         "upload_label": "افزودن فایل/عکس",
         "ask_doc_input": "سؤال درباره محتوای PDF یا تمرین‌ها",
@@ -131,7 +131,7 @@ SESSION_DEFAULTS = {
     "language": "🇮🇷 فارسی",
     "settings": {
         "model": "openai/gpt-oss-120b",
-        "temperature": 0.2,
+        "temperature": 0.1,
         "max_tokens": 2048,
     },
 }
@@ -146,11 +146,11 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Perfect Table Layout & Clean Text Formatting)
+# STYLING (Forcing text wrapping inside chat box and tables)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "عברית" in current_lang
+is_rtl = "فارسی" in current_lang or "עברית" in current_lang
 
 st.markdown(
     f"""
@@ -158,7 +158,7 @@ st.markdown(
     .stApp {{
         background: #080b14;
         color: #e7edf7;
-        font-family: Tahoma, sans-serif, -apple-system;
+        font-family: Tahoma, sans-serif;
     }}
 
     [data-testid="stSidebar"] {{
@@ -183,6 +183,7 @@ st.markdown(
         margin-bottom: 0.8rem;
     }}
 
+    /* جلوگیری از بیرون زدن متن و کادر چت در موبایل */
     div[data-testid="stChatMessage"] {{
         border: 1px solid #27334e;
         border-radius: 12px;
@@ -190,8 +191,9 @@ st.markdown(
         padding: 14px;
         text-align: {"right" if is_rtl else "left"};
         direction: {"rtl" if is_rtl else "ltr"};
-        word-break: normal;
+        word-wrap: break-word;
         overflow-wrap: break-word;
+        max-width: 100%;
     }}
 
     .stButton button {{
@@ -200,34 +202,28 @@ st.markdown(
         width: 100%;
     }}
 
-    /* تنظیمات حرفه‌ای برای جداول جهت قرارگیری متن‌ها در یک خط و جلوگیری از به هم ریختگی در موبایل */
+    /* استایل استاندارد جدول‌ها داخل کادر پیام برای جلوگیری از بیرون زدگی */
     table {{
         width: 100% !important;
         border-collapse: collapse !important;
-        margin-top: 10px;
-        margin-bottom: 10px;
+        margin: 10px 0;
         background-color: #0f1627;
         border-radius: 8px;
         overflow: hidden;
+        display: table !important;
     }}
     
     th, td {{
-        padding: 10px 14px !important;
+        padding: 8px 10px !important;
         border: 1px solid #27334e !important;
         text-align: center !important;
-        white-space: nowrap !important; /* جلوگیری از شکستن کلمات و قرارگیری در یک خط */
-        font-size: 0.95rem;
+        font-size: 0.9rem;
+        word-break: break-word;
     }}
     
     th {{
         background-color: #1a233a !important;
         color: #5cecff !important;
-    }}
-
-    /* محفظه جدول برای اسکرول روان افقی در موبایل بدون به هم ریختن صفحه */
-    div.scrollable-table {{
-        width: 100%;
-        overflow-x: auto;
     }}
     
     .plus-btn-container button {{
@@ -300,7 +296,7 @@ def get_document_context() -> str:
         for page in pages:
             if remaining <= 0:
                 break
-            section = f"\n[Document: {filename} | Page: {page['page']}]\n{page['text']}\n"
+            section = f"\n[مدرک: {filename} | صفحه: {page['page']}]\n{page['text']}\n"
             section = section[:remaining]
             parts.append(section)
             remaining -= len(section)
@@ -342,30 +338,28 @@ def generate_answer(question: str, mode: str, web_results: list[dict] | None = N
 
     if is_greeting:
         system_prompt = f"""
-You are NOVA, a friendly, warm, and helpful AI assistant.
-Respond warmly, politely, and naturally in {selected_language}.
-Offer your assistance with their PDF documents, exercises, questions, or general queries.
+تو دستیار هوشمند NOVA هستی. به گرمی و با ادب به زبان {selected_language} جواب بده و اعلام آمادگی کن.
 """
     else:
-        # پرامپت با حداکثر دقت برای پاسخ‌های کاملاً دقیق، علمی، بدون کاراکترهای خراب و جدول‌های کاملاً مرتب
+        # پرامپت بسیار دقیق، تضمینی، ساده برای کودکان 12 ساله، و اجبار کامل به پاسخ‌گویی مستقیم بدون امتناع
         system_prompt = f"""
-You are NOVA, an expert academic tutor and scientific researcher with maximum precision and accuracy.
+تو هوش مصنوعی بسیار دقیق و حرفه‌ای به نام NOVA هستی. کاربر تو یک دانش‌آموز ۱۲ ساله است.
 
-CRITICAL INSTRUCTIONS FOR MAXIMUM ACCURACY:
-1. **LANGUAGE:** Respond strictly and 100% in {selected_language}.
-2. **DIRECT & EXACT SOLUTIONS:** Never refuse to answer questions. Provide full, step-by-step, perfectly accurate solutions based on the uploaded document or user prompt.
-3. **READABILITY & TABLES:** When presenting data, summaries, comparisons, or properties, use clean Markdown tables (`| Col1 | Col2 |`). Ensure all table contents and text entries stay clean, perfectly legible, and formatted in single coherent lines without awkward word-breaks.
-4. **MATH & SYMBOLS:** Use precise mathematical symbols like multiplication (×) and division (÷). Avoid raw programming code blocks entirely; write everything in clear natural educational text.
+قوانین حیاتی و قطعی:
+۱. **زبان پاسخ:** فقط و فقط به زبان {selected_language} پاسخ بده.
+۲. **پاسخ مستقیم و تضمینی:** هرگز از پاسخ دادن به سوالات یا حل تمرین‌ها امتناع نکن، هیچ‌وقت پند و اندرز نده که "خودت حل کن"، و همیشه جواب کامل، دقیق و قطعی سوالات موجود در فایل آپلود شده یا متن را بده.
+۳. **سادگی برای سن ۱۲ سال:** تمام مفاهیم، فرمول‌ها و پاسخ‌ها را مثل یک معلم مهربان و با زبان بسیار ساده، روان و کودکانه (مناسب سن ۱۲ سال) توضیح بده.
+۴. **دقت کامل:** سوال را با نهایت دقت بررسی کن و پاسخ کاملاً صحیح، قدم به قدم و بدون اشتباه را بنویس. از نمادهای ریاضی استاندارد مثل ضرب (×) و تقسیم (÷) استفاده کن. به هیچ وجه از کدهای کامپیوتری استفاده نکن.
 """
 
     context = get_document_context()
     if context and not is_greeting:
-        context = "\n\nUPLOADED DOCUMENT CONTEXT:\n" + context
+        context = "\n\nمتن اسناد و فایل‌های بارگذاری‌شده:\n" + context
 
     if not is_greeting and web_results:
-        context += "\n\nWEB SEARCH RESULTS:\n"
+        context += "\n\nنتایج جستجوی وب:\n"
         for index, item in enumerate(web_results, start=1):
-            context += f"\n[{index}] {item['title']}\nURL: {item['url']}\nExcerpt: {item['snippet']}\n"
+            context += f"\n[{index}] {item['title']}\nتوضیح: {item['snippet']}\n"
 
     messages = [{"role": "system", "content": system_prompt}]
     if context and not is_greeting:
@@ -386,7 +380,7 @@ CRITICAL INSTRUCTIONS FOR MAXIMUM ACCURACY:
         )
         return response.choices[0].message.content or ""
     except Exception as e:
-        return f"Error communicating with AI: {e}"
+        return f"خطا در ارتباط با هوش مصنوعی: {e}"
 
 
 def download_name(prefix: str, extension: str) -> str:
