@@ -231,7 +231,7 @@ TEXTS = {
         "study_page": "Çalışma و Pratik",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışا Aktar و Yedekle",
+        "export_page": "Dışa Aktar و Yedekle",
         "settings_page": "Ayarlar",
         "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
         "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
@@ -313,14 +313,14 @@ TEXTS = {
     "🇮🇱 עברית": {
         "title": "NOVA 2.0 · עוזר חכם",
         "subtitle": "בינה מלאכותית אישית · לימודים · אינטרנט · מסמכים · ייצוא",
-        "sidebar_workspace": "מרחב עבודה",
+        "sidebar_workspace": "מרחب עבודה",
         "sidebar_lang": "🌐 בחר שפה",
         "new_chat": "➕ שיחה חדשה",
         "system_status": "מצב המערכת",
         "online_model": "מודל מקوون",
         "connected": "מחובר ل-API",
         "not_configured": "לא מוגדר",
-        "web_search": "חיפוש באינטرנט",
+        "web_search": "חיפוש באינטרנט",
         "ready": "מוכן",
         "need_install": "דורש התקנה",
         "uploaded_docs": "מסמכים שהועלו",
@@ -377,7 +377,7 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Mobile Friendly & Perfectly Wrapping Tables/Text)
+# STYLING
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
@@ -429,7 +429,6 @@ st.markdown(
         width: 100%;
     }}
 
-    /* استایل واکنش‌گرا و مرتب برای جدول‌ها در موبایل */
     table {{
         width: 100% !important;
         overflow-x: auto;
@@ -560,24 +559,23 @@ Respond warmly, politely, and naturally in {selected_language}.
 Offer your assistance with their PDF documents, exercises, questions, or general queries.
 """
     else:
-        # تنظیم دقیق پرامپت برای پاسخ کاملاً روان، کتابی، ساده و دور از کدهای پیچیده
+        # تنظیم پرامپت برای پاسخ به شدت ساده، روان، مناسب نوجوانان، با علامت‌های صحیح ضرب (×) و تقسیم (÷)
         system_prompt = f"""
-You are NOVA, an expert academic tutor and study assistant.
+You are NOVA, a friendly and expert academic tutor who explains things to a 14-year-old student.
 
 STRICT RULES FOR RESPONSES:
-- Write your answers entirely in fluent, natural, textbook-style human text in {selected_language}.
-- **NEVER** output raw programming code blocks or technical code formatting unless specifically requested.
-- Explain concepts clearly using regular paragraphs, simple bullet points, or clean text explanations, exactly like a high-quality educational book or website.
-- For formulas and scientific explanations, write them clearly in standard readable text format so anyone can easily understand them.
-- Rely on provided documents and web search results when available, and keep the tone helpful, clear, and educational.
+- Explain everything in extremely simple, clear, and friendly language, exactly like an experienced teacher talking to a 14-year-old teenager.
+- **NEVER** use raw programming code blocks. Write everything in normal, readable text and paragraphs.
+- For mathematical or scientific formulas, write them out clearly using correct symbols like multiplication (×) and division (÷) instead of messy code symbols.
+- Break down steps into numbered lists so they are very easy to follow and understand.
 """
 
         if mode == "Study Tutor":
-            system_prompt += "\nAct as a friendly study tutor. Explain concepts step by step in plain and simple language."
+            system_prompt += "\nAct as a patient study tutor explaining things simply."
         elif mode == "Research":
-            system_prompt += "\nAct as a research assistant. Present facts clearly and transparently."
+            system_prompt += "\nAct as a clear research assistant."
         elif mode == "Writing":
-            system_prompt += "\nAct as a writing assistant. Produce structured and clear text."
+            system_prompt += "\nAct as a writing assistant."
 
     context = get_document_context()
     if context and not is_greeting:
