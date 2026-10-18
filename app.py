@@ -47,7 +47,7 @@ st.set_page_config(
 # =========================================================
 
 TEXTS = {
-    "فارسی": {
+    "🇮🇷 فارسی": {
         "title": "NOVA 2.0 · دستیار هوشمند",
         "subtitle": "هوش مصنوعی شخصی · مطالعه · وب · اسناد · خروجی",
         "sidebar_workspace": "فضای کاری",
@@ -79,7 +79,7 @@ TEXTS = {
         "flashcard_text": "متن برای ساخت فلش‌کارت",
         "make_flashcard": "ساخت فلش‌کارت",
     },
-    "English": {
+    "🇺🇸 English": {
         "title": "NOVA 2.0 · Smart Assistant",
         "subtitle": "Personal AI · Study · Web · Documents · Export",
         "sidebar_workspace": "Workspace",
@@ -111,7 +111,7 @@ TEXTS = {
         "flashcard_text": "Text for creating flashcards",
         "make_flashcard": "Create Flashcards",
     },
-    "Español": {
+    "🇪🇸 Español": {
         "title": "NOVA 2.0 · Asistente Inteligente",
         "subtitle": "IA Personal · Estudio · Web · Documentos · Exportar",
         "sidebar_workspace": "Espacio de trabajo",
@@ -143,7 +143,7 @@ TEXTS = {
         "flashcard_text": "Texto para crear tarjetas de memoria",
         "make_flashcard": "Crear tarjetas",
     },
-    "Italiano": {
+    "🇮🇹 Italiano": {
         "title": "NOVA 2.0 · Assistente Intelligente",
         "subtitle": "IA Personale · Studio · Web · Documenti · Esporta",
         "sidebar_workspace": "Spazio di lavoro",
@@ -175,7 +175,7 @@ TEXTS = {
         "flashcard_text": "Testo per creare flashcard",
         "make_flashcard": "Crea flashcard",
     },
-    "Русский": {
+    "🇷🇺 Русский": {
         "title": "NOVA 2.0 · Умный помощник",
         "subtitle": "Личный ИИ · Учеба · Веб · Документы · Экспорт",
         "sidebar_workspace": "Рабочая область",
@@ -207,7 +207,7 @@ TEXTS = {
         "flashcard_text": "Текст для создания карточек",
         "make_flashcard": "Создать карточки",
     },
-    "Türkçe": {
+    "🇹🇷 Türkçe": {
         "title": "NOVA 2.0 · Akıllı Asistan",
         "subtitle": "Kişisel Yapay Zeka · Çalışma · Web · Belgeler · Dışa Aktar",
         "sidebar_workspace": "Çalışma Alanı",
@@ -229,17 +229,17 @@ TEXTS = {
         "export_page": "Dışa Aktar ve Yedekle",
         "settings_page": "Ayarlar",
         "chat_input": "NOVA için mesajınızı, sorunuzu veya egzersizinizi yazın...",
-        "thinking": "NOVA analiz ediyor ve yanıt hazırlıyor...",
+        "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
         "error_msg": "Bir hata oluştu. API ayarlarını ve ağ bağlantısını kontrol edin.",
         "upload_label": "PDF dosyalarını seçin",
-        "ask_doc_input": "PDF içeriği veya alıştırmalar hakkında soru",
+        "ask_doc_input": "PDF içeriği یا alıştırmalar hakkında soru",
         "ask_doc_btn": "Belgelerden ve Web'den Yanıtla",
-        "study_text": "Konu, eğitim metni veya egzersiz metni",
+        "study_text": "Konu, eğitim metni یا egzersiz metni",
         "generate_study": "Eğitim İçeriği Oluştur",
         "flashcard_text": "Bilgi kartı oluşturmak için metin",
         "make_flashcard": "Bilgi Kartı Oluştur",
     },
-    "中文": {
+    "🇨🇳 中文": {
         "title": "NOVA 2.0 · 智能助手",
         "subtitle": "个人AI · 学习 · 网页 · 文档 · 导出",
         "sidebar_workspace": "工作区",
@@ -271,7 +271,7 @@ TEXTS = {
         "flashcard_text": "用于制作抽认卡的文本",
         "make_flashcard": "制作抽认卡",
     },
-    "日本語": {
+    "🇯🇵 日本語": {
         "title": "NOVA 2.0 · スマートアシスタント",
         "subtitle": "パーソナルAI · 学習 · ウェブ · 文書 · エクスポート",
         "sidebar_workspace": "ワークスペース",
@@ -303,7 +303,7 @@ TEXTS = {
         "flashcard_text": "単語帳（フラッシュカード）作成用のテキスト",
         "make_flashcard": "フラッシュカードを作成",
     },
-    "עברית": {
+    "🇮🇱 עברית": {
         "title": "NOVA 2.0 · עוזר חכם",
         "subtitle": "בינה מלאכותית אישית · לימודים · אינטרנט · מסמכים · ייצוא",
         "sidebar_workspace": "מרחב עבודה",
@@ -330,7 +330,7 @@ TEXTS = {
         "upload_label": "בחר קבצי PDF",
         "ask_doc_input": "שאלה לגבי תוכן ה-PDF או תרגילים",
         "ask_doc_btn": "ענה מתוך המסמכים והאינטרנט",
-        "study_text": "נושא, טקסט לימודי או תיאור תרגיל",
+        "study_text": "נושא, טקסט לימודי أو תיאור תרגיל",
         "generate_study": "צור תוכן לימודי",
         "flashcard_text": "טקסט ליצירת כרטיסיות לימוד",
         "make_flashcard": "צור כרטיסיות",
@@ -351,7 +351,7 @@ SESSION_DEFAULTS = {
     "web_results": [],
     "quiz": [],
     "flashcards": [],
-    "language": "فارسی",
+    "language": "🇮🇷 فارسی",
     "settings": {
         "model": "openai/gpt-oss-120b",
         "temperature": 0.3,
@@ -372,8 +372,8 @@ for key, default in SESSION_DEFAULTS.items():
 # STYLING (Supports RTL for Persian and Hebrew)
 # =========================================================
 
-current_lang = st.session_state.get("language", "فارسی")
-is_rtl = current_lang in ["فارسی", "עברית"]
+current_lang = st.session_state.get("language", "🇮🇷 فارسی")
+is_rtl = "فارسی" in current_lang or "عברית" in current_lang
 
 st.markdown(
     f"""
@@ -450,10 +450,10 @@ APP_DIR = Path(__file__).resolve().parent
 EXPORT_DIR = APP_DIR / "exports"
 
 def t(key: str) -> str:
-    lang = st.session_state.get("language", "فارسی")
+    lang = st.session_state.get("language", "🇮🇷 فارسی")
     if lang in TEXTS and key in TEXTS[lang]:
         return TEXTS[lang][key]
-    return TEXTS["English"].get(key, key)
+    return TEXTS["🇺🇸 English"].get(key, key)
 
 
 def get_api_key() -> str:
@@ -529,9 +529,8 @@ def generate_answer(question: str, mode: str, web_results: list[dict] | None = N
     settings = st.session_state.settings
     client = Groq(api_key=api_key)
 
-    selected_language = st.session_state.get("language", "فارسی")
+    selected_language = st.session_state.get("language", "🇮🇷 فارسی")
 
-    # بررسی احوالپرسی یا مکالمه ساده به زبان‌های مختلف
     greetings = ["سلام", "درود", "hello", "hi", "hola", "ciao", "привет", "merhaba", "你好", "こんにちは", "שלום"]
     is_greeting = any(greet in question.lower() for greet in greetings) and len(question.split()) <= 4
 
@@ -549,7 +548,7 @@ Rules:
 - Respond strictly in the following language chosen by the user: {selected_language}.
 - Distinguish verified evidence from uncertainty.
 - Never invent citations, URLs, quotations, or page numbers.
-- **First Priority (PDF Context):** If document context is supplied, prioritize it for document/study questions. Cite exact evidence and page numbers using [Document: filename, Page: N].
+- **First Priority (PDF Context):** If document context is supplied, prioritize it for document/study questions. Cite exact evidence and page numbers using [Document: filename, Page: N] or [صفحه N].
 - **Second Priority (Web Search Context / Exercises):** If a question is an exercise or its answer is missing from the document context, use the provided web search results to give a fully correct, well-structured, and accurate answer.
 - For study tasks and exercises, explain concepts step by step in {selected_language}.
 """
@@ -637,17 +636,16 @@ with st.sidebar:
     st.caption("YOUR PERSONAL AI WORKSPACE")
     st.divider()
 
-    # انتخاب زبان توسط کاربر
     languages_list = [
-        "فارسی",
-        "English",
-        "Español",
-        "Italiano",
-        "Русский",
-        "Türkçe",
-        "中文",
-        "日本語",
-        "עברית",
+        "🇮🇷 فارسی",
+        "🇺🇸 English",
+        "🇪🇸 Español",
+        "🇮🇹 Italiano",
+        "🇷🇺 Русский",
+        "🇹🇷 Türkçe",
+        "🇨🇳 中文",
+        "🇯🇵 日本語",
+        "🇮🇱 עברית",
     ]
     
     selected_lang = st.selectbox(
