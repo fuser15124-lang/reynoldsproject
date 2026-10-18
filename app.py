@@ -231,7 +231,7 @@ TEXTS = {
         "study_page": "Çalışma و Pratik",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışa Aktar و Yedekle",
+        "export_page": "Dışا Aktar و Yedekle",
         "settings_page": "Ayarlar",
         "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
         "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
@@ -320,21 +320,21 @@ TEXTS = {
         "online_model": "מודל מקوون",
         "connected": "מחובר ل-API",
         "not_configured": "לא מוגדר",
-        "web_search": "חיפוש באינטרנט",
+        "web_search": "חיפוש באינטرנט",
         "ready": "מוכן",
         "need_install": "דורש התקנה",
         "uploaded_docs": "מסמכים שהועלו",
         "messages_count": "הודעות",
         "clear_chat": "נקה היסטוריית שיחות",
         "chat_page": "צ'אט",
-        "study_page": "למידה ותרגול",
+        "study_page": "למידה ותרגول",
         "docs_page": "ניהול מסמכים",
         "web_page": "מחקר אינטرנט",
         "export_page": "ייצוא وגיبוי",
         "settings_page": "הגדרות",
         "chat_input": "הקלד הודעה, שאלה أو תרגיל עבור NOVA...",
         "thinking": "NOVA מנתח ומכין את תשובה...",
-        "error_msg": "אירעה شגיאה. בדוק את הגדרות ال-API وأת חיבור הרשת.",
+        "error_msg": "אירעה شגיאה. בדוק את הגדרות ال-API وأت חיבור הרשת.",
         "upload_label": "הוסף קובץ",
         "ask_doc_input": "שאלה לגבי תוכן ال-PDF أو תרגילים",
         "ask_doc_btn": "ענה מתוך המסמכים והאינטرנט",
@@ -377,7 +377,7 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING
+# STYLING (Mobile Friendly & Perfectly Wrapping Tables/Text)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
@@ -417,9 +417,10 @@ st.markdown(
         border: 1px solid #27334e;
         border-radius: 12px;
         background: rgba(15, 22, 39, .9);
-        padding: 10px;
+        padding: 12px;
         text-align: {"right" if is_rtl else "left"};
         direction: {"rtl" if is_rtl else "ltr"};
+        word-break: break-word;
     }}
 
     .stButton button {{
@@ -428,11 +429,18 @@ st.markdown(
         width: 100%;
     }}
 
+    /* استایل واکنش‌گرا و مرتب برای جدول‌ها در موبایل */
     table {{
         width: 100% !important;
         overflow-x: auto;
         display: block;
         word-break: break-word;
+        border-collapse: collapse;
+    }}
+    
+    th, td {{
+        padding: 8px 12px;
+        border: 1px solid #27334e;
     }}
     
     .plus-btn-container button {{
@@ -552,25 +560,24 @@ Respond warmly, politely, and naturally in {selected_language}.
 Offer your assistance with their PDF documents, exercises, questions, or general queries.
 """
     else:
-        # دستورالعمل سخت‌گیرانه برای تولید پاسخ متنی، واضح و انسانی به جای کدهای به هم ریخته
+        # تنظیم دقیق پرامپت برای پاسخ کاملاً روان، کتابی، ساده و دور از کدهای پیچیده
         system_prompt = f"""
-You are NOVA, an advanced expert AI academic tutor, researcher, and multilingual assistant.
+You are NOVA, an expert academic tutor and study assistant.
 
-CRITICAL FORMATTING RULES:
-- Respond strictly in clear, fluent, natural human text in {selected_language}.
-- **DO NOT** output raw code blocks unless explicitly requested by the user. Explain everything in clear paragraphs, bullet points, or structured markdown tables.
-- If there are mathematical formulas, scientific equations, or tabular data, present them cleanly and accurately using Markdown formatting and standard text so that any normal user can easily read and understand them.
-- Distinguish verified evidence from uncertainty. Never invent citations, URLs, quotations, or page numbers.
-- **First Priority (PDF Context):** Prioritize document context for document/study questions and cite evidence correctly.
-- **Second Priority (Web Search Context / Exercises):** Use web search results to provide fully accurate answers to exercises and questions.
+STRICT RULES FOR RESPONSES:
+- Write your answers entirely in fluent, natural, textbook-style human text in {selected_language}.
+- **NEVER** output raw programming code blocks or technical code formatting unless specifically requested.
+- Explain concepts clearly using regular paragraphs, simple bullet points, or clean text explanations, exactly like a high-quality educational book or website.
+- For formulas and scientific explanations, write them clearly in standard readable text format so anyone can easily understand them.
+- Rely on provided documents and web search results when available, and keep the tone helpful, clear, and educational.
 """
 
         if mode == "Study Tutor":
-            system_prompt += "\nAct as a study tutor. Explain reasoning step by step clearly and simply."
+            system_prompt += "\nAct as a friendly study tutor. Explain concepts step by step in plain and simple language."
         elif mode == "Research":
-            system_prompt += "\nAct as a research assistant. Compare evidence clearly."
+            system_prompt += "\nAct as a research assistant. Present facts clearly and transparently."
         elif mode == "Writing":
-            system_prompt += "\nAct as a writing assistant. Produce clear, structured text."
+            system_prompt += "\nAct as a writing assistant. Produce structured and clear text."
 
     context = get_document_context()
     if context and not is_greeting:
