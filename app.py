@@ -168,6 +168,7 @@ defaults = {
     "vector_store": None,
     "embeddings": None,
     "processed_file": None,
+    "page_texts": {},
 }
 for key, value in defaults.items():
     if key not in st.session_state:
@@ -189,13 +190,15 @@ with st.sidebar:
             with st.spinner(t["processing_spinner"]):
                 reader = PdfReader(uploaded_file)
                 page_documents: List[Document] = []
+                complete_page_texts = {}
 
                 for page_number, page in enumerate(reader.pages, start=1):
                     page_text = page.extract_text() or ""
                     if page_text.strip():
+                        complete_page_texts[page_number] = page_text.strip()
                         page_documents.append(
                             Document(
-                                page_content=page_text,
+                                page_content=page_text.strip(),
                                 metadata={
                                     "page": page_number,
                                     "source": uploaded_file.name,
@@ -206,6 +209,7 @@ with st.sidebar:
                 if not page_documents:
                     st.session_state.vector_store = None
                     st.session_state.processed_file = None
+                    st.session_state.page_texts = {}
                     st.error(t["empty_pdf"])
                 else:
                     splitter = RecursiveCharacterTextSplitter(
@@ -225,6 +229,7 @@ with st.sidebar:
                         embedding=st.session_state.embeddings,
                     )
                     st.session_state.processed_file = current_signature
+                    st.session_state.page_texts = complete_page_texts
                     st.session_state.chat_history = []
                     st.success(t["success_msg"])
 
@@ -295,7 +300,15 @@ if user_query:
         )
 
         with st.chat_message("user"):
-            st.markdown(user_query)
+            if language == "فارسی":
+                st.markdown(
+                    f'<div dir="rtl" style="text-align:right; direction:rtl; '
+                    f'font-size:17px; line-height:1.95; overflow-wrap:anywhere;">'
+                    f'{user_query}</div>',
+                    unsafe_allow_html=True,
+                )
+            else:
+                st.markdown(user_query)
 
         with st.chat_message("assistant"):
             try:
@@ -334,7 +347,26 @@ if user_query:
                         pdf_context = "No PDF has been uploaded and processed."
                         vector_store = st.session_state.vector_store
 
-                        if vector_store is not None:
+                        # If the user asks about a specific page, pass the complete extracted
+                        # text of that page instead of relying on top-k semantic retrieval.
+                        page_number = requested_page_number(user_query)
+                        page_texts = st.session_state.page_texts
+
+                        if page_number is not None and page_texts:
+                            if page_number in page_texts:
+                                pdf_context = (
+                                    f"[Complete text of PDF page {page_number}]\\n"
+                                    f"{page_texts[page_number]}"
+                                )
+                            else:
+                                available_pages = ", ".join(
+                                    str(p) for p in sorted(page_texts.keys())
+                                )
+                                pdf_context = (
+                                    f"The requested PDF page {page_number} was not found. "
+                                    f"Pages with extractable text include: {available_pages}."
+                                )
+                        elif vector_store is not None:
                             retriever = vector_store.as_retriever(
                                 search_type="mmr",
                                 search_kwargs={"k": 6, "fetch_k": 20},
@@ -359,8 +391,11 @@ if user_query:
                                 """You are a careful academic tutor and research assistant.
 Answer in the same language as the user (Persian or English).
 
-Use the PDF context first when it contains relevant information. When you use PDF content,
-cite the page labels shown in the context, such as [Page 3]. Never invent page numbers.
+Use the PDF context first when it contains relevant information. When the user asks to explain,
+summarize, or describe a specific page, cover the whole supplied page text, not just one sentence.
+For page summaries, include the main idea, key points, important terms/formulas, and conclusion
+in a concise, organized answer. Do not claim the page is missing if its full text is supplied.
+When you use PDF content, cite page labels shown in the context, such as [Page 3]. Never invent page numbers.
 If the PDF does not answer the question, you may use the web search results.
 Be clear when a claim comes from web results, and do not claim that search results are verified
 unless the supplied results actually support it.
@@ -391,7 +426,18 @@ Web search results:
                         )
                         answer = chain.invoke(user_query)
 
-                st.markdown(answer)
+                if language == "فارسی":
+                    # Escape HTML so model output is displayed as text, not markup.
+                    import html
+                    safe_answer = html.escape(answer).replace("\\n", "<br>")
+                    st.markdown(
+                        f'<div dir="rtl" style="text-align:right; direction:rtl; '
+                        f'font-size:17px; line-height:1.95; overflow-wrap:anywhere;">'
+                        f'{safe_answer}</div>',
+                        unsafe_allow_html=True,
+                    )
+                else:
+                    st.markdown(answer)
                 st.session_state.chat_history.append(
                     {"role": "assistant", "content": answer}
                 )
