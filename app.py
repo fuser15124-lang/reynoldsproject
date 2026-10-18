@@ -52,6 +52,7 @@ TEXTS = {
         "subtitle": "هوش مصنوعی شخصی · مطالعه · وب · اسناد · خروجی",
         "sidebar_workspace": "فضای کاری",
         "sidebar_lang": "🌐 انتخاب زبان",
+        "new_chat": "➕ چت جدید",
         "system_status": "وضعیت سیستم",
         "online_model": "مدل آنلاین",
         "connected": "متصل به تنظیمات API",
@@ -84,6 +85,7 @@ TEXTS = {
         "subtitle": "Personal AI · Study · Web · Documents · Export",
         "sidebar_workspace": "Workspace",
         "sidebar_lang": "🌐 Select Language",
+        "new_chat": "➕ New Chat",
         "system_status": "System Status",
         "online_model": "Online Model",
         "connected": "Connected to API",
@@ -116,6 +118,7 @@ TEXTS = {
         "subtitle": "IA Personal · Estudio · Web · Documentos · Exportar",
         "sidebar_workspace": "Espacio de trabajo",
         "sidebar_lang": "🌐 Seleccionar Idioma",
+        "new_chat": "➕ Nuevo Chat",
         "system_status": "Estado del Sistema",
         "online_model": "Modelo Online",
         "connected": "Conectado a la API",
@@ -148,6 +151,7 @@ TEXTS = {
         "subtitle": "IA Personale · Studio · Web · Documenti · Esporta",
         "sidebar_workspace": "Spazio di lavoro",
         "sidebar_lang": "🌐 Seleziona Lingua",
+        "new_chat": "➕ Nuova Chat",
         "system_status": "Stato del Sistema",
         "online_model": "Modello Online",
         "connected": "Connesso all'API",
@@ -180,6 +184,7 @@ TEXTS = {
         "subtitle": "Личный ИИ · Учеба · Веб · Документы · Экспорт",
         "sidebar_workspace": "Рабочая область",
         "sidebar_lang": "🌐 Выбрать язык",
+        "new_chat": "➕ Новый чат",
         "system_status": "Статус системы",
         "online_model": "Онлайн-модель",
         "connected": "Подключено к API",
@@ -212,6 +217,7 @@ TEXTS = {
         "subtitle": "Kişisel Yapay Zeka · Çalışma · Web · Belgeler · Dışa Aktar",
         "sidebar_workspace": "Çalışma Alanı",
         "sidebar_lang": "🌐 Dil Seçin",
+        "new_chat": "➕ Yeni Sohbet",
         "system_status": "Sistem Durumu",
         "online_model": "Çevrimiçi Model",
         "connected": "API'ye Bağlı",
@@ -228,9 +234,9 @@ TEXTS = {
         "web_page": "Web Araştırma",
         "export_page": "Dışa Aktar ve Yedekle",
         "settings_page": "Ayarlar",
-        "chat_input": "NOVA için mesajınızı, sorunuzu veya egzersizinizi yazın...",
+        "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
         "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
-        "error_msg": "Bir hata oluştu. API ayarlarını ve ağ bağlantısını kontrol edin.",
+        "error_msg": "Bir hata oluştu. API ayarlarını و ağ bağlantısını kontrol edin.",
         "upload_label": "PDF dosyalarını seçin",
         "ask_doc_input": "PDF içeriği یا alıştırmalar hakkında soru",
         "ask_doc_btn": "Belgelerden ve Web'den Yanıtla",
@@ -244,6 +250,7 @@ TEXTS = {
         "subtitle": "个人AI · 学习 · 网页 · 文档 · 导出",
         "sidebar_workspace": "工作区",
         "sidebar_lang": "🌐 选择语言",
+        "new_chat": "➕ 新对话",
         "system_status": "系统状态",
         "online_model": "在线模型",
         "connected": "已连接API",
@@ -276,6 +283,7 @@ TEXTS = {
         "subtitle": "パーソナルAI · 学習 · ウェブ · 文書 · エクスポート",
         "sidebar_workspace": "ワークスペース",
         "sidebar_lang": "🌐 言語選択",
+        "new_chat": "➕ 新しいチャット",
         "system_status": "システムステータス",
         "online_model": "オンラインモデル",
         "connected": "API接続済み",
@@ -308,6 +316,7 @@ TEXTS = {
         "subtitle": "בינה מלאכותית אישית · לימודים · אינטרנט · מסמכים · ייצוא",
         "sidebar_workspace": "מרחב עבודה",
         "sidebar_lang": "🌐 בחר שפה",
+        "new_chat": "➕ שיחה חדשה",
         "system_status": "מצב המערכת",
         "online_model": "מודל מקוון",
         "connected": "מחובר ל-API",
@@ -322,13 +331,13 @@ TEXTS = {
         "study_page": "למידה ותרגול",
         "docs_page": "ניהול מסמכים",
         "web_page": "מחקר אינטרנט",
-        "export_page": "ייצוא וגיבוי",
+        "export_page": "ייצוא وגיבוי",
         "settings_page": "הגדרות",
-        "chat_input": "הקלד הודעה, שאלה או תרגיל עבור NOVA...",
+        "chat_input": "הקלד הודעה, שאלה أو תרגיל עבור NOVA...",
         "thinking": "NOVA מנתח ומכין את התשובה...",
-        "error_msg": "אירעה שגיאה. בדוק את הגדרות ה-API ואת חיבור הרשת.",
+        "error_msg": "אירעה שגיאה. בדוק את הגדרות ال-API ואת חיבור הרשת.",
         "upload_label": "בחר קבצי PDF",
-        "ask_doc_input": "שאלה לגבי תוכן ה-PDF או תרגילים",
+        "ask_doc_input": "שאלה לגבי תוכן ال-PDF أو תרגילים",
         "ask_doc_btn": "ענה מתוך המסמכים והאינטרנט",
         "study_text": "נושא, טקסט לימודי أو תיאור תרגיל",
         "generate_study": "צור תוכן לימודי",
@@ -634,6 +643,14 @@ def build_flashcards(text: str) -> list[dict]:
 with st.sidebar:
     st.markdown('<div class="nova-brand">NOVA</div>', unsafe_allow_html=True)
     st.caption("YOUR PERSONAL AI WORKSPACE")
+    st.divider()
+
+    # دکمه ساخت چت جدید
+    if st.button(t("new_chat"), use_container_width=True, type="primary"):
+        st.session_state.chat_history = []
+        st.session_state.last_answer = ""
+        st.rerun()
+
     st.divider()
 
     languages_list = [
