@@ -51,7 +51,7 @@ TEXTS = {
         "subtitle": "هوش مصنوعی شخصی · مطالعه · وب · اسناد · خروجی",
         "sidebar_workspace": "فضای کاری",
         "sidebar_lang": "🌐 انتخاب زبان",
-        "new_chat": "➕ چت جدید",
+        "new_chat": "چت جدید",
         "system_status": "وضعیت سیستم",
         "online_model": "مدل آنلاین",
         "connected": "متصل به تنظیمات API",
@@ -84,7 +84,7 @@ TEXTS = {
         "subtitle": "Personal AI · Study · Web · Documents · Export",
         "sidebar_workspace": "Workspace",
         "sidebar_lang": "🌐 Select Language",
-        "new_chat": "➕ New Chat",
+        "new_chat": "New Chat",
         "system_status": "System Status",
         "online_model": "Online Model",
         "connected": "Connected to API",
@@ -111,237 +111,6 @@ TEXTS = {
         "generate_study": "Generate Study Content",
         "flashcard_text": "Text for creating flashcards",
         "make_flashcard": "Create Flashcards",
-    },
-    "🇪🇸 Español": {
-        "title": "NOVA 2.0 · Asistente Inteligente",
-        "subtitle": "IA Personal · Estudio · Web · Documentos · Exportar",
-        "sidebar_workspace": "Espacio de trabajo",
-        "sidebar_lang": "🌐 Seleccionar Idioma",
-        "new_chat": "➕ Nuevo Chat",
-        "system_status": "Estado del Sistema",
-        "online_model": "Modelo Online",
-        "connected": "Conectado a la API",
-        "not_configured": "No configurado",
-        "web_search": "Búsqueda Web",
-        "ready": "Listo",
-        "need_install": "Requiere instalación",
-        "uploaded_docs": "Documentos subidos",
-        "messages_count": "Mensajes",
-        "clear_chat": "Borrar historial de chat",
-        "chat_page": "Chat",
-        "study_page": "Estudio y Práctica",
-        "docs_page": "Documentos",
-        "web_page": "Investigación Web",
-        "export_page": "Exportar y Copia de seguridad",
-        "settings_page": "Configuración",
-        "chat_input": "Escribe tu mensaje, pregunta o ejercicio para NOVA...",
-        "thinking": "NOVA está analizando y preparando la respuesta...",
-        "error_msg": "Ocurrió un error. Comprueba la configuración de la API.",
-        "upload_label": "Añadir archivo",
-        "ask_doc_input": "Pregunta sobre el contenido del PDF o ejercicios",
-        "ask_doc_btn": "Responder desde documentos y web",
-        "study_text": "Tema, texto educativo o enunciado de ejercicio",
-        "generate_study": "Generar contenido de estudio",
-        "flashcard_text": "Texto para crear tarjetas de memoria",
-        "make_flashcard": "Crear tarjetas",
-    },
-    "🇮🇹 Italiano": {
-        "title": "NOVA 2.0 · Assistente Intelligente",
-        "subtitle": "IA Personale · Studio · Web · Documenti · Esporta",
-        "sidebar_workspace": "Spazio di lavoro",
-        "sidebar_lang": "🌐 Seleziona Lingua",
-        "new_chat": "➕ Nuova Chat",
-        "system_status": "Stato del Sistema",
-        "online_model": "Modello Online",
-        "connected": "Connesso all'API",
-        "not_configured": "Non configurato",
-        "web_search": "Ricerca Web",
-        "ready": "Pronto",
-        "need_install": "Richiede installazione",
-        "uploaded_docs": "Documenti caricati",
-        "messages_count": "Messaggi",
-        "clear_chat": "Cancella cronologia chat",
-        "chat_page": "Chat",
-        "study_page": "Studio e Pratica",
-        "docs_page": "Documenti",
-        "web_page": "Ricerca Web",
-        "export_page": "Esporta e Backup",
-        "settings_page": "Impostazioni",
-        "chat_input": "Scrivi il tuo messaggio, domanda o esercizio per NOVA...",
-        "thinking": "NOVA sta analizzando e preparando la risposta...",
-        "error_msg": "Si è verificato un errore. Controlla le impostazioni dell'API.",
-        "upload_label": "Aggiungi file",
-        "ask_doc_input": "Domanda sul contenuto del PDF o esercizi",
-        "ask_doc_btn": "Rispondi da documenti e web",
-        "study_text": "Argomento, testo educativo o traccia dell'esercizio",
-        "generate_study": "Genera contenuto di studio",
-        "flashcard_text": "Testo per creare flashcard",
-        "make_flashcard": "Crea flashcard",
-    },
-    "🇷🇺 Русский": {
-        "title": "NOVA 2.0 · Умный помощник",
-        "subtitle": "Личный ИИ · Учеба · Веб · Документы · Экспорт",
-        "sidebar_workspace": "Рабочая область",
-        "sidebar_lang": "🌐 Выбрать язык",
-        "new_chat": "➕ Новый чат",
-        "system_status": "Статус системы",
-        "online_model": "Онлайн-модель",
-        "connected": "Подключено к API",
-        "not_configured": "Не настроено",
-        "web_search": "Поиск в вебе",
-        "ready": "Готово",
-        "need_install": "Требуется установка",
-        "uploaded_docs": "Загруженные документы",
-        "messages_count": "Сообщения",
-        "clear_chat": "Очистить историю чата",
-        "chat_page": "Чат",
-        "study_page": "Учеба и практика",
-        "docs_page": "Документы",
-        "web_page": "Веб-поиск",
-        "export_page": "Экспорт и бэкап",
-        "settings_page": "Настройки",
-        "chat_input": "Введите сообщение, вопрос или упражнение для NOVA...",
-        "thinking": "NOVA анализирует и готовит ответ...",
-        "error_msg": "Произошла ошибка. Проверьте настройки API.",
-        "upload_label": "Добавить файл",
-        "ask_doc_input": "Вопрос по содержимому PDF или упражнениям",
-        "ask_doc_btn": "Ответить по документам и вебу",
-        "study_text": "Тема, учебный текст или условие упражнения",
-        "generate_study": "Создать учебный материал",
-        "flashcard_text": "Текст для создания карточек",
-        "make_flashcard": "Создать карточки",
-    },
-    "🇹🇷 Türkçe": {
-        "title": "NOVA 2.0 · Akıllı Asistan",
-        "subtitle": "Kişisel Yapay Zeka · Çalışma · Web · Belgeler · Dışa Aktar",
-        "sidebar_workspace": "Çalışma Alanı",
-        "sidebar_lang": "🌐 Dil Seçin",
-        "new_chat": "➕ Yeni Sohbet",
-        "system_status": "Sistem Durumu",
-        "online_model": "Çevrimiçi Model",
-        "connected": "API'ye Bağlı",
-        "not_configured": "Yapılandırılmadı",
-        "web_search": "Web Arama",
-        "ready": "Hazır",
-        "need_install": "Kurulum Gerekli",
-        "uploaded_docs": "Yüklenen Belgeler",
-        "messages_count": "Mesajlar",
-        "clear_chat": "Sohbet Geçmişini Temizle",
-        "chat_page": "Sohbet",
-        "study_page": "Çalışma و Pratik",
-        "docs_page": "Belgeler",
-        "web_page": "Web Araştırma",
-        "export_page": "Dışa Aktar و Yedekle",
-        "settings_page": "Ayarlar",
-        "chat_input": "NOVA için mesajınızı, sorunuzu یا egzersizinizi yazın...",
-        "thinking": "NOVA analiz ediyor و yanıt hazırlıyor...",
-        "error_msg": "Bir hata oluştu. API ayarlarını و ağ bağlantısını kontrol edin.",
-        "upload_label": "Dosya Ekle",
-        "ask_doc_input": "PDF içeriği یا alıştırmalar hakkında soru",
-        "ask_doc_btn": "Belgelerden و Web'den Yanıtla",
-        "study_text": "Konu, eğitim metni یا egzersiz metni",
-        "generate_study": "Eğitim İçeriği Oluştur",
-        "flashcard_text": "Bilgi kartı oluşturmak için metin",
-        "make_flashcard": "Bilgi Kartı Oluştur",
-    },
-    "🇨🇳 中文": {
-        "title": "NOVA 2.0 · 智能助手",
-        "subtitle": "个人AI · 学习 · 网页 · 文档 · 导出",
-        "sidebar_workspace": "工作区",
-        "sidebar_lang": "🌐 选择语言",
-        "new_chat": "➕ 新对话",
-        "system_status": "系统状态",
-        "online_model": "在线模型",
-        "connected": "已连接API",
-        "not_configured": "未配置",
-        "web_search": "网页搜索",
-        "ready": "就绪",
-        "need_install": "需要安装",
-        "uploaded_docs": "已上传文档",
-        "messages_count": "消息数",
-        "clear_chat": "清除聊天记录",
-        "chat_page": "聊天",
-        "study_page": "学习与练习",
-        "docs_page": "文档管理",
-        "web_page": "网页研究",
-        "export_page": "导出与备份",
-        "settings_page": "设置",
-        "chat_input": "向 NOVA 发送消息、提问或联系练习...",
-        "thinking": "NOVA 正在分析并准备回答...",
-        "error_msg": "发生错误，请检查API设置和网络连接。",
-        "upload_label": "添加文件",
-        "ask_doc_input": "关于PDF内容或练习的问题",
-        "ask_doc_btn": "从文档和网页回答",
-        "study_text": "主题、教育文本或练习提示",
-        "generate_study": "生成学习内容",
-        "flashcard_text": "用于制作抽认卡的文本",
-        "make_flashcard": "制作抽认卡",
-    },
-    "🇯🇵 日本語": {
-        "title": "NOVA 2.0 · スマートアシスタント",
-        "subtitle": "パーソナルAI · 学習 · ウェブ · 文書 · エクスポート",
-        "sidebar_workspace": "ワークスペース",
-        "sidebar_lang": "🌐 言語選択",
-        "new_chat": "➕ 新しいチャット",
-        "system_status": "システムステータс",
-        "online_model": "オンラインモデル",
-        "connected": "API接続済み",
-        "not_configured": "未設定",
-        "web_search": "ウェブ検索",
-        "ready": "準備完了",
-        "need_install": "インストールが必要",
-        "uploaded_docs": "アップロードされた文書",
-        "messages_count": "メッセージ数",
-        "clear_chat": "チャット履歴をクリア",
-        "chat_page": "チャット",
-        "study_page": "学習と演習",
-        "docs_page": "文書管理",
-        "web_page": "ウェブ調査",
-        "export_page": "エクスポートとバックアップ",
-        "settings_page": "設定",
-        "chat_input": "NOVAへのメッセージ、質問、または演習を入力してください...",
-        "thinking": "NOVAが分析し、回答を準備しています...",
-        "error_msg": "エラーが発生しました。API設定とネットワーク接続を確認してください。",
-        "upload_label": "ファイル追加",
-        "ask_doc_input": "PDFの内容や演習に関する質問",
-        "ask_doc_btn": "文書とウェブから回答",
-        "study_text": "トピック、教育テキスト、または演習のプロンプト",
-        "generate_study": "学習コンテンツを生成",
-        "flashcard_text": "単語帳（フラッシュカード）作成用のテキスト",
-        "make_flashcard": "フラッシュカードを作成",
-    },
-    "🇮🇱 עברית": {
-        "title": "NOVA 2.0 · עוזר חכם",
-        "subtitle": "בינה מלאכותية אישית · לימודים · אינטרנט · מסמכים · ייצוא",
-        "sidebar_workspace": "מרחב עבודה",
-        "sidebar_lang": "🌐 בחר שפה",
-        "new_chat": "➕ שיחה חדשה",
-        "system_status": "מצב המערכת",
-        "online_model": "מודל מקوون",
-        "connected": "מחובר ل-API",
-        "not_configured": "לא מוגדר",
-        "web_search": "חיפוש באינטרנט",
-        "ready": "מוכן",
-        "need_install": "דורש התקנה",
-        "uploaded_docs": "מסמכים שהועלו",
-        "messages_count": "הודעות",
-        "clear_chat": "נקה היסטוריית שיחות",
-        "chat_page": "צ'אט",
-        "study_page": "למידה ותרגول",
-        "docs_page": "ניהול מסמכים",
-        "web_page": "מחקר אינטرנט",
-        "export_page": "ייצוא وגיبוי",
-        "settings_page": "הגדרות",
-        "chat_input": "הקלד הודעה, שאלה أو תרגיל עבור NOVA...",
-        "thinking": "NOVA מנתח ומכין את תשובה...",
-        "error_msg": "אירעה شגיאה. בדוק את הגדרות ال-API وأت חיבור הרשת.",
-        "upload_label": "הוסף קובץ",
-        "ask_doc_input": "שאלה לגבי תוכן ال-PDF أو תרגילים",
-        "ask_doc_btn": "ענה מתוך המסמכים והאינטرנט",
-        "study_text": "נושא, טקסט לימודי أو תיאור תרגיל",
-        "generate_study": "צור תוכן לימודי",
-        "flashcard_text": "טקסט ליצירת כרטיסיות לימוד",
-        "make_flashcard": "צור כרטיسیות",
     }
 }
 
@@ -362,7 +131,7 @@ SESSION_DEFAULTS = {
     "language": "🇮🇷 فارسی",
     "settings": {
         "model": "openai/gpt-oss-120b",
-        "temperature": 0.3,
+        "temperature": 0.2,
         "max_tokens": 2048,
     },
 }
@@ -377,7 +146,7 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING
+# STYLING (Perfect Table Layout & Clean Text Formatting)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
@@ -389,6 +158,7 @@ st.markdown(
     .stApp {{
         background: #080b14;
         color: #e7edf7;
+        font-family: Tahoma, sans-serif, -apple-system;
     }}
 
     [data-testid="stSidebar"] {{
@@ -416,11 +186,12 @@ st.markdown(
     div[data-testid="stChatMessage"] {{
         border: 1px solid #27334e;
         border-radius: 12px;
-        background: rgba(15, 22, 39, .9);
-        padding: 12px;
+        background: rgba(15, 22, 39, .95);
+        padding: 14px;
         text-align: {"right" if is_rtl else "left"};
         direction: {"rtl" if is_rtl else "ltr"};
-        word-break: break-word;
+        word-break: normal;
+        overflow-wrap: break-word;
     }}
 
     .stButton button {{
@@ -429,17 +200,34 @@ st.markdown(
         width: 100%;
     }}
 
+    /* تنظیمات حرفه‌ای برای جداول جهت قرارگیری متن‌ها در یک خط و جلوگیری از به هم ریختگی در موبایل */
     table {{
         width: 100% !important;
-        overflow-x: auto;
-        display: block;
-        word-break: break-word;
-        border-collapse: collapse;
+        border-collapse: collapse !important;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background-color: #0f1627;
+        border-radius: 8px;
+        overflow: hidden;
     }}
     
     th, td {{
-        padding: 8px 12px;
-        border: 1px solid #27334e;
+        padding: 10px 14px !important;
+        border: 1px solid #27334e !important;
+        text-align: center !important;
+        white-space: nowrap !important; /* جلوگیری از شکستن کلمات و قرارگیری در یک خط */
+        font-size: 0.95rem;
+    }}
+    
+    th {{
+        background-color: #1a233a !important;
+        color: #5cecff !important;
+    }}
+
+    /* محفظه جدول برای اسکرول روان افقی در موبایل بدون به هم ریختن صفحه */
+    div.scrollable-table {{
+        width: 100%;
+        overflow-x: auto;
     }}
     
     .plus-btn-container button {{
@@ -505,7 +293,7 @@ def extract_pdf_text(data: bytes) -> list[dict]:
 
 def get_document_context() -> str:
     parts = []
-    remaining = 24000
+    remaining = 28000
     for filename, pages in st.session_state.documents.items():
         if remaining <= 0:
             break
@@ -559,22 +347,23 @@ Respond warmly, politely, and naturally in {selected_language}.
 Offer your assistance with their PDF documents, exercises, questions, or general queries.
 """
     else:
-        # پرامپت دقیق و قاطع برای اجبار به پاسخ‌دهی کامل، به زبان انتخابی کاربر و جلوگیری از پاسخ انگلیسی یا امتناع از حل سوال
+        # پرامپت با حداکثر دقت برای پاسخ‌های کاملاً دقیق، علمی، بدون کاراکترهای خراب و جدول‌های کاملاً مرتب
         system_prompt = f"""
-You are NOVA, an expert academic tutor and study assistant.
+You are NOVA, an expert academic tutor and scientific researcher with maximum precision and accuracy.
 
-MANDATORY RULES:
-1. **LANGUAGE:** You MUST respond 100% in the language selected by the user: {selected_language}. Never reply in English if the user selected Persian, Spanish, or any other language.
-2. **DIRECT ANSWERS:** When the user asks to solve questions or provide answers based on uploaded documents, exercises, or prompts, **NEVER refuse, never lecture, and never tell the user to solve it themselves**. Always provide the full, accurate, and step-by-step solutions immediately.
-3. **CLARITY & FORMAT:** Explain everything simply and clearly for a 14-year-old student using normal text paragraphs and bullet points. Never output raw code blocks. Use correct math symbols like multiplication (×) and division (÷).
+CRITICAL INSTRUCTIONS FOR MAXIMUM ACCURACY:
+1. **LANGUAGE:** Respond strictly and 100% in {selected_language}.
+2. **DIRECT & EXACT SOLUTIONS:** Never refuse to answer questions. Provide full, step-by-step, perfectly accurate solutions based on the uploaded document or user prompt.
+3. **READABILITY & TABLES:** When presenting data, summaries, comparisons, or properties, use clean Markdown tables (`| Col1 | Col2 |`). Ensure all table contents and text entries stay clean, perfectly legible, and formatted in single coherent lines without awkward word-breaks.
+4. **MATH & SYMBOLS:** Use precise mathematical symbols like multiplication (×) and division (÷). Avoid raw programming code blocks entirely; write everything in clear natural educational text.
 """
 
     context = get_document_context()
     if context and not is_greeting:
-        context = "\n\nUPLOADED DOCUMENT EXCERPTS:\n" + context
+        context = "\n\nUPLOADED DOCUMENT CONTEXT:\n" + context
 
     if not is_greeting and web_results:
-        context += "\n\nWEB SEARCH RESULTS (for exercises / missing info):\n"
+        context += "\n\nWEB SEARCH RESULTS:\n"
         for index, item in enumerate(web_results, start=1):
             context += f"\n[{index}] {item['title']}\nURL: {item['url']}\nExcerpt: {item['snippet']}\n"
 
@@ -642,13 +431,6 @@ with st.sidebar:
     languages_list = [
         "🇮🇷 فارسی",
         "🇺🇸 English",
-        "🇪🇸 Español",
-        "🇮🇹 Italiano",
-        "🇷🇺 Русский",
-        "🇹🇷 Türkçe",
-        "🇨🇳 中文",
-        "🇯🇵 日本語",
-        "🇮🇱 עברית",
     ]
     
     selected_lang = st.selectbox(
