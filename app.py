@@ -10,7 +10,6 @@ from pathlib import Path
 
 import streamlit as st
 
-# Optional dependencies are handled gracefully.
 try:
     from pypdf import PdfReader
 except ImportError:
@@ -239,7 +238,7 @@ TEXTS = {
         "error_msg": "Bir hata oluştu. API ayarlarını و ağ bağlantısını kontrol edin.",
         "upload_label": "PDF dosyalarını seçin",
         "ask_doc_input": "PDF içeriği یا alıştırmalar hakkında soru",
-        "ask_doc_btn": "Belgelerden ve Web'den Yanıtla",
+        "ask_doc_btn": "Belgelerden و Web'den Yanıtla",
         "study_text": "Konu, eğitim metni یا egzersiz metni",
         "generate_study": "Eğitim İçeriği Oluştur",
         "flashcard_text": "Bilgi kartı oluşturmak için metin",
@@ -318,8 +317,8 @@ TEXTS = {
         "sidebar_lang": "🌐 בחר שפה",
         "new_chat": "➕ שיחה חדשה",
         "system_status": "מצב המערכת",
-        "online_model": "מודל מקוون",
-        "connected": "מחובר ל-API",
+        "online_model": "מודל מקوون",
+        "connected": "מחובר ل-API",
         "not_configured": "לא מוגדר",
         "web_search": "חיפוש באינטרנט",
         "ready": "מוכן",
@@ -331,11 +330,11 @@ TEXTS = {
         "study_page": "למידה ותרגול",
         "docs_page": "ניהול מסמכים",
         "web_page": "מחקר אינטרנט",
-        "export_page": "ייצוא وגיבוי",
+        "export_page": "ייצוא وגיبוי",
         "settings_page": "הגדרות",
         "chat_input": "הקלד הודעה, שאלה أو תרגיל עבור NOVA...",
         "thinking": "NOVA מנתח ומכין את התשובה...",
-        "error_msg": "אירעה שגיאה. בדוק את הגדרות ال-API ואת חיבור הרשת.",
+        "error_msg": "אירעה שגיאה. בדוק את הגדרות ال-API وأת חיבור הרשת.",
         "upload_label": "בחר קבצי PDF",
         "ask_doc_input": "שאלה לגבי תוכן ال-PDF أو תרגילים",
         "ask_doc_btn": "ענה מתוך המסמכים והאינטרנט",
@@ -348,7 +347,7 @@ TEXTS = {
 
 
 # =========================================================
-# SESSION STATE -- MUST RUN BEFORE ANY ACCESS
+# SESSION STATE
 # =========================================================
 
 SESSION_DEFAULTS = {
@@ -378,20 +377,17 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Responsive for Mobile & RTL support)
+# CLEAN & RESPONSIVE STYLING (Mobile Fixed)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "עברית" in current_lang
+is_rtl = "فارسی" in current_lang or "عברית" in current_lang
 
 st.markdown(
     f"""
     <style>
     .stApp {{
-        background:
-            radial-gradient(ellipse at top left,
-                rgba(37, 60, 105, .28), transparent 45%),
-            #080b14;
+        background: #080b14;
         color: #e7edf7;
         direction: {"rtl" if is_rtl else "ltr"};
     }}
@@ -406,58 +402,32 @@ st.markdown(
         color: #e8faff !important;
     }}
 
-    .nova-brand {{
-        font-size: 2.2rem;
+    /* استایل استاندارد و ایمن برای موبایل جهت جلوگیری از شکستگی متن */
+    .nova-header-title {{
+        font-size: 1.6rem;
         font-weight: 800;
-        letter-spacing: .12em;
         color: #5cecff;
-        text-shadow: 0 0 22px rgba(92, 236, 255, .3);
+        margin-bottom: 0.2rem;
     }}
 
-    .nova-subtitle {{
+    .nova-header-sub {{
         color: #9baac5;
-        font-size: .9rem;
-        margin-bottom: 1.5rem;
+        font-size: 0.85rem;
+        margin-bottom: 1rem;
     }}
 
     div[data-testid="stChatMessage"] {{
         border: 1px solid #27334e;
-        border-radius: 14px;
-        background: rgba(15, 22, 39, .72);
-        padding: 12px;
+        border-radius: 12px;
+        background: rgba(15, 22, 39, .9);
+        padding: 10px;
         text-align: {"right" if is_rtl else "left"};
     }}
 
     .stButton button {{
         border: 1px solid #354b6d;
-        border-radius: 10px;
-        transition: all .2s ease;
-    }}
-
-    .stButton button:hover {{
-        border-color: #5cecff;
-        color: #5cecff;
-    }}
-
-    div[data-testid="stMetric"] {{
-        background: #10182a;
-        padding: 14px;
-        border: 1px solid #26334e;
-        border-radius: 12px;
-    }}
-
-    /* Media Queries for Mobile Screens */
-    @media (max-width: 768px) {{
-        .nova-brand {{
-            font-size: 1.6rem;
-            letter-spacing: .08em;
-        }}
-        .nova-subtitle {{
-            font-size: 0.8rem;
-        }}
-        .stChatMessage {{
-            padding: 8px;
-        }}
+        border-radius: 8px;
+        width: 100%;
     }}
     </style>
     """,
@@ -466,7 +436,7 @@ st.markdown(
 
 
 # =========================================================
-# CONFIGURATION AND HELPERS
+# HELPERS
 # =========================================================
 
 APP_DIR = Path(__file__).resolve().parent
@@ -655,8 +625,7 @@ def build_flashcards(text: str) -> list[dict]:
 # =========================================================
 
 with st.sidebar:
-    st.markdown('<div class="nova-brand">NOVA</div>', unsafe_allow_html=True)
-    st.caption("YOUR PERSONAL AI WORKSPACE")
+    st.markdown("### NOVA 2.0")
     st.divider()
 
     if st.button(t("new_chat"), use_container_width=True, type="primary"):
@@ -718,11 +687,11 @@ with st.sidebar:
 
 
 # =========================================================
-# HEADER
+# HEADER (Safe for Mobile)
 # =========================================================
 
-st.markdown(f'<div class="nova-brand">{t("title")}</div>', unsafe_allow_html=True)
-st.markdown(f'<div class="nova-subtitle">{t("subtitle")}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="nova-header-title">{t("title")}</div>', unsafe_allow_html=True)
+st.markdown(f'<div class="nova-header-sub">{t("subtitle")}</div>', unsafe_allow_html=True)
 
 
 # =========================================================
