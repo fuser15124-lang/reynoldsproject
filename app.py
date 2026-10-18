@@ -69,11 +69,11 @@ TEXTS = {
         "export_page": "خروجی و پشتیبان",
         "settings_page": "تنظیمات",
         "chat_input": "پیام، سوال یا تمرین خود را برای NOVA بنویس...",
-        "thinking": "NOVA در حال تحلیل دقیق و پاسخ‌دهی به تمام سوالات است...",
+        "thinking": "NOVA در حال بررسی اسناد/منابع و تحلیل دقیق است...",
         "error_msg": "در تولید پاسخ خطایی رخ داد. تنظیمات API و اتصال شبکه را بررسی کنید.",
         "upload_label": "افزودن فایل/عکس",
         "ask_doc_input": "سؤال درباره محتوای PDF یا تمرین‌ها",
-        "ask_doc_btn": "پاسخ کامل به اسناد",
+        "ask_doc_btn": "پاسخ کامل از روی اسناد",
         "study_text": "موضوع یا متن آموزشی یا صورت تمرین",
         "generate_study": "تولید محتوای آموزشی",
         "flashcard_text": "متن برای ساخت فلش‌کارت",
@@ -102,11 +102,11 @@ TEXTS = {
         "export_page": "Export & Backup",
         "settings_page": "Settings",
         "chat_input": "Type your message, question, or exercise for NOVA...",
-        "thinking": "NOVA is analyzing and solving all questions...",
+        "thinking": "NOVA is analyzing docs and sources...",
         "error_msg": "An error occurred. Check API settings and network connection.",
         "upload_label": "Add File/Image",
         "ask_doc_input": "Question about PDF content or exercises",
-        "ask_doc_btn": "Answer All Questions",
+        "ask_doc_btn": "Answer All Questions from PDF",
         "study_text": "Subject, educational text, or exercise prompt",
         "generate_study": "Generate Study Content",
         "flashcard_text": "Text for creating flashcards",
@@ -146,11 +146,11 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Perfect Responsive Design)
+# STYLING (Perfect Mobile Responsiveness)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "عברית" in current_lang
+is_rtl = "فارسی" in current_lang or "עברית" in current_lang
 
 st.markdown(
     f"""
@@ -339,16 +339,16 @@ def generate_answer(question: str, mode: str, web_results: list[dict] | None = N
 تو دستیار هوشمند NOVA هستی. به گرمی و با ادب به زبان {selected_language} جواب بده و اعلام آمادگی کن.
 """
     else:
-        # پرامپت با تاکید بر حل کامل و ۱۰۰ درصدی تمام سوالات بدون استثنا
+        # پرامپت با تاکید بر حل تمرین‌ها بر اساس PDF یا منابع معتبر وب
         system_prompt = f"""
-تو هوش مصنوعی فوق‌العاده دقیق، قدرتمند و جامع به نام NOVA هستی.
+تو هوش مصنوعی فوق‌العاده دقیق و پیشرفته‌ای به نام NOVA هستی.
 
 قوانین حتمی و اجباری:
-۱. **پاسخ کامل و ۱۰۰% به تمام سوالات:** باید بدون هیچ‌گونه استثنا، خلاصه کاری یا جا انداختن، تمام سوالات، تمرین‌ها و بندهای موجود در فایل آپلود شده یا متن کاربر را یک به یک و کاملاً گام‌به‌گام حل کنی و پاسخ قطعی بدهی.
-۲. **زبان پاسخ:** فقط و فقط به زبان {selected_language} پاسخ بده.
-۳. **عدم امتناع:** هرگز از پاسخ دادن شانه خالی نکن، نصیحت نکن و مستقیم پاسخ کامل، علمی و دقیق همه سوالات را ارائه بده.
-۴. **سادگی و خوانایی:** تمام مفاهیم و فرمول‌ها را به زبانی کاملاً روان، ساده، واضح و قابل فهم بیان کن.
-۵. **فرمول‌ها:** از علائم دقیق ریاضی مانند ضرب (×) و تقسیم (÷) استفاده کن و هیچ‌وقت کد کامپیوتری خام تولید نکن.
+۱. **اولویت قطعی با فایل PDF:** اگر فایل PDF بارگذاری شده است، پاسخ تمامی سوالات و تمرین‌ها را مستقیماً و دقیقاً از روی محتوای فایل PDF استخراج کن و به صورت کامل، ۱۰۰% دقیق و بدون جا انداختن حل کن.
+۲. **استفاده از منابع آنلاین معتبر:** اگر فایلی وجود نداشت، پاسخ‌ها را با استناد به معتبرترین سایت‌های علمی آنلاین ارائه بده.
+۳. **زبان پاسخ:** پاسخ را تماماً به زبان {selected_language} ارائه کن.
+۴. **سادگی و خوانایی (سن ۱۲ سال):** تمام مفاهیم و مراحل حل را به زبانی ساده، روان و قابل فهم برای دانش‌آموز ۱۲ ساله بگو.
+۵. **فرمول‌ها:** از علائم ریاضی دقیق مثل ضرب (×) و تقسیم (÷) استفاده کن. از کدهای کامپیوتری استفاده نکن.
 """
 
     context = get_document_context()
