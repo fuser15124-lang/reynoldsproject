@@ -221,7 +221,7 @@ TEXTS = {
         "study_page": "Çalışma",
         "docs_page": "Belgeler",
         "web_page": "Web Araştırma",
-        "export_page": "Dışa Aktar",
+        "export_page": "Dışა Aktar",
         "settings_page": "Ayarlar",
         "chat_input": "NOVA için mesajınızı yazın...",
         "thinking": "NOVA analiz ediyor...",
@@ -229,7 +229,7 @@ TEXTS = {
         "upload_label": "Dosya Ekle",
         "ask_doc_input": "PDF hakkında soru",
         "ask_doc_btn": "Yanıtla",
-        "study_text": "Konu veya metin",
+        "study_text": "Konu یا metin",
         "generate_study": "İçerik Oluştur",
     },
     "🇨🇳 中文": {
@@ -320,16 +320,16 @@ TEXTS = {
         "thinking": "NOVA מנתח את השאלה...",
         "error_msg": "אירעה שגיאה.",
         "upload_label": "הוסף קובץ",
-        "ask_doc_input": "שאלה على ال-PDF",
+        "ask_doc_input": "שאלה על ה-PDF",
         "ask_doc_btn": "ענה",
-        "study_text": "נושא أو טקסט",
+        "study_text": "נושא או טקסט",
         "generate_study": "צור תוכן",
     }
 }
 
 
 # =========================================================
-# SESSION STATE
+# SESSION STATE & AUTO MIGRATION OF OLD MODELS
 # =========================================================
 
 SESSION_DEFAULTS = {
@@ -341,7 +341,7 @@ SESSION_DEFAULTS = {
     "web_results": [],
     "language": "🇮🇷 فارسی",
     "settings": {
-        "model": "llama3-70b-8192",  # مدل بسیار پایدار و سراسری Groq
+        "model": "openai/gpt-oss-120b",
         "temperature": 0.2,
         "max_tokens": 2048,
     },
@@ -354,6 +354,12 @@ for key, default in SESSION_DEFAULTS.items():
             else default.copy() if isinstance(default, list)
             else default
         )
+
+# تبدیل خودکار مدل‌های ذخیره‌شدهٔ قدیمی به مدل جدید
+deprecated_models = ["llama3-70b-8192", "llama-3.1-8b-instant", "mixtral-8x7b-32768", "llama-3.3-70b-versatile"]
+current_saved_model = st.session_state.get("settings", {}).get("model", "")
+if not current_saved_model or current_saved_model in deprecated_models:
+    st.session_state["settings"]["model"] = "openai/gpt-oss-120b"
 
 
 # =========================================================
@@ -869,12 +875,17 @@ elif page == t("export_page"):
 
 
 # =========================================================
-# SETTINGS PAGE
+# SETTINGS PAGE (Updated Model Selection)
 # =========================================================
 
 elif page == t("settings_page"):
     st.subheader(t("settings_page"))
-    model = st.selectbox("Model", ["llama3-70b-8192", "mixtral-8x7b-32768"], index=0)
+    available_models = ["openai/gpt-oss-120b", "llama-3.3-70b-versatile"]
+    current_model = st.session_state.settings.get("model", "openai/gpt-oss-120b")
+    if current_model not in available_models:
+        available_models.insert(0, current_model)
+        
+    model = st.selectbox("Model", available_models, index=0)
     if st.button("Save Settings"):
         st.session_state.settings["model"] = model
         st.success("Settings saved.")
