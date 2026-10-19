@@ -42,13 +42,13 @@ st.set_page_config(
 
 
 # =========================================================
-# MULTILINGUAL DICTIONARIES
+# MULTILINGUAL DICTIONARIES (All requested languages added)
 # =========================================================
 
 TEXTS = {
     "🇮🇷 فارسی": {
         "title": "NOVA 2.0",
-        "subtitle": "دستیار هوشمند و حل کامل تمرین‌ها",
+        "subtitle": "دستیار آموزشی پیشرفته و معلم خصوصی هوشمند",
         "sidebar_workspace": "فضای کاری",
         "sidebar_lang": "🌐 انتخاب زبان",
         "new_chat": "چت جدید",
@@ -62,18 +62,18 @@ TEXTS = {
         "uploaded_docs": "اسناد بارگذاری‌شده",
         "messages_count": "پیام‌ها",
         "clear_chat": "پاک‌کردن تاریخچه گفتگو",
-        "chat_page": "گفت‌وگو",
-        "study_page": "مطالعه و تمرین",
+        "chat_page": "گفت‌وگو و آموزش",
+        "study_page": "مطالعه و حل تمرین",
         "docs_page": "مدیریت اسناد",
         "web_page": "جست‌وجوی وب",
         "export_page": "خروجی و پشتیبان",
         "settings_page": "تنظیمات",
-        "chat_input": "پیام، سوال یا تمرین خود را برای NOVA بنویس...",
-        "thinking": "NOVA در حال بررسی اسناد/منابع و تحلیل دقیق است...",
+        "chat_input": "پیام، سوال درسی، یا تمرین خود را برای NOVA بنویس...",
+        "thinking": "NOVA در حال تحلیل دقیق سؤال و آماده‌سازی پاسخ است...",
         "error_msg": "در تولید پاسخ خطایی رخ داد. تنظیمات API و اتصال شبکه را بررسی کنید.",
         "upload_label": "افزودن فایل/عکس",
         "ask_doc_input": "سؤال درباره محتوای PDF یا تمرین‌ها",
-        "ask_doc_btn": "پاسخ کامل از روی اسناد",
+        "ask_doc_btn": "پاسخ کامل و گام‌به‌گام از روی اسناد",
         "study_text": "موضوع یا متن آموزشی یا صورت تمرین",
         "generate_study": "تولید محتوای آموزشی",
         "flashcard_text": "متن برای ساخت فلش‌کارت",
@@ -81,7 +81,7 @@ TEXTS = {
     },
     "🇺🇸 English": {
         "title": "NOVA 2.0",
-        "subtitle": "Smart Assistant & Complete Exercise Solver",
+        "subtitle": "Advanced Educational Assistant & Smart Tutor",
         "sidebar_workspace": "Workspace",
         "sidebar_lang": "🌐 Select Language",
         "new_chat": "New Chat",
@@ -95,22 +95,253 @@ TEXTS = {
         "uploaded_docs": "Uploaded Documents",
         "messages_count": "Messages",
         "clear_chat": "Clear Chat History",
-        "chat_page": "Chat",
+        "chat_page": "Chat & Tutoring",
         "study_page": "Study & Practice",
         "docs_page": "Documents",
         "web_page": "Web Research",
         "export_page": "Export & Backup",
         "settings_page": "Settings",
-        "chat_input": "Type your message, question, or exercise for NOVA...",
-        "thinking": "NOVA is analyzing docs and sources...",
+        "chat_input": "Type your message, study question, or exercise...",
+        "thinking": "NOVA is carefully analyzing the question and preparing the response...",
         "error_msg": "An error occurred. Check API settings and network connection.",
         "upload_label": "Add File/Image",
         "ask_doc_input": "Question about PDF content or exercises",
-        "ask_doc_btn": "Answer All Questions from PDF",
+        "ask_doc_btn": "Answer from Documents",
         "study_text": "Subject, educational text, or exercise prompt",
         "generate_study": "Generate Study Content",
         "flashcard_text": "Text for creating flashcards",
         "make_flashcard": "Create Flashcards",
+    },
+    "🇪🇸 Español": {
+        "title": "NOVA 2.0",
+        "subtitle": "Asistente Educativo Avanzado y Tutor Inteligente",
+        "sidebar_workspace": "Espacio de trabajo",
+        "sidebar_lang": "🌐 Seleccionar Idioma",
+        "new_chat": "Nuevo Chat",
+        "system_status": "Estado del Sistema",
+        "online_model": "Modelo Online",
+        "connected": "Conectado a la API",
+        "not_configured": "No configurado",
+        "web_search": "Búsqueda Web",
+        "ready": "Listo",
+        "need_install": "Requiere instalación",
+        "uploaded_docs": "Documentos subidos",
+        "messages_count": "Mensajes",
+        "clear_chat": "Borrar historial",
+        "chat_page": "Chat y Tutoría",
+        "study_page": "Estudio y Práctica",
+        "docs_page": "Documentos",
+        "web_page": "Investigación Web",
+        "export_page": "Exportar",
+        "settings_page": "Configuración",
+        "chat_input": "Escribe tu mensaje o pregunta para NOVA...",
+        "thinking": "NOVA está analizando la pregunta...",
+        "error_msg": "Ocurrió un error.",
+        "upload_label": "Añadir archivo",
+        "ask_doc_input": "Pregunta sobre el PDF",
+        "ask_doc_btn": "Responder",
+        "study_text": "Tema o texto",
+        "generate_study": "Generar contenido",
+        "flashcard_text": "Texto para tarjetas",
+        "make_flashcard": "Crear tarjetas",
+    },
+    "🇮🇹 Italiano": {
+        "title": "NOVA 2.0",
+        "subtitle": "Assistente Educativo Avanzato e Tutore Intelligente",
+        "sidebar_workspace": "Spazio di lavoro",
+        "sidebar_lang": "🌐 Seleziona Lingua",
+        "new_chat": "Nuova Chat",
+        "system_status": "Stato del Sistema",
+        "online_model": "Modello Online",
+        "connected": "Connesso all'API",
+        "not_configured": "Non configurato",
+        "web_search": "Ricerca Web",
+        "ready": "Pronto",
+        "need_install": "Richiede installazione",
+        "uploaded_docs": "Documenti caricati",
+        "messages_count": "Messaggi",
+        "clear_chat": "Cancella cronologia",
+        "chat_page": "Chat e Tutorato",
+        "study_page": "Studio e Pratica",
+        "docs_page": "Documenti",
+        "web_page": "Ricerca Web",
+        "export_page": "Esporta",
+        "settings_page": "Impostazioni",
+        "chat_input": "Scrivi il tuo messaggio per NOVA...",
+        "thinking": "NOVA sta analizzando la domanda...",
+        "error_msg": "Si è verificato un errore.",
+        "upload_label": "Aggiungi file",
+        "ask_doc_input": "Domanda sul PDF",
+        "ask_doc_btn": "Rispondi",
+        "study_text": "Argomento o testo",
+        "generate_study": "Genera contenuto",
+        "flashcard_text": "Testo per flashcard",
+        "make_flashcard": "Crea flashcard",
+    },
+    "🇷🇺 Русский": {
+        "title": "NOVA 2.0",
+        "subtitle": "Продвинутый образовательный помощник",
+        "sidebar_workspace": "Рабочая область",
+        "sidebar_lang": "🌐 Выбрать язык",
+        "new_chat": "Новый чат",
+        "system_status": "Статус системы",
+        "online_model": "Онлайн-модель",
+        "connected": "Подключено к API",
+        "not_configured": "Не настроено",
+        "web_search": "Поиск в вебе",
+        "ready": "Готово",
+        "need_install": "Требуется установка",
+        "uploaded_docs": "Загруженные документы",
+        "messages_count": "Сообщения",
+        "clear_chat": "Очистить историю",
+        "chat_page": "Чат и обучение",
+        "study_page": "Учеба и практика",
+        "docs_page": "Документы",
+        "web_page": "Веб-поиск",
+        "export_page": "Экспорт",
+        "settings_page": "Настройки",
+        "chat_input": "Введите сообщение для NOVA...",
+        "thinking": "NOVA анализирует вопрос...",
+        "error_msg": "Произошла ошибка.",
+        "upload_label": "Добавить файл",
+        "ask_doc_input": "Вопрос по PDF",
+        "ask_doc_btn": "Ответить",
+        "study_text": "Тема или текст",
+        "generate_study": "Создать материал",
+        "flashcard_text": "Текст для карточек",
+        "make_flashcard": "Создать карточки",
+    },
+    "🇹🇷 Türkçe": {
+        "title": "NOVA 2.0",
+        "subtitle": "Gelişmiş Eğitim Asistanı ve Akıllı Eğitmen",
+        "sidebar_workspace": "Çalışma Alanı",
+        "sidebar_lang": "🌐 Dil Seçin",
+        "new_chat": "Yeni Sohbet",
+        "system_status": "Sistem Durumu",
+        "online_model": "Çevrimiçi Model",
+        "connected": "API'ye Bağlı",
+        "not_configured": "Yapılandırılmadı",
+        "web_search": "Web Arama",
+        "ready": "Hazır",
+        "need_install": "Kurulum Gerekli",
+        "uploaded_docs": "Yüklenen Belgeler",
+        "messages_count": "Mesajlar",
+        "clear_chat": "Geçmişi Temizle",
+        "chat_page": "Sohbet",
+        "study_page": "Çalışma",
+        "docs_page": "Belgeler",
+        "web_page": "Web Araştırma",
+        "export_page": "Dışa Aktar",
+        "settings_page": "Ayarlar",
+        "chat_input": "NOVA için mesajınızı yazın...",
+        "thinking": "NOVA analiz ediyor...",
+        "error_msg": "Bir hata oluştu.",
+        "upload_label": "Dosya Ekle",
+        "ask_doc_input": "PDF hakkında soru",
+        "ask_doc_btn": "Yanıtla",
+        "study_text": "Konu veya metin",
+        "generate_study": "İçerik Oluştur",
+        "flashcard_text": "Kartlar için metin",
+        "make_flashcard": "Kart Oluştur",
+    },
+    "🇨🇳 中文": {
+        "title": "NOVA 2.0",
+        "subtitle": "高级教育助手与智能导师",
+        "sidebar_workspace": "工作区",
+        "sidebar_lang": "🌐 选择语言",
+        "new_chat": "新对话",
+        "system_status": "系统状态",
+        "online_model": "在线模型",
+        "connected": "已连接API",
+        "not_configured": "未配置",
+        "web_search": "网页搜索",
+        "ready": "就绪",
+        "need_install": "需要安装",
+        "uploaded_docs": "已上传文档",
+        "messages_count": "消息数",
+        "clear_chat": "清除历史",
+        "chat_page": "聊天与辅导",
+        "study_page": "学习与练习",
+        "docs_page": "文档",
+        "web_page": "网页研究",
+        "export_page": "导出",
+        "settings_page": "设置",
+        "chat_input": "向 NOVA 发送消息...",
+        "thinking": "NOVA 正在分析问题...",
+        "error_msg": "发生错误。",
+        "upload_label": "添加文件",
+        "ask_doc_input": "关于PDF的问题",
+        "ask_doc_btn": "回答",
+        "study_text": "主题或文本",
+        "generate_study": "生成内容",
+        "flashcard_text": "抽认卡文本",
+        "make_flashcard": "制作卡片",
+    },
+    "🇯🇵 日本語": {
+        "title": "NOVA 2.0",
+        "subtitle": "高度な教育アシスタント・スマートチューター",
+        "sidebar_workspace": "ワークスペース",
+        "sidebar_lang": "🌐 言語選択",
+        "new_chat": "新しいチャット",
+        "system_status": "システム状態",
+        "online_model": "オンラインモデル",
+        "connected": "API接続済み",
+        "not_configured": "未設定",
+        "web_search": "ウェブ検索",
+        "ready": "準備完了",
+        "need_install": "インストールが必要",
+        "uploaded_docs": "アップロードされた文書",
+        "messages_count": "メッセージ数",
+        "clear_chat": "履歴をクリア",
+        "chat_page": "チャット",
+        "study_page": "学習と演習",
+        "docs_page": "文書管理",
+        "web_page": "ウェブ調査",
+        "export_page": "エクスポート",
+        "settings_page": "設定",
+        "chat_input": "NOVAへのメッセージを入力...",
+        "thinking": "NOVAが分析中...",
+        "error_msg": "エラーが発生しました。",
+        "upload_label": "ファイル追加",
+        "ask_doc_input": "PDFに関する質問",
+        "ask_doc_btn": "回答",
+        "study_text": "トピックまたはテキスト",
+        "generate_study": "コンテンツ生成",
+        "flashcard_text": "フラッシュカード用テキスト",
+        "make_flashcard": "カード作成",
+    },
+    "🇮🇱 עברית": {
+        "title": "NOVA 2.0",
+        "subtitle": "עוזר חינוכי מתקדם ומורה פרטי חכם",
+        "sidebar_workspace": "מרחב עבודה",
+        "sidebar_lang": "🌐 בחר שפה",
+        "new_chat": "שיחה חדשה",
+        "system_status": "מצב מערכת",
+        "online_model": "מודל מקוון",
+        "connected": "מחובר ל-API",
+        "not_configured": "לא מוגדר",
+        "web_search": "חיפוש אינטרנט",
+        "ready": "מוכן",
+        "need_install": "דורש התקנה",
+        "uploaded_docs": "מסמכים שהועלו",
+        "messages_count": "הודעות",
+        "clear_chat": "נקה היסטוריה",
+        "chat_page": "צ'אט ולמידה",
+        "study_page": "למידה ותרגול",
+        "docs_page": "מסמכים",
+        "web_page": "מחקר אינטרנט",
+        "export_page": "ייצוא",
+        "settings_page": "הגדרות",
+        "chat_input": "הקלד הודעה עבור NOVA...",
+        "thinking": "NOVA מנתח את השאלה...",
+        "error_msg": "אירעה שגיאה.",
+        "upload_label": "הוסף קובץ",
+        "ask_doc_input": "שאלה על ה-PDF",
+        "ask_doc_btn": "ענה",
+        "study_text": "נושא או טקסט",
+        "generate_study": "צור תוכן",
+        "flashcard_text": "טקסט לכרטיסיות",
+        "make_flashcard": "צור כרטיסיות",
     }
 }
 
@@ -131,7 +362,7 @@ SESSION_DEFAULTS = {
     "language": "🇮🇷 فارسی",
     "settings": {
         "model": "openai/gpt-oss-120b",
-        "temperature": 0.1,
+        "temperature": 0.2,
         "max_tokens": 4096,
     },
 }
@@ -146,7 +377,7 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Perfect Mobile Responsiveness)
+# STYLING
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
@@ -336,27 +567,36 @@ def generate_answer(question: str, mode: str, web_results: list[dict] | None = N
 
     if is_greeting:
         system_prompt = f"""
-تو دستیار هوشمند NOVA هستی. به گرمی و با ادب به زبان {selected_language} جواب بده و اعلام آمادگی کن.
+تو هوش مصنوعی آموزشی پیشرفته، معلم خصوصی، حل‌کننده مسائل و متخصص خلاصه‌نویسی به نام NOVA هستی. به گرمی و با ادب به زبان {selected_language} جواب بده و اعلام آمادگی کن تا به درس‌ها، تمرین‌ها و سوالات امتحانی رسیدگی کنی.
 """
     else:
-        # پرامپت با تاکید بر حل تمرین‌ها بر اساس PDF یا منابع معتبر وب
         system_prompt = f"""
-تو هوش مصنوعی فوق‌العاده دقیق و پیشرفته‌ای به نام NOVA هستی.
+SYSTEM PROMPT — هوش مصنوعی آموزشی حرفه‌ای (NOVA)
 
-قوانین حتمی و اجباری:
-۱. **اولویت قطعی با فایل PDF:** اگر فایل PDF بارگذاری شده است، پاسخ تمامی سوالات و تمرین‌ها را مستقیماً و دقیقاً از روی محتوای فایل PDF استخراج کن و به صورت کامل، ۱۰۰% دقیق و بدون جا انداختن حل کن.
-۲. **استفاده از منابع آنلاین معتبر:** اگر فایلی وجود نداشت، پاسخ‌ها را با استناد به معتبرترین سایت‌های علمی آنلاین ارائه بده.
-۳. **زبان پاسخ:** پاسخ را تماماً به زبان {selected_language} ارائه کن.
-۴. **سادگی و خوانایی (سن ۱۲ سال):** تمام مفاهیم و مراحل حل را به زبانی ساده، روان و قابل فهم برای دانش‌آموز ۱۲ ساله بگو.
-۵. **فرمول‌ها:** از علائم ریاضی دقیق مثل ضرب (×) و تقسیم (÷) استفاده کن. از کدهای کامپیوتری استفاده نکن.
+۱. هویت و مأموریت:
+تو یک هوش مصنوعی آموزشی پیشرفته، معلم خصوصی، حل‌کننده مسائل و متخصص خلاصه‌نویسی هستی. وظیفه تو پاسخ‌گویی دقیق به سؤالات، آموزش مفاهیم، تحلیل متن، خلاصه‌کردن درس‌ها و آماده‌سازی دانش‌آموزان برای امتحانات است.
+باید مانند یک معلم حرفه‌ای عمل کنی که منظور دانش‌آموز را می‌فهمد، موضوع را به‌درستی تحلیل می‌کند، پاسخ درست را پیدا می‌کند و آن را به زبانی ساده، روان و قابل‌فهم توضیح می‌دهد.
+
+۲. درک هوشمندانه سؤال:
+- متن سؤال، تصاویر، اطلاعات ارائه‌شده و ارتباط میان بخش‌های مختلف را بررسی کن.
+- به تمام قسمت‌های سؤال پاسخ بده و هیچ بخش مهمی را از قلم نینداز.
+
+۳. اصل اول: صحت پاسخ و منبع:
+- اولویت اول با متن اسناد و فایل‌های PDF بارگذاری‌شده است. اگر فایلی وجود دارد، پاسخ‌ها را دقیقاً از روی آن استخراج کن.
+- در غیر این صورت، از معتبرترین منابع علمی آنلاین استفاده کن.
+- فرمول‌ها و محاسبات را مرحله‌به‌مرحله با علائم دقیق ریاضی (× و ÷) انجام بده.
+
+۴. زبان و نگارش:
+- تمام پاسخ‌ها باید کاملاً به زبان انتخاب‌شده توسط کاربر یعنی {selected_language} باشد.
+- از کدهای کامپیوتری خام پرهیز کن و مطالب را در قالب متن روان، لیست‌های منظم و جدول‌های ساختاریافته ارائه بده.
 """
 
     context = get_document_context()
     if context and not is_greeting:
-        context = "\n\nمتن کامل اسناد و فایل‌های بارگذاری‌شده:\n" + context
+        context = "\n\nمتن کامل اسناد و فایل‌های بارگذاری‌شده (اولویت اول):\n" + context
 
     if not is_greeting and web_results:
-        context += "\n\nنتایج معتبر جستجوی وب:\n"
+        context += "\n\nنتایج معتبر جستجوی وب (برای اطلاعات تکمیلی):\n"
         for index, item in enumerate(web_results, start=1):
             context += f"\n[{index}] عنوان: {item['title']}\nمنبع: {item['url']}\nمتن: {item['snippet']}\n"
 
@@ -424,6 +664,13 @@ with st.sidebar:
     languages_list = [
         "🇮🇷 فارسی",
         "🇺🇸 English",
+        "🇪🇸 Español",
+        "🇮🇹 Italiano",
+        "🇷🇺 Русский",
+        "🇹🇷 Türkçe",
+        "🇨🇳 中文",
+        "🇯🇵 日本語",
+        "🇮🇱 עברית",
     ]
     
     selected_lang = st.selectbox(
@@ -661,4 +908,4 @@ elif page == t("settings_page"):
 # =========================================================
 
 st.divider()
-st.caption("NOVA 2.0 · Multilingual AI Assistant")
+st.caption("NOVA 2.0 · Professional Educational AI Assistant")
