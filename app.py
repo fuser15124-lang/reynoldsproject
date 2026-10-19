@@ -341,7 +341,7 @@ SESSION_DEFAULTS = {
     "web_results": [],
     "language": "🇮🇷 فارسی",
     "settings": {
-        "model": "llama-3.1-8b-instant",  # مدل پایدار و در دسترس گروق
+        "model": "llama3-70b-8192",  # مدل بسیار پایدار و سراسری Groq
         "temperature": 0.2,
         "max_tokens": 2048,
     },
@@ -874,7 +874,7 @@ elif page == t("export_page"):
 
 elif page == t("settings_page"):
     st.subheader(t("settings_page"))
-    model = st.selectbox("Model", ["llama-3.1-8b-instant", "llama3-70b-8192"], index=0)
+    model = st.selectbox("Model", ["llama3-70b-8192", "mixtral-8x7b-32768"], index=0)
     if st.button("Save Settings"):
         st.session_state.settings["model"] = model
         st.success("Settings saved.")
