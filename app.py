@@ -34,7 +34,7 @@ except ImportError:
 # =========================================================
 
 st.set_page_config(
-    page_title="NOVA AI Assistant",
+    page_title="NOVA 3.0 AI Assistant",
     page_icon="🌌",
     layout="wide",
     initial_sidebar_state="collapsed",
@@ -47,7 +47,7 @@ st.set_page_config(
 
 TEXTS = {
     "🇮🇷 فارسی": {
-        "title": "NOVA 2.0",
+        "title": "NOVA 3.0",
         "subtitle": "دستیار آموزشی پیشرفته و معلم خصوصی هوشمند",
         "sidebar_workspace": "فضای کاری",
         "sidebar_lang": "🌐 انتخاب زبان",
@@ -76,11 +76,9 @@ TEXTS = {
         "ask_doc_btn": "پاسخ کامل و گام‌به‌گام از روی اسناد",
         "study_text": "موضوع یا متن آموزشی یا صورت تمرین",
         "generate_study": "تولید محتوای آموزشی",
-        "flashcard_text": "متن برای ساخت فلش‌کارت",
-        "make_flashcard": "ساخت فلش‌کارت",
     },
     "🇺🇸 English": {
-        "title": "NOVA 2.0",
+        "title": "NOVA 3.0",
         "subtitle": "Advanced Educational Assistant & Smart Tutor",
         "sidebar_workspace": "Workspace",
         "sidebar_lang": "🌐 Select Language",
@@ -109,11 +107,9 @@ TEXTS = {
         "ask_doc_btn": "Answer from Documents",
         "study_text": "Subject, educational text, or exercise prompt",
         "generate_study": "Generate Study Content",
-        "flashcard_text": "Text for creating flashcards",
-        "make_flashcard": "Create Flashcards",
     },
     "🇪🇸 Español": {
-        "title": "NOVA 2.0",
+        "title": "NOVA 3.0",
         "subtitle": "Asistente Educativo Avanzado y Tutor Inteligente",
         "sidebar_workspace": "Espacio de trabajo",
         "sidebar_lang": "🌐 Seleccionar Idioma",
@@ -142,11 +138,9 @@ TEXTS = {
         "ask_doc_btn": "Responder",
         "study_text": "Tema o texto",
         "generate_study": "Generar contenido",
-        "flashcard_text": "Texto para tarjetas",
-        "make_flashcard": "Crear tarjetas",
     },
     "🇮🇹 Italiano": {
-        "title": "NOVA 2.0",
+        "title": "NOVA 3.0",
         "subtitle": "Assistente Educativo Avanzato e Tutore Intelligente",
         "sidebar_workspace": "Spazio di lavoro",
         "sidebar_lang": "🌐 Seleziona Lingua",
@@ -175,11 +169,9 @@ TEXTS = {
         "ask_doc_btn": "Rispondi",
         "study_text": "Argomento o testo",
         "generate_study": "Genera contenuto",
-        "flashcard_text": "Testo per flashcard",
-        "make_flashcard": "Crea flashcard",
     },
     "🇷🇺 Русский": {
-        "title": "NOVA 2.0",
+        "title": "NOVA 3.0",
         "subtitle": "Продвинутый образовательный помощник",
         "sidebar_workspace": "Рабочая область",
         "sidebar_lang": "🌐 Выбрать язык",
@@ -208,11 +200,9 @@ TEXTS = {
         "ask_doc_btn": "Ответить",
         "study_text": "Тема или текст",
         "generate_study": "Создать материал",
-        "flashcard_text": "Текст для карточек",
-        "make_flashcard": "Создать карточки",
     },
     "🇹🇷 Türkçe": {
-        "title": "NOVA 2.0",
+        "title": "NOVA 3.0",
         "subtitle": "Gelişmiş Eğitim Asistanı ve Akıllı Eğitmen",
         "sidebar_workspace": "Çalışma Alanı",
         "sidebar_lang": "🌐 Dil Seçin",
@@ -241,11 +231,9 @@ TEXTS = {
         "ask_doc_btn": "Yanıtla",
         "study_text": "Konu veya metin",
         "generate_study": "İçerik Oluştur",
-        "flashcard_text": "Kartlar için metin",
-        "make_flashcard": "Kart Oluştur",
     },
     "🇨🇳 中文": {
-        "title": "NOVA 2.0",
+        "title": "NOVA 3.0",
         "subtitle": "高级教育助手与智能导师",
         "sidebar_workspace": "工作区",
         "sidebar_lang": "🌐 选择语言",
@@ -274,11 +262,9 @@ TEXTS = {
         "ask_doc_btn": "回答",
         "study_text": "主题或文本",
         "generate_study": "生成内容",
-        "flashcard_text": "抽认卡文本",
-        "make_flashcard": "制作卡片",
     },
     "🇯🇵 日本語": {
-        "title": "NOVA 2.0",
+        "title": "NOVA 3.0",
         "subtitle": "高度な教育アシスタント・スマートチューター",
         "sidebar_workspace": "ワークスペース",
         "sidebar_lang": "🌐 言語選択",
@@ -307,18 +293,16 @@ TEXTS = {
         "ask_doc_btn": "回答",
         "study_text": "トピックまたはテキスト",
         "generate_study": "コンテンツ生成",
-        "flashcard_text": "フラッシュカード用テキスト",
-        "make_flashcard": "カード作成",
     },
     "🇮🇱 עברית": {
-        "title": "NOVA 2.0",
+        "title": "NOVA 3.0",
         "subtitle": "עוזר חינוכי מתקדם ומורה פרטי חכם",
         "sidebar_workspace": "מרחב עבודה",
         "sidebar_lang": "🌐 בחר שפה",
         "new_chat": "שיחה חדשה",
         "system_status": "מצב מערכת",
         "online_model": "מודל מקוון",
-        "connected": "מחובר ל-API",
+        "connected": "מחובר ل-API",
         "not_configured": "לא מוגדר",
         "web_search": "חיפוש אינטרנט",
         "ready": "מוכן",
@@ -336,12 +320,10 @@ TEXTS = {
         "thinking": "NOVA מנתח את השאלה...",
         "error_msg": "אירעה שגיאה.",
         "upload_label": "הוסף קובץ",
-        "ask_doc_input": "שאלה על ה-PDF",
+        "ask_doc_input": "שאלה על ال-PDF",
         "ask_doc_btn": "ענה",
-        "study_text": "נושא או טקסט",
+        "study_text": "נושא أو טקסט",
         "generate_study": "צור תוכן",
-        "flashcard_text": "טקסט לכרטיסיות",
-        "make_flashcard": "צור כרטיסיות",
     }
 }
 
@@ -357,13 +339,11 @@ SESSION_DEFAULTS = {
     "active_mode": "General Assistant",
     "last_answer": "",
     "web_results": [],
-    "quiz": [],
-    "flashcards": [],
     "language": "🇮🇷 فارسی",
     "settings": {
-        "model": "openai/gpt-oss-120b",
+        "model": "llama-3.3-70b-versatile",
         "temperature": 0.2,
-        "max_tokens": 4096,
+        "max_tokens": 2048,
     },
 }
 
@@ -377,11 +357,11 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Hiding Code Formatting for Math Formulas)
+# STYLING (Modern & Clean Mobile Friendly)
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "עברית" in current_lang
+is_rtl = "فارسی" in current_lang or "عברית" in current_lang
 
 st.markdown(
     f"""
@@ -426,7 +406,6 @@ st.markdown(
         max-width: 100%;
     }}
 
-    /* مخفی کردن کادرهای مشکی و کدگونه فرمول‌ها */
     code, pre {{
         background-color: transparent !important;
         border: none !important;
@@ -529,7 +508,7 @@ def extract_pdf_text(data: bytes) -> list[dict]:
 
 def get_document_context() -> str:
     parts = []
-    remaining = 32000
+    remaining = 6500  # کنترل حجم متن برای جلوگیری از خطای TPM
     for filename, pages in st.session_state.documents.items():
         if remaining <= 0:
             break
@@ -543,7 +522,7 @@ def get_document_context() -> str:
     return "\n".join(parts)
 
 
-def search_web(query: str, limit: int = 5) -> list[dict]:
+def search_web(query: str, limit: int = 3) -> list[dict]:
     if DDGS is None:
         return []
     try:
@@ -578,48 +557,32 @@ def generate_answer(question: str, mode: str, web_results: list[dict] | None = N
 
     if is_greeting:
         system_prompt = f"""
-تو هوش مصنوعی آموزشی پیشرفته، معلم خصوصی، حل‌کننده مسائل و متخصص خلاصه‌نویسی به نام NOVA هستی. به گرمی و با ادب به زبان {selected_language} جواب بده و اعلام آمادگی کن تا به درس‌ها، تمرین‌ها و سوالات امتحانی رسیدگی کنی.
+تو هوش مصنوعی آموزشی پیشرفته نسخه ۳.۰ به نام NOVA هستی. به گرمی و با ادب به زبان {selected_language} جواب بده.
 """
     else:
         system_prompt = f"""
-SYSTEM PROMPT — هوش مصنوعی آموزشی حرفه‌ای (NOVA)
-
-۱. هویت و مأموریت:
-تو یک هوش مصنوعی آموزشی پیشرفته، معلم خصوصی، حل‌کننده مسائل و متخصص خلاصه‌نویسی هستی. وظیفه تو پاسخ‌گویی دقیق به سؤالات، آموزش مفاهیم، تحلیل متن، خلاصه‌کردن درس‌ها و آماده‌سازی دانش‌آموزان برای امتحانات است.
-باید مانند یک معلم حرفه‌ای عمل کنی که منظور دانش‌آموز را می‌فهمد، موضوع را به‌درستی تحلیل می‌کند، پاسخ درست را پیدا می‌کند و آن را به زبانی ساده، روان و قابل‌فهم توضیح می‌دهد.
-
-۲. دستورالعمل ویژه فرمول‌ها (عدم استفاده از فرمت کد):
-- **مطلقاً از کادر کد، علامت‌های ``` یا لاتخ کدنویسی استفاده نکن.**
-- تمامی فرمول‌های ریاضی، فیزیک و شیمی را دقیقاً مانند کتاب‌های درسی به صورت متن ساده و روان بنویس.
-- از علائم ریاضی استاندارد مانند ضرب (×) و تقسیم (÷) استفاده کن.
-- برای نشان دادن توان یا زیروند از متون شفاف استفاده کن؛ مثلاً:
-  شعاع کاتیونی = a ÷ 2
-  شعاع آنیونی = b ÷ 2
-
-۳. صحت پاسخ و منبع:
-- اولویت اول با متن اسناد و فایل‌های PDF بارگذاری‌شده است. اگر فایلی وجود دارد، پاسخ‌ها را دقیقاً از روی آن استخراج کن.
-- در غیر این صورت، از معتبرترین منابع علمی آنلاین استفاده کن.
-- محاسبات را گام‌به‌گام انجام بده.
-
-۴. زبان و نگارش:
-- تمام پاسخ‌ها باید کاملاً به زبان انتخاب‌شده توسط کاربر یعنی {selected_language} باشد.
-- مطالب را در قالب متن روان، لیست‌های منظم و جدول‌های ساختاریافته ارائه بده.
+SYSTEM PROMPT — هوش مصنوعی آموزشی حرفه‌ای (NOVA 3.0)
+تو یک معلم خصوصی و دستیار هوشمند هستی.
+۱. تمامی فرمول‌ها و روابط را به صورت روان، ساده و با علائم ریاضی استاندارد (× و ÷) بنویس. مطلقاً از کادرهای کدنویسی استفاده نکن.
+۲. تمام سوالات را به زبان {selected_language} گام‌به‌گام و کامل حل کن.
+۳. اولویت اول با متن اسناد بارگذاری‌شده است؛ اگر فایلی هست، پاسخ را دقیقاً از روی آن استخراج کن.
 """
 
     context = get_document_context()
     if context and not is_greeting:
-        context = "\n\nمتن کامل اسناد و فایل‌های بارگذاری‌شده (اولویت اول):\n" + context
+        context = "\n\nمتن اسناد بارگذاری‌شده:\n" + context
 
     if not is_greeting and web_results:
-        context += "\n\nنتایج معتبر جستجوی وب (برای اطلاعات تکمیلی):\n"
+        context += "\n\nنتایج جستجوی وب:\n"
         for index, item in enumerate(web_results, start=1):
-            context += f"\n[{index}] عنوان: {item['title']}\nمنبع: {item['url']}\nمتن: {item['snippet']}\n"
+            context += f"\n[{index}] عنوان: {item['title']}\nمتن: {item['snippet']}\n"
 
     messages = [{"role": "system", "content": system_prompt}]
     if context and not is_greeting:
         messages.append({"role": "system", "content": context})
 
-    for message in st.session_state.chat_history[-12:]:
+    # محدودسازی پیام‌های قبلی برای جلوگیری از خطای حجم توکن
+    for message in st.session_state.chat_history[-4:]:
         if message.get("role") in ("user", "assistant"):
             messages.append({"role": message["role"], "content": message.get("content", "")})
 
@@ -630,7 +593,7 @@ SYSTEM PROMPT — هوش مصنوعی آموزشی حرفه‌ای (NOVA)
             model=settings["model"],
             messages=messages,
             temperature=float(settings["temperature"]),
-            max_tokens=int(settings["max_tokens"]),
+            max_tokens=2048,
         )
         return response.choices[0].message.content or ""
     except Exception as e:
@@ -643,7 +606,7 @@ def download_name(prefix: str, extension: str) -> str:
 
 
 def export_chat_markdown() -> str:
-    lines = ["# NOVA Conversation", "", f"Exported: {datetime.now().isoformat(timespec='seconds')}", ""]
+    lines = ["# NOVA 3.0 Conversation", "", f"Exported: {datetime.now().isoformat(timespec='seconds')}", ""]
     for message in st.session_state.chat_history:
         role = message.get("role", "unknown").capitalize()
         content = message.get("content", "")
@@ -654,7 +617,7 @@ def export_chat_markdown() -> str:
 def export_chat_json() -> str:
     payload = {
         "application": "NOVA",
-        "version": "2.0",
+        "version": "3.0",
         "exported_at": datetime.now().isoformat(),
         "messages": st.session_state.chat_history,
     }
@@ -666,7 +629,7 @@ def export_chat_json() -> str:
 # =========================================================
 
 with st.sidebar:
-    st.markdown("### NOVA 2.0")
+    st.markdown("### NOVA 3.0")
     st.divider()
 
     if st.button(t("new_chat"), use_container_width=True, type="primary"):
@@ -794,7 +757,7 @@ if page == t("chat_page"):
                     is_greeting = any(g in prompt.lower() for g in greetings) and len(prompt.split()) <= 4
                     
                     if not is_greeting:
-                        web_results = search_web(prompt, limit=5)
+                        web_results = search_web(prompt, limit=3)
 
                     answer = generate_answer(prompt, mode, web_results=web_results)
                 st.markdown(answer)
@@ -855,7 +818,7 @@ elif page == t("docs_page"):
         else:
             try:
                 with st.spinner(t("thinking")):
-                    web_results = search_web(document_question, limit=5)
+                    web_results = search_web(document_question, limit=3)
                     answer = generate_answer(document_question, "Research", web_results=web_results)
                 st.markdown(answer)
                 st.session_state.chat_history.extend([
@@ -892,7 +855,7 @@ elif page == t("study_page"):
     study_text = st.text_area(t("study_text"), height=180)
     if st.button(t("generate_study"), type="primary"):
         if study_text.strip():
-            answer = generate_answer("Solve this exercise step by step: " + study_text, "Study Tutor", web_results=search_web(study_text, limit=5))
+            answer = generate_answer("Solve this exercise step by step: " + study_text, "Study Tutor", web_results=search_web(study_text, limit=3))
             st.markdown(answer)
 
 
@@ -912,7 +875,7 @@ elif page == t("export_page"):
 
 elif page == t("settings_page"):
     st.subheader(t("settings_page"))
-    model = st.selectbox("Model", ["openai/gpt-oss-120b", "llama-3.1-70b-versatile"], index=0)
+    model = st.selectbox("Model", ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"], index=0)
     if st.button("Save Settings"):
         st.session_state.settings["model"] = model
         st.success("Settings saved.")
@@ -923,4 +886,4 @@ elif page == t("settings_page"):
 # =========================================================
 
 st.divider()
-st.caption("NOVA 2.0 · Professional Educational AI Assistant")
+st.caption("NOVA 3.0 · Professional Educational AI Assistant")
