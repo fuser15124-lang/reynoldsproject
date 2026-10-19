@@ -302,7 +302,7 @@ TEXTS = {
         "new_chat": "שיחה חדשה",
         "system_status": "מצב מערכת",
         "online_model": "מודל מקוון",
-        "connected": "מחובר ل-API",
+        "connected": "מחובר ל-API",
         "not_configured": "לא מוגדר",
         "web_search": "חיפוש אינטרנט",
         "ready": "מוכן",
@@ -320,7 +320,7 @@ TEXTS = {
         "thinking": "NOVA מנתח את השאלה...",
         "error_msg": "אירעה שגיאה.",
         "upload_label": "הוסף קובץ",
-        "ask_doc_input": "שאלה על ال-PDF",
+        "ask_doc_input": "שאלה على ال-PDF",
         "ask_doc_btn": "ענה",
         "study_text": "נושא أو טקסט",
         "generate_study": "צור תוכן",
@@ -341,7 +341,7 @@ SESSION_DEFAULTS = {
     "web_results": [],
     "language": "🇮🇷 فارسی",
     "settings": {
-        "model": "llama-3.3-70b-versatile",
+        "model": "llama-3.1-8b-instant",  # مدل پایدار و در دسترس گروق
         "temperature": 0.2,
         "max_tokens": 2048,
     },
@@ -357,11 +357,11 @@ for key, default in SESSION_DEFAULTS.items():
 
 
 # =========================================================
-# STYLING (Modern & Clean Mobile Friendly)
+# STYLING
 # =========================================================
 
 current_lang = st.session_state.get("language", "🇮🇷 فارسی")
-is_rtl = "فارسی" in current_lang or "عברית" in current_lang
+is_rtl = "فارسی" in current_lang or "עברית" in current_lang
 
 st.markdown(
     f"""
@@ -508,7 +508,7 @@ def extract_pdf_text(data: bytes) -> list[dict]:
 
 def get_document_context() -> str:
     parts = []
-    remaining = 6500  # کنترل حجم متن برای جلوگیری از خطای TPM
+    remaining = 5000  # کنترل بهینه توکن‌ها
     for filename, pages in st.session_state.documents.items():
         if remaining <= 0:
             break
@@ -581,7 +581,6 @@ SYSTEM PROMPT — هوش مصنوعی آموزشی حرفه‌ای (NOVA 3.0)
     if context and not is_greeting:
         messages.append({"role": "system", "content": context})
 
-    # محدودسازی پیام‌های قبلی برای جلوگیری از خطای حجم توکن
     for message in st.session_state.chat_history[-4:]:
         if message.get("role") in ("user", "assistant"):
             messages.append({"role": message["role"], "content": message.get("content", "")})
@@ -875,7 +874,7 @@ elif page == t("export_page"):
 
 elif page == t("settings_page"):
     st.subheader(t("settings_page"))
-    model = st.selectbox("Model", ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"], index=0)
+    model = st.selectbox("Model", ["llama-3.1-8b-instant", "llama3-70b-8192"], index=0)
     if st.button("Save Settings"):
         st.session_state.settings["model"] = model
         st.success("Settings saved.")
